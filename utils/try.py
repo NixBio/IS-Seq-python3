@@ -15,25 +15,24 @@ if not os.path.exists(outDir):
 myfile=open(sys.argv[1])
 mydict={}
 for l in myfile:
-	l=l.rstrip()
-	l=l.split('\t')
-	tmp= l[4],l[5]
-	try:
-		mydict[tmp].append(l[1])
-	except:
-		mydict[tmp]=[l[1]]
+    l=l.rstrip()
+    l=l.split('\t')
+    tmp= l[4],l[5]
+    try:
+        mydict[tmp].append(l[1])
+    except:
+        mydict[tmp]=[l[1]]
 #
 for chr, pos in mydict:
-	print chr, pos, len(mydict[chr, pos])
-	out_f=os.path.join(outDir,baseFile[:-25]+'_'+baseFile[-12:-4]+'_'+str(chr)+'_'+str(pos)+'.txt')
-	my_out=open(out_f, 'w')
-	n=0
-	for read in mydict[chr, pos]:
-		if n<=len(mydict[chr, pos]):
-			my_out.write(str(read)+'\n')
-			n+=1
-		else:
-			my_out.close()
+    print(chr, pos, len(mydict[chr, pos]))
+    out_f=os.path.join(outDir,baseFile[:-25]+'_'+baseFile[-12:-4]+'_'+str(chr)+'_'+str(pos)+'.txt')
+    my_out=open(out_f, 'w')
+    n=0
+    for read in mydict[chr, pos]:
+        if n<=len(mydict[chr, pos]):
+            my_out.write(str(read)+'\n')
+            n+=1
+        else:
+            my_out.close()
 #
 myfile.close()
-

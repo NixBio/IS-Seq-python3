@@ -24,7 +24,7 @@ for read in samfile.fetch():
                             continue
         #if the read is the second in pair (R2) there is no need for filtering
         else:
-           out_reads.write(read)
+            out_reads.write(read)
     #if the read is aligned in forward
     else:
         #if the read is first in pair (R1)

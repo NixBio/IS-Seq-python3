@@ -135,7 +135,7 @@ def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder):
     if check:
 
         def call_script_R(wd,suffix):
-            mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTableINSPIIRED.R''')+''' '''+wd+''' '''+suffix
+            mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder
             print(mycmd)
             subprocess.call(mycmd,shell=True)
 
@@ -302,8 +302,6 @@ def main():
         collisionFolder="Lenti_Human"
     if (Organism=="hg38" and VectorType=="SIN-LV"):
         collisionFolder="Lenti_Human"
-    if (Organism=="hg18" and VectorType=="SIN-LV"):
-        collisionFolder="Lenti_Human"
     if (Organism=="Mouse" and VectorType=="SIN-LV"):
         collisionFolder="Lenti_Mouse"
     if (Organism=="Human" and VectorType=="RV"):
@@ -323,7 +321,7 @@ def main():
         randBrc=1
 
     if (VectorType=="SIN-LV"):
-        LCFileFa=suffix+"_"+"LC_completo.fa"
+        LCFileFa="LC_completo.fa"
     if (VectorType=="RV"):
         LCFileFa="LC_completo.fa"
 
@@ -351,9 +349,9 @@ def main():
         sortedKnownGene=os.path.join(utilsRef,'hg38','hg38_genesKNOWN_sorted.bed')
         genomeSorted=os.path.join(utilsRef,'hg38','hg38.genome.sorted.txt')
     if (Organism=="hg18"):
-        maskFile=os.path.join(utilsRef,'hg18','repeatMaskerhg18BED')
+        maskFile=os.path.join(utilsRef,'hg18','repeatMaskerhg38BED')
         chrList=os.path.join(utilsRef,'hg18','hg18.genome.num.txt')
-        dirGenome= os.path.join(utilsRef,'hg18','hg18ChrOnly.fa')
+        dirGenome= os.path.join(utilsRef,'h18','hg18ChrOnly.fa')
         sortedKnownGene=os.path.join(utilsRef,'hg18','hg18_genesKNOWN_sorted.bed')
         genomeSorted=os.path.join(utilsRef,'hg18','hg18.genome.sorted.txt')
     if (Organism=="Mouse"):
@@ -499,10 +497,10 @@ def main():
             dirGenome= os.path.join(utilsRef,'vector','IUPF-CTNS','IUVPF_CTNS_LTRtoLTR.fa')
         if Vector == 'pCDY-EFS-hGLAco':
             dirGenome= os.path.join(utilsRef,'vector','pCDY-EFS-hGLAco','pCDY-EFS-hGLAco_LTRtoLTR.fa')
-        if Vector == 'p746vector':
-            dirGenome= os.path.join(utilsRef,'vector','p746vector','p746vector.fa')
+
 
         align2vector(seqPlat,R1Out,R2Out,outputDir,sampleResearch,dirGenome,sampleName)
+
 
     if analysisType == "missingIS":
         print("missingIS analysis start")
@@ -553,8 +551,6 @@ def main():
                     dirGenome= os.path.join(utilsRef,'vector','IUPF-CTNS','IUVPF_CTNS_LTRtoLTR.fa')
                 if Vector == 'pCDY-EFS-hGLAco':
                     dirGenome= os.path.join(utilsRef,'vector','pCDY-EFS-hGLAco','pCDY-EFS-hGLAco_LTRtoLTR.fa')
-                if Vector == 'p746vector':
-                    dirGenome= os.path.join(utilsRef,'vector','p746vector','p746vector.fa')
 
                 IdentityThreshold=95
                 input = os.path.join(dwdt,"CutAdapt","BAMSorted",filename)
@@ -591,11 +587,6 @@ def main():
             chrList=os.path.join(utilsRef,'vector','pCDY-EFS-hGLAco','vector_chr_list_num.txt')
             sortedKnownGene=os.path.join(utilsRef,'vector','pCDY-EFS-hGLAco','pCDY-EFS-hGLAco_LTRtoLTR_sorted.bed')
             genomeSorted=os.path.join(utilsRef,'vector','pCDY-EFS-hGLAco','vector_genome_sorted.txt')
-
-        if Vector == 'p746vector':
-            chrList=os.path.join(utilsRef,'vector','p746vector','vector_chr_list_num.txt')
-            sortedKnownGene=os.path.join(utilsRef,'vector','p746vector','Features_p746vector.txt')
-            genomeSorted=os.path.join(utilsRef,'vector','p746vector','vector_genome_sorted.txt')
 
         getVectorIsTable(outputDirMissIS,sampleResearch,utilsDir,utilsRef,chrList,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,VectorMask)
 
@@ -1168,7 +1159,7 @@ def getUmi(file,outputDir):
             for listitem in readName:
 
                 listitem=re.split(' ',listitem)
-                rUmi = listitem[0][-12:]
+                rUmi = listitem[0][-18:]
 
                 umi.write('%s\n' % rUmi)
         f.close()
@@ -1185,8 +1176,8 @@ def getReadNameUmi(UmiFileDir):
             readName=[item[:-1] for item in lines[::4]]
             for listitem in readName:
                 listitem=re.split(' ',listitem)
-                rName = listitem[0][1:-13]
-                rUmi = listitem[0][-12:]
+                rName = listitem[0][1:-19]
+                rUmi = listitem[0][-18:]
                 try:
                     mydictUmi[rName].append(rUmi)
                 except:
@@ -1289,7 +1280,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
         # #### TRIM FIRST 12 NT START ####################
     if check:
         if not 'ftrimmer' in globals():
-            ftrimmer=1
+            ftrimmer=13
         if not 'Qtrimmer' in globals():
             Qtrimmer=33
 
@@ -1562,7 +1553,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
                     if check:
                         def call_script(FileRx):
                             temp = os.path.join(dwdt,"fqSplit")
-                            mycmd='''ls ''' +os.path.join(temp,FileRx+'''FqSplit*''')
+                            mycmd='''rm ''' +os.path.join(temp,FileRx+'''FqSplit*''')
                             print(mycmd)
                             subprocess.call(mycmd,shell=True)
 
@@ -1832,96 +1823,74 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
             x.join()
 
     ## b
+    threads = []
+    def call_script_Blast(filename,seqFile):
+        inputFile = filename
+        outputFile = os.path.join(outputDir,filename[:-3]+ '''_blastAnchor.txt''')
+        check = compareFileTime(inputFile,outputFile)
+        if check:
+            mycmd='''blastn -task blastn-short -word_size 4 -query ''' +inputFile+ ''' -subject '''+seqFile+''' -outfmt "6 std btop slen" -max_target_seqs 1 > '''  +outputFile
+            print(mycmd)
+            subprocess.call(mycmd,shell=True)
 
+    for filename in os.listdir(outputDir):
+        if fnmatch.fnmatch(filename,'*.fq_trimwithCutAdapt.fa'):
+            t1 = Thread(target=call_script_Blast, args=(os.path.join(outputDir,filename),seqFile))
+            threads.append(t1)
 
-    b = os.path.getsize(seqFile)
+    for i in range(0, len(threads), NT):
+        for x in threads[i:i+NT]:
+            x.start()
+        for x in threads[i:i+NT]:
+            x.join()
 
-    if b > 0:
-        threads = []
-        def call_script_Blast(filename,seqFile):
-            inputFile = filename
-            outputFile = os.path.join(outputDir,filename[:-3]+ '''_blastAnchor.txt''')
+    for filename in os.listdir(outputDir):
+        if fnmatch.fnmatch(filename,'*_blastAnchor.txt'):
+
+            inputFile = os.path.join(outputDir,filename)
+            outputFile = os.path.join(outputDir,filename[:-4]+ '''_7.txt''')
+
             check = compareFileTime(inputFile,outputFile)
+
             if check:
-                mycmd='''blastn -task blastn-short -word_size 4 -query ''' +inputFile+ ''' -subject '''+seqFile+''' -outfmt "6 std btop slen" -max_target_seqs 1 > '''  +outputFile
-                print(mycmd)
-                subprocess.call(mycmd,shell=True)
+                goodID=[]
+                myblast=open(inputFile)
+                myout_7=open(outputFile,'w')
 
-        for filename in os.listdir(outputDir):
-            if fnmatch.fnmatch(filename,'*.fq_trimwithCutAdapt.fa'):
-                t1 = Thread(target=call_script_Blast, args=(os.path.join(outputDir,filename),seqFile))
-                threads.append(t1)
-
-        for i in range(0, len(threads), NT):
-            for x in threads[i:i+NT]:
-                x.start()
-            for x in threads[i:i+NT]:
-                x.join()
-
-        for filename in os.listdir(outputDir):
-            if fnmatch.fnmatch(filename,'*_blastAnchor.txt'):
-                inputFile = os.path.join(outputDir,filename)
-                outputFile = os.path.join(outputDir,filename[:-4]+ '''_7.txt''')
-
-                check = compareFileTime(inputFile,outputFile)
-
-                if check:
-
-                    goodID=[]
-                    myblast=open(inputFile)
-                    myout_7=open(outputFile,'w')
-
-                    for l in myblast.readlines():
-                        l= l.rstrip()
-
-                        if l[0]=='#':
-                            continue
-                        l= l.split('\t')
-
-                        if int(l[4])==0 and int(l[5])==0:
-                            if int(l[6])==7 and int(l[7])==12:
-                                myout_7.write('\t'.join(l)+'\n')
-                                goodID+=[l[0]]
+                for l in myblast.readlines():
+                    l= l.rstrip()
+                    if l[0]=='#':
+                        continue
+                    l= l.split('\t')
+                    if int(l[4])==0 and int(l[5])==0:
+                        if int(l[6])==7 and int(l[7])==12:
+                            myout_7.write('\t'.join(l)+'\n')
+                            goodID+=[l[0]]
                     #if int(l[6])==6 and int(l[7])==11:
                     #    myout_6.write('\t'.join(l)+'\n')
-                    goodIDset = set(goodID)
+                goodIDset = set(goodID)
+                with open(os.path.join(outputDir,filename[:-4]+'_ID_blast_7.lst'), "w") as myblastOutID:
+                    myblastOutID.write('\n'.join(goodIDset))
+                myblast.close()
+                myblastOutID.close()
 
-                    with open(os.path.join(outputDir,filename[:-4]+'_ID_blast_7.lst'), "w") as myblastOutID:
-                        myblastOutID.write('\n'.join(goodIDset))
-                    myblast.close()
-                    myblastOutID.close()
-
-        def call_script(filename):
-
-            inputFile = filename
-            temp = os.path.basename(filename)
-
-            inputFile1 = os.path.join(outputDir,temp+"_blastAnchor_ID_blast_7.lst")
-
-            outputFile = os.path.join(outputDir,temp+"_reads_withAncora")
-
-            check = compareFileTime(inputFile,outputFile)
-
-            if check:
-                mycmd='''seqtk subseq '''+inputFile+ ''' ''' +inputFile1 + ''' > '''+outputFile
-                print(mycmd)
-                subprocess.call(mycmd,shell=True)
 
     def call_script(filename):
 
         inputFile = filename
         temp = os.path.basename(filename)
 
-        inputFile1 = os.path.join(outputDir,temp)
+        inputFile1 = os.path.join(outputDir,temp+"_blastAnchor_ID_blast_7.lst")
 
         outputFile = os.path.join(outputDir,temp+"_reads_withAncora")
 
         check = compareFileTime(inputFile,outputFile)
 
         if check:
-            mycmd='''cat '''+inputFile+''' > '''+outputFile
+            mycmd='''seqtk subseq '''+inputFile+ ''' ''' +inputFile1 + ''' > '''+outputFile
             print(mycmd)
             subprocess.call(mycmd,shell=True)
+
 
     threads = []
     for filename in os.listdir(inputDir,):
@@ -1941,10 +1910,10 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
         inputFile = filename
         temp = os.path.basename(filename)
 
-        outputFile = os.path.join(outputDir,temp+"_out_trim12")
+        outputFile = os.path.join(outputDir,temp+"_out_trim18")
         check = compareFileTime(inputFile,outputFile)
         if check:
-            mycmd='''fastx_trimmer -f 13 -Q 33 -i '''+inputFile+''' -o '''+outputFile
+            mycmd='''fastx_trimmer -f 19 -Q 33 -i '''+inputFile+''' -o '''+outputFile
             print(mycmd)
             subprocess.call(mycmd,shell=True)
 
@@ -1977,7 +1946,7 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
             subprocess.call(mycmd,shell=True)
 
     for filename in os.listdir(outputDir):
-        if fnmatch.fnmatch(filename,'*withAncora_out_trim12'):
+        if fnmatch.fnmatch(filename,'*withAncora_out_trim18'):
             t1 = Thread(target=call_scriptFqFa, args=(os.path.join(outputDir,filename),))
             threads.append(t1)
 
@@ -2002,7 +1971,7 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
             subprocess.call(mycmd,shell=True)
 
     for filename in os.listdir(outputDir):
-        if fnmatch.fnmatch(filename,'*withAncora_out_trim12.fa'):
+        if fnmatch.fnmatch(filename,'*withAncora_out_trim18.fa'):
             t1 = Thread(target=call_script_Blast, args=(os.path.join(outputDir,filename),seqFile1))
             threads.append(t1)
 
@@ -2027,7 +1996,7 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
                         continue
                     l= l.split('\t')
                     if int(l[4])<=3:
-                        if int(l[6])<=2 and int(l[7])>=15:
+                        if int(l[6])<=2 and int(l[7])>=19:
                             goodID+=[l[0]]
                 myblast.close()
                 goodIDset = set(goodID)
@@ -2052,7 +2021,7 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
 
     threads = []
     for filename in os.listdir(outputDir):
-        if fnmatch.fnmatch(filename,'R2_fastq*_out_trim12'):
+        if fnmatch.fnmatch(filename,'R2_fastq*_out_trim18'):
             t1 = Thread(target=call_script, args=(os.path.join(outputDir,filename),))
             threads.append(t1)
 
@@ -2074,7 +2043,7 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
         check = compareFileTime(inputFile,outputFile)
 
         if check:
-            mycmd='''fastx_trimmer -f 17 -Q 33 -i '''+inputFile+''' -o '''+outputFile
+            mycmd='''fastx_trimmer -f 21 -Q 33 -i '''+inputFile+''' -o '''+outputFile
             print(mycmd)
             subprocess.call(mycmd,shell=True)
 
@@ -2122,7 +2091,7 @@ def extractUmiOnly(filename,outDir):
 
     if check:
 
-        mycmd='''eval "$(conda shell.bash hook)" && conda activate py3.7 && umi_tools extract --extract-method=string -p NNNNNNNNNNNN -I '''+filename+''' -S '''+outputFile
+        mycmd='''eval "$(conda shell.bash hook)" && conda activate py3.7 && umi_tools extract --extract-method=string -p NNNNNNNNNNNNNNNNNN -I '''+filename+''' -S '''+outputFile
         print(mycmd)
         subprocess.call(mycmd,shell=True)
 

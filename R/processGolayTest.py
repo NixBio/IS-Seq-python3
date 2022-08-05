@@ -3,13 +3,13 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import *
 from golay import *
-import commands
+import subprocess
 import sys
 
 
-print str(sys.argv[1])
-print str(sys.argv[2])
-print str(sys.argv[3])
+print(str(sys.argv[1]))
+print(str(sys.argv[2]))
+print(str(sys.argv[3]))
 
 
 out_handle = open(str(sys.argv[2]),"w")
@@ -18,8 +18,8 @@ for seq_record in SeqIO.parse(str(sys.argv[1]), "fasta"):
   
   #print str(seq_record.seq)
   res = decode(str(seq_record.seq))
-  print str(seq_record.seq)
-  print res
+  print(str(seq_record.seq))
+  print(res)
 
   if res[0] != None:
     SeqIO.write(SeqRecord(Seq(res[0], SingleLetterAlphabet()), id=seq_record.id, description=""), out_handle, "fasta")

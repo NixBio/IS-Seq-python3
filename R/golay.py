@@ -166,7 +166,7 @@ def _seq_to_bits(seq, nt_to_bits):
     bitstring = ""
     for nt in seq:
         bitstring += nt_to_bits[nt]
-    bits = numpy.array(map(int,bitstring))
+    bits = numpy.array(list(map(int,bitstring)))
     return bits
 
 
@@ -176,7 +176,7 @@ def _bits_to_seq(bits, nt_to_bits):
     nt_to_bits is e.g.: {"A":"11", "C":"00", "T":"10", "G":"01"}
 
     """
-    bits_to_nt = dict(zip(nt_to_bits.values(), nt_to_bits.keys()))
+    bits_to_nt = dict(list(zip(list(nt_to_bits.values()), list(nt_to_bits.keys()))))
     seq = ""
     for i in range(0,len(bits),2): #take bits in twos
         bit1 = str(int(round(bits[i])))
