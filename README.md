@@ -12,7 +12,7 @@ using viral vectors in gene therapy.
 
 ## Introduction
 
-This pipeline is a version of IS-Seq pipeline under Python 3.10.5 and
+This is a version of IS-Seq pipeline under Python 3.10.5 and
 R/Rscript(4.2.0) environment.
 
 ### To use this IS-Seq version in Linux workstation, you need to install the following software and modules
