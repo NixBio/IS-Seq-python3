@@ -122,6 +122,8 @@ conda install -c bioconda blat
 conda install -c bioconda starcode
 
 R/Rscript(4.2.0)
+
+conda install -c bioconda umi_tools
 ```
 
   - On R console:
