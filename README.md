@@ -4,6 +4,7 @@
 # IS-Seq
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 IS-Seq is a pipeline for identifying insert sites on host genome when
@@ -17,24 +18,24 @@ Umibased, and FragmentBased analysis, respectively.
 
 ### To use IS-Seq in Linux workstation, you need to install the following software and modules
 
--   Install conda and python 2.7.17
+  - Install conda and Python 3.10.5
 
 User needs to run IS-Seq under Python 2.7.17 environment. You can
 install Python 2.7.17 environment by downloading
-Miniconda2-latest-Linux-x86_64.sh from
+Miniconda2-latest-Linux-x86\_64.sh from
 <https://docs.conda.io/en/latest/miniconda.html>, and install it by the
 following command:
 
     bash Miniconda2-latest-Linux-x86_64.sh
 
--   Other required software and managing python 2.7.17 and python3
+  - Other required software and managing python 2.7.17 and python3
     environment
 
 IS-Seq requires to have the following software to be installed under
 Python 2.7.17 environment. User also needs to create an python3.7
-environment, and install umi_tools under python3.7. IS-Seq will activate
-python3.7 to use umi_tools for UMI extracting automatically during
-running, User don’t need to activate python3.7 manually.
+environment, and install umi\_tools under python3.7. IS-Seq will
+activate python3.7 to use umi\_tools for UMI extracting automatically
+during running, User don’t need to activate python3.7 manually.
 
 ``` bash
 The list of tools and how to install it 
@@ -102,11 +103,33 @@ conda install Biopython
 pip install more_itertools
 sudo apt-get install libtbb2
 conda install -c kantorlab blastn
+
+# Some tools and packages needed for Python 3.10.5
+
+pip3 install numpy
+
+pip3 install more_itertools
+pip3 install Bio
+
+sudo apt install ncbi-blast+
+
+conda install -c bioconda -y ea-utils
+
+conda install -c bioconda bwa-mem2
+
+conda install -c bioconda blat
+
+conda install -c bioconda starcode
+
+R/Rscript(4.2.0)
 ```
 
--   On R console:
+  - On R console:
+
+<!-- end list -->
 
 ``` r
+
 if (!requireNamespace("reshape", quietly = TRUE))
   install.packages("reshape",repos = "http://cran.us.r-project.org")
 
@@ -134,15 +157,15 @@ Rscript path/to/IS-Seq/R/makeREFIndex.R -i ftp://ftp.ebi.ac.uk/pub/databases/gen
 
 ### The data set we used for testing IS-Seq:
 
--   One public available data set, and can be downloaded from the
+  - One public available data set, and can be downloaded from the
     folllowing website
-
+    
     <https://github.com/BushmanLab/intSiteCaller/tree/master/testCases/intSiteValidation/Data>
 
--   3 in-house generated data sets, and can be downloaded from GEO
-
+  - 3 in-house generated data sets, and can be downloaded from GEO
+    
     <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE203211>
-
+    
     Note: These data sets will be available after our IS-Seq paper is
     accepted for publication. Before this, if you want to review these
     data sets, please send an email to <aimin.at.work@gmail.com>, we
@@ -150,12 +173,14 @@ Rscript path/to/IS-Seq/R/makeREFIndex.R -i ftp://ftp.ebi.ac.uk/pub/databases/gen
 
 ### if you have BCL files from sequencing run, convert BCL files to fastq.gz files using bcl2fastq
 
+``` 
 
-    # Example:
+# Example:
 
-    # serial dilutions data set 1
+# serial dilutions data set 1
 
-    nohup bcl2fastq --runfolder-dir path/to/BCL files/Files --output-dir path/to/output_Fastq_files > log.txt 2>&1 &
+nohup bcl2fastq --runfolder-dir path/to/BCL files/Files --output-dir path/to/output_Fastq_files > log.txt 2>&1 &
+```
 
 ### To have a quick start to using IS-Seq, you can run the following command:
 
@@ -171,117 +196,118 @@ Usage: python path/to/IS-Seq/ISpipelineFv3_test.py -1 <r1.fq.gz> -2 <r2.fq.gz> -
 python path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/assiciation_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a read
 ```
 
--   Command line arguments:
-
-    -   -1 R1 read file for pair-ended sequencing files
-
-    -   -2 R2 read file for pair-ended sequencing files
-
-    -   -s sample name, e.g. “POOL-UCL-CPL-Re”
-
-    -   -o The folder name of your output
-
+  - Command line arguments:
+    
+      - \-1 R1 read file for pair-ended sequencing files
+    
+      - \-2 R2 read file for pair-ended sequencing files
+    
+      - \-s sample name, e.g. “POOL-UCL-CPL-Re”
+    
+      - \-o The folder name of your output
+    
     note: user should not use underscore(*) in the output folder name
     and file name because of special meanings of underscore(*) in Python
-
-    -   -t time you run this pipeline
-
-    -   -r association file. User should prepare an assocation file
-        based on the formats in “Association_File_format.png” in
-        “sample_research” folder. you can check the detailed format
+    
+      - \-t time you run this pipeline
+    
+      - \-r association file. User should prepare an assocation file
+        based on the formats in “Association\_File\_format.png” in
+        “sample\_research” folder. you can check the detailed format
         information here
-        <img src="sample_research/Association_File_format.png"
-        style="width:100.0%" alt="SampleInfor" />. The following is the
-        detailed information of each column in this format:
-
-        -   1: LAM-PCR-ID
-
-        -   2: PT-DONOR-MOUSE
-
-        -   3: PT-Transduction-ID
-
-        -   4 Source
-
-        -   5: Sample-Type  
-
-        -   6: Research-(-R-)-Clinic-(-C-)  
-
-        -   7: TimePoint-R(d)-C(m) use month as measurement unit  
-
-        -   8: Fusion-Primer-LTR.-ID note: you shoud use give this like
+        ![SampleInfor](sample_research/Association_File_format.png). The
+        following is the detailed information of each column in this
+        format:
+        
+          - 1: LAM-PCR-ID
+        
+          - 2: PT-DONOR-MOUSE
+        
+          - 3: PT-Transduction-ID
+        
+          - 4 Source
+        
+          - 5: Sample-Type  
+        
+          - 6: Research-(-R-)-Clinic-(-C-)  
+        
+          - 7: TimePoint-R(d)-C(m) use month as measurement unit  
+        
+          - 8: Fusion-Primer-LTR.-ID note: you shoud use give this like
             “FB-P5-Rd1-LTR.1”,FB-P5-Rd1-LTR-1 will give an error  
-
-        -   9: Fusion-Primer-LC.-ID note: format requirement for LC
+        
+          - 9: Fusion-Primer-LC.-ID note: format requirement for LC
             barcode is like format requirement as LTR barcode
-
-        -   10: Library, this is same as sample name in comand line
+        
+          - 10: Library, this is same as sample name in comand line
             arguments
-
-        -   11: Sequencing-date-(mm-dd-yy)  
-
-        -   12: Organism  
-
-        -   13: VectorType  
-
-        -   14: VectorMask  
-
-        -   15: Linker-Cassette  
-
-        -   16: Transgene
-
-        -   17: Other-Infos  
-
-        -   18: Other-infos-2
-
+        
+          - 11: Sequencing-date-(mm-dd-yy)  
+        
+          - 12: Organism  
+        
+          - 13: VectorType  
+        
+          - 14: VectorMask  
+        
+          - 15: Linker-Cassette  
+        
+          - 16: Transgene
+        
+          - 17: Other-Infos  
+        
+          - 18: Other-infos-2
+            
             note: user should not use underscore(\_) in these column
             name and their entries in this table because of special
             meanings in Python
-
-    -   -u The folder you put reference data
-
-    -   -p The folder for auxiliary scripts you need in
-        IS-SeqlineFv3_test.py
-
-    -   -a analysis type,
-        e.g. “read”,“missingIS”,“VectorCount”,“align2Vector”,“umi” or
-        “fragment”,
-
-    -   -c the previous folder, this is a folder including those
-        \*grouped_IS file from previous run:
+    
+      - \-u The folder you put reference data
+    
+      - \-p The folder for auxiliary scripts you need in
+        IS-SeqlineFv3\_test.py
+    
+      - \-a analysis type,
+        e.g. “read”,“missingIS”,“VectorCount”,“align2Vector”,“umi”
+        or “fragment”,
+    
+      - \-c the previous folder, this is a folder including those
+        \*grouped\_IS file from previous run:
 
 Note: you need to follow these order to run IS-Seq:
 
--   You need to set up which genome will be used as reference genome in
+  - You need to set up which genome will be used as reference genome in
     the association file Organism column, currently, the accepted genome
     is Human(hg19),hg38 and Mouse(mm10).
 
--   You need to run ReadBased(“-a read”) firstly because the runs for
+  - You need to run ReadBased(“-a read”) firstly because the runs for
     “missingIS”,“VectorCount”,“umi” or “fragment” depends on the
     intermediate files from ReadBased.
 
--   After you finished ReadBased run, if you want to get “missingIS”,
+  - After you finished ReadBased run, if you want to get “missingIS”,
     you just need to set ‘-a missingIS’.
 
--   If you want to run ‘-a VectorCount’, you need to finish ‘-a
+  - If you want to run ‘-a VectorCount’, you need to finish ‘-a
     missingIS’ firstly.
 
--   align2Vector If you want to align all reads(not missing reads) on
+  - align2Vector If you want to align all reads(not missing reads) on
     vector, use this analysis type
 
--   To set the previous folder in -c, you need to follow the following
+  - To set the previous folder in -c, you need to follow the following
     rule:
-
+    
     for example:
-
-    You can find “*grouped_IS” files by using
-    /home/user/Seagate/ISseqOutput/Oct22New/CutAdapt/filterNo/db/*grouped_IS
-
+    
+    You can find "*grouped\_IS" files by using
+    /home/user/Seagate/ISseqOutput/Oct22New/CutAdapt/filterNo/db/*grouped\_IS
+    
     The previous folder name you need to give is
     /home/user/Seagate/ISseqOutput/Oct22New
 
 ### To get ReadBased results, you need to run the following command:
 
 ``` bash
+
 nohup python -u path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/association_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a read -c nothing > logRead.txt 2>&1 &
 
 Rscript path/to/IS-Seq/utils/getReadsFromSam.R -n 'pCDY.MND.GFP' -v path/to/Output/April20/vector/align -a path/to/assiciation_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -o path/to/Output/April20/total_vector_host_sam.rds
@@ -290,12 +316,14 @@ Rscript path/to/IS-Seq/utils/getReadsFromSam.R -n 'pCDY.MND.GFP' -v path/to/Outp
 ### To get UmiBased results, you need to run the following command:
 
 ``` bash
+
 nohup python -u path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/association_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a umi -c nothing > logUmi.txt 2>&1 &
 ```
 
 ### To get FragmentBased results, you need to run the following command:
 
 ``` bash
+
 nohup python -u path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/association_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a fragment -c nothing > logFragment.txt 2>&1 &
 ```
 
@@ -304,12 +332,12 @@ you need to have 145G work space for read, umi and fragment based
 resutls totally.
 
 The following Figure shows the differences on some insert sites among 3
-methods <img src="doc/resultsOf3methods.png" style="width:80.0%"
-alt="results" />
+methods ![results](doc/resultsOf3methods.png)
 
 ### To use IS-Seq on the data set from INSPIIRED pipeline, you need to run the following command:
 
 ``` bash
+
 # Convert the data set in INSPIIRED pipeline to the format that can be used in IS-Seq firstly
 
 # check which python is used
@@ -346,6 +374,7 @@ The input FASTQ files needs to be downloaded from the folllowing website
 ##### demultiplex
 
 ``` bash
+
 # check which python is used
 
 # echo $(python -c "import site; print(site.getsitepackages()[0])")
@@ -356,9 +385,10 @@ The input FASTQ files needs to be downloaded from the folllowing website
 Rscript path/to/IS-Seq/R/demultiplex.R path/to/Undetermined_S0_L001_I1_001.fastq.gz path/to/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData path/to/Undetermined_S0_L001_R1_001.fastq.gz path/to/Undetermined_S0_L001_R2_001.fastq.gz path/to/INSPIIRED_test_output /home/ubuntu/miniconda2/lib/python2.7/site-packages
 ```
 
-##### Trim_After_Demultiplex
+##### Trim\_After\_Demultiplex
 
 ``` bash
+
 # Make hg18ChrOnly.2bit file firstly 
 
 Rscript path/to/IS-Seq/R/makeREFIndex4INSPIIRED.R -i hg18 -o path/to/output
@@ -371,6 +401,7 @@ Rscript path/to/IS-Seq/R/Trim_After_Demultiplex.R path/to/IS-Seq/utilsRefData/IN
 ##### call IS using blat-aligned R1 and R2 psl files
 
 ``` bash
+
 # INSPIIRED clone1-1
 Rscript ~/IS-Seq/R/PslToIs_one_replicate_change_sequence_similarity.R path/to/INSPIIRED_test_output/clone1-1/R1-1.fa.psl path/to/INSPIIRED_test_output/clone1-1/R2-1.fa.psl path/to/INSPIIRED_test_output/clone1-1/keys.rds ~/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData path/to/INSPIIRED_test_output/clone1-1/IS_0 hg18 1 0
 

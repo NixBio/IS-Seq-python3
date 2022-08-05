@@ -22,7 +22,7 @@ IS-Seq is a pipeline for identifying insert sites on host genome when using vira
 This pipeline can generate 3 types of analysis results based on different counting methods. These 3 types of resutls are ReadBased, Umibased, and FragmentBased analysis, respectively.
 
 ### To use IS-Seq in Linux workstation, you need to install the following software and modules
-* Install conda and python 2.7.17
+* Install conda and Python 3.10.5
 
 User needs to run IS-Seq under Python 2.7.17 environment. You can install Python 2.7.17 environment by downloading Miniconda2-latest-Linux-x86_64.sh from https://docs.conda.io/en/latest/miniconda.html, and install it by the following command:
 
@@ -99,6 +99,25 @@ conda install Biopython
 pip install more_itertools
 sudo apt-get install libtbb2
 conda install -c kantorlab blastn
+
+# Some tools and packages needed for Python 3.10.5
+
+pip3 install numpy
+
+pip3 install more_itertools
+pip3 install Bio
+
+sudo apt install ncbi-blast+
+
+conda install -c bioconda -y ea-utils
+
+conda install -c bioconda bwa-mem2
+
+conda install -c bioconda blat
+
+conda install -c bioconda starcode
+
+R/Rscript(4.2.0)
 
 ```
 
