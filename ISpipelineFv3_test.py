@@ -2196,7 +2196,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
 
-                        mycmd='''/home/ubuntu/ngsutilsj/dist/ngsutilsj fastq-sort ''' +r2filename+ '''_ReadyToAlign > ''' +r2filename+ '''_ReadyToAlignSort'''
+                        mycmd='''ngsutilsj fastq-sort ''' +r2filename+ '''_ReadyToAlign > ''' +r2filename+ '''_ReadyToAlignSort'''
                         print(mycmd)
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
@@ -3570,7 +3570,7 @@ def align2vector(seqPlat,R1Out,R2Out,outputDir,sampleResearch,dirGenome,sampleNa
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
 
-                        mycmd='''/home/ubuntu/ngsutilsj/dist/ngsutilsj fastq-sort ''' +r1filename+ '''_ReadyToAlign > ''' +r1filename+ '''_ReadyToAlignSort'''
+                        mycmd='''ngsutilsj fastq-sort ''' +r1filename+ '''_ReadyToAlign > ''' +r1filename+ '''_ReadyToAlignSort'''
                         print(mycmd)
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
@@ -3580,7 +3580,7 @@ def align2vector(seqPlat,R1Out,R2Out,outputDir,sampleResearch,dirGenome,sampleNa
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
 
-                        mycmd='''/home/ubuntu/ngsutilsj/dist/ngsutilsj fastq-sort ''' +r2filename+ '''_ReadyToAlign > ''' +r2filename+ '''_ReadyToAlignSort'''
+                        mycmd='''ngsutilsj fastq-sort ''' +r2filename+ '''_ReadyToAlign > ''' +r2filename+ '''_ReadyToAlignSort'''
                         print(mycmd)
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
