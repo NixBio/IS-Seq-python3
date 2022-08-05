@@ -12,30 +12,22 @@ using viral vectors in gene therapy.
 
 ## Introduction
 
-This pipeline can generate 3 types of analysis results based on
-different counting methods. These 3 types of resutls are ReadBased,
-Umibased, and FragmentBased analysis, respectively.
+This pipeline is a version of IS-Seq pipeline under Python 3.10.5 and
+R/Rscript(4.2.0) environment.
 
-### To use IS-Seq in Linux workstation, you need to install the following software and modules
+### To use this IS-Seq version in Linux workstation, you need to install the following software and modules
 
-  - Install conda and Python 3.10.5
+Under Python 2.7.17 environment
 
-User needs to run IS-Seq under Python 2.7.17 environment. You can
-install Python 2.7.17 environment by downloading
-Miniconda2-latest-Linux-x86\_64.sh from
-<https://docs.conda.io/en/latest/miniconda.html>, and install it by the
-following command:
+  - Install Python 3.10.5
+    
+    conda create –name 2to3 python=3
+    
+    conda activate 2to3
 
-    bash Miniconda2-latest-Linux-x86_64.sh
+  - Other required software under Python 3.10.5 environment
 
-  - Other required software and managing python 2.7.17 and python3
-    environment
-
-IS-Seq requires to have the following software to be installed under
-Python 2.7.17 environment. User also needs to create an python3.7
-environment, and install umi\_tools under python3.7. IS-Seq will
-activate python3.7 to use umi\_tools for UMI extracting automatically
-during running, User don’t need to activate python3.7 manually.
+<!-- end list -->
 
 ``` bash
 The list of tools and how to install it 
@@ -43,8 +35,6 @@ The list of tools and how to install it
 awk
 Linux built-in, you do not need to install this
 
-Python 2.7.17
-python2
 
 Tools can be installed by "conda install -c bioconda packageName" 
 
@@ -57,9 +47,7 @@ seqtk(conda install -c bioconda seqtk)
 fastq-multx(conda install -c bioconda -y ea-utils)
 fastq-mcf(conda install -c bioconda -y ea-utils)(note: the earliest version of IS-Seq uses fastq-mcf for trimming LTR and LC, then uses flexbar to process *.skip.fq files. However, we find fastq-mcf trims one more nucleotide base, so the current version of IS-Seq uses cutadapt for trimming LTR and LC)
 
-fastqutils(conda install -c bioconda ngsutils)
-
-bwa(conda install -c bioconda bwa)
+bwa-mem2(conda install -c bioconda bwa-mem2)
 samtools(conda install -c bioconda samtools)
 bedtools(conda install -c bioconda bedtools)
 blat(conda install -c bioconda blat)
@@ -78,18 +66,8 @@ picard-tools:
 sudo apt-get install picard-tools
 use PicardCommandLine
 
-R/Rscript(3.6.2)
-
 cutadapt:
 sudo apt install cutadapt
-
-pip install numpy
-pip install more_itertools
-
-umi_tools:
-conda create -n py3.7 python=3.7
-pip install umi_tools
-umi_tools is used for UMI extract, and run under python3.7 environment and this environment is activated at ad-hoc during running 
 
 sudo apt-get install libxml2 libxml2-dev
 sudo apt-get -y install libcurl4-gnutls-dev libxml2-dev libssl-dev
@@ -100,11 +78,15 @@ sudo apt-get install libgtk2.0-dev xvfb xauth xfonts-base libxt-dev
 if you want to run this Pipeline on AWS, you also need to do:
 conda install Biopython
 
-pip install more_itertools
 sudo apt-get install libtbb2
 conda install -c kantorlab blastn
 
-# Some tools and packages needed for Python 3.10.5
+git clone https://github.com/compgen-io/ngsutilsj.git
+cd ~/ngsutilsj
+ant jar
+vi ~/.bashrc , and add the follwoing line to ~/.bashrc
+export PATH=$PATH:/home/ubuntu/ngsutilsj/dist
+source ~/.bashrc
 
 pip3 install numpy
 
@@ -113,38 +95,9 @@ pip3 install Bio
 
 sudo apt install ncbi-blast+
 
-conda install -c bioconda -y ea-utils
-
-conda install -c bioconda bwa-mem2
-
-conda install -c bioconda blat
-
-conda install -c bioconda starcode
-
 R/Rscript(4.2.0)
 
 conda install -c bioconda umi_tools
-```
-
-  - On R console:
-
-<!-- end list -->
-
-``` r
-
-if (!requireNamespace("reshape", quietly = TRUE))
-  install.packages("reshape",repos = "http://cran.us.r-project.org")
-
-if (!requireNamespace("optparse", quietly = TRUE))
-  install.packages("optparse",repos = "http://cran.us.r-project.org")
-
-if (!requireNamespace("rmarkdown", quietly = TRUE))
-  install.packages("rmarkdown",repos = "http://cran.us.r-project.org")
-
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("GenomicRanges")
 ```
 
 ### To generate the reference genome data(mm10,hg19,hg38), you can run the following command:
