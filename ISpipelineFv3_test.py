@@ -2091,7 +2091,7 @@ def extractUmiOnly(filename,outDir):
 
     if check:
 
-        mycmd='''eval "$(conda shell.bash hook)" && conda activate py3.7 && umi_tools extract --extract-method=string -p NNNNNNNNNNNNNNNNNN -I '''+filename+''' -S '''+outputFile
+        mycmd='''umi_tools extract --extract-method=string -p NNNNNNNNNNNNNNNNNN -I '''+filename+''' -S '''+outputFile
         print(mycmd)
         subprocess.call(mycmd,shell=True)
 
@@ -2186,7 +2186,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
 
-                        mycmd='''/home/ubuntu/ngsutilsj/dist/ngsutilsj fastq-sort ''' +r1filename+ '''_ReadyToAlign > ''' +r1filename+ '''_ReadyToAlignSort'''
+                        mycmd='''ngsutilsj fastq-sort ''' +r1filename+ '''_ReadyToAlign > ''' +r1filename+ '''_ReadyToAlignSort'''
                         print(mycmd)
                         process = subprocess.Popen(mycmd,shell=True)
                         process.wait()
