@@ -26,7 +26,7 @@ Under Python 2.7.17 environment
 
   - Install Python 3.10.5
 
-    conda create --name 2to3 python=3
+    conda create --name 2to3 python=3.10.5
 
     conda activate 2to3
 
@@ -42,20 +42,50 @@ Linux built-in, you do not need to install this
 
 Tools can be installed by "conda install -c bioconda packageName" 
 
-fastx_trimmer(conda install -c bioconda fastx_toolkit)
-fastq_quality_trimmer(conda install -c bioconda fastx_toolkit)
+conda install fastx_toolkit
 
-blastn(conda install -c bioconda blastn)
-seqtk(conda install -c bioconda seqtk)
+#fastx_trimmer(conda install -c bioconda fastx_toolkit)
+#fastq_quality_trimmer(conda install -c bioconda fastx_toolkit)
 
-fastq-multx(conda install -c bioconda -y ea-utils)
+conda install fastx_toolkit
+conda install blast
+conda install seqtk
+
+#blastn(conda install -c bioconda blast)
+#seqtk(conda install -c bioconda seqtk)
+
+?conda install ea-utils
+
+?fastq-multx(conda install -c bioconda -y ea-utils)
 fastq-mcf(conda install -c bioconda -y ea-utils)(note: the earliest version of IS-Seq uses fastq-mcf for trimming LTR and LC, then uses flexbar to process *.skip.fq files. However, we find fastq-mcf trims one more nucleotide base, so the current version of IS-Seq uses cutadapt for trimming LTR and LC)
 
+?conda install bwa-mem2
+
 bwa-mem2(conda install -c bioconda bwa-mem2)
+
+
+sed -i' ' 's/memset_s/memset8_s/g' include/safe_mem_lib.h
+
+
+sed -i' ' 's/memset_s/memset8_s/g' safeclib/memset16_s.c
+sed -i' ' 's/memset_s/memset8_s/g' safeclib/memset32_s.c
+sed -i' ' 's/memset_s/memset8_s/g' safeclib/memset_s.c
+sed -i' ' 's/memset_s/memset8_s/g' safeclib/wmemset_s.c
+
+
+
+
 samtools(conda install -c bioconda samtools)
+conda install samtools
+
 bedtools(conda install -c bioconda bedtools)
+conda install bedtools
+
 blat(conda install -c bioconda blat)
+conda install blat
+
 starcode(conda install -c bioconda starcode)
+conda install starcode
 
 flexbar:
 download flexbar-3.5.0-linux.tar.gz to somePath from https://github.com/seqan/flexbar/releases
@@ -66,9 +96,14 @@ e.g.
 /usr/bin/flexbar -> /home/user/Downloads/flexbar-3.5.0-linux/flexbar
 you also need "sudo apt-get install libtbb2" for flexbar to run
 
+conda install -c bioconda flexbar
+conda install flexbar
+
 picard-tools:
+conda install -c bioconda picard
 sudo apt-get install picard-tools
 use PicardCommandLine
+conda install picard-tools
 
 cutadapt:
 sudo apt install cutadapt
@@ -79,21 +114,37 @@ sudo apt-get -y install libcurl4-gnutls-dev libxml2-dev libssl-dev
 sudo apt-get install libcairo2-dev
 sudo apt-get install libgtk2.0-dev xvfb xauth xfonts-base libxt-dev
 
+On my Macs
+conda install cutadapt
+
+
 if you want to run this Pipeline on AWS, you also need to do:
 conda install Biopython
 
 sudo apt-get install libtbb2
 conda install -c kantorlab blastn
 
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+
+arch -arm64 brew install ant
+
+
 git clone https://github.com/compgen-io/ngsutilsj.git
 cd ~/ngsutilsj
 ant jar
 vi ~/.bashrc , and add the follwoing line to ~/.bashrc
 export PATH=$PATH:/home/ubuntu/ngsutilsj/dist
+
+echo 'export PATH=$PATH:~/ngsutilsj/dist' >> ~/.zprofile
+source ~/.zprofile
+
 source ~/.bashrc
 
-pip3 install numpy
 
+pip3 install numpy
 pip3 install more_itertools
 pip3 install Bio
 
@@ -102,6 +153,133 @@ sudo apt install ncbi-blast+
 R/Rscript(4.2.0)
 
 conda install -c bioconda umi_tools
+
+conda config --set channel_priority false
+
+
+ln -s /opt/homebrew/opt/openssl/lib/libssl.dylib /usr/local/lib/
+
+ln -s /opt/homebrew/opt/openssl/lib/libcrypto.dylib /usr/local/lib/
+ 
+ 
+ 
+Rscript $HOME/Aimin/ispipe/R/makeREFIndex.R -i ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz -g ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.annotation.gtf.gz -o /home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
+ 
+ 
+Rscript ~/IS-Seq-python3/R/makeREFIndex.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_40/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_40/gencode.v40.annotation.gtf.gz -o ~/IS-Seq-python3/utilsRefData/IsSeq/hg38/GRCh38.primary_assembly.genome.fa
+ 
+docker run -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/tmp -w /tmp dceoy/bwa-mem2 index hg38ChrOnly.fa
+ 
+ 
+docker run --rm -v "/Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/data" dceoy/bwa-mem2 index /data/hg38ChrOnly.fa
+
+
+bwa-mem2 mem -t 8 /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa /Users/aiminyan/DEMO/ISseqOutput/test/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort /Users/aiminyan/DEMO/ISseqOutput/test/RandomBarcodRemovalOutPut4R2CuReRun/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+ 
+
+docker run --rm -v "/your/data/dir:/data" pegi3s/bwa bwa mem /data/chr19_KI270866v1_alt.fasta /data/7859_GPI.read1.fq /data/7859_GPI.read2.fq > aln-pe.sam
+
+ 
+docker run --rm -v "/Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/data" --rm -v "/Users/aiminyan/DEMO/ISseqOutput/test/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq:/data1" --rm -v "/Users/aiminyan/DEMO/ISseqOutput/test/RandomBarcodRemovalOutPut4R2CuReRun:/data2" dceoy/bwa-mem2 mem -t 8 /data/hg38ChrOnly.fa /data1/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort /data2/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+
+
+docker run --rm -v "/Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/data" dceoy/bwa-mem2 index /data/hg38ChrOnly.fa
+
+docker run --rm -v "/Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/data" --rm -v "/Users/aiminyan/DEMO/ISseqOutput/test/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq:/data1" --rm -v "/Users/aiminyan/DEMO/ISseqOutput/test/RandomBarcodRemovalOutPut4R2CuReRun:/data2" dceoy/bwa-mem2 mem -t 8 /data/hg38ChrOnly.fa /data1/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort /data2/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+
+
+
+
+docker run -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/tmp -w /tmp dceoy/bwa-mem2 mem -t 8 
+hg38ChrOnly.fa 
+
+
+R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+
+
+
+
+
+docker run -v /Users/aiminyan dceoy/bwa-mem2 mem -t 8 
+IS-Seq-python3/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa DEMO/ISseqOutput/test/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort DEMO/ISseqOutput/test/RandomBarcodRemovalOutPut4R2CuReRun/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+
+
+
+
+hg38ChrOnly.fa
+ 
+
+brew install openjdk
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home"
+java --version
+
+ 
+nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipelineFv3_test.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /Users/aiminyan/DEMO/ISseqOutput -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a read -c nothing -q 0 > logRead.txt 2>&1 &
+```
+
+### To use this IS-Seq version in Linux workstation, you need to install the following software and modules
+
+```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+# Go to the following link to sign up for AWS(if you don't have an AWS account) or sign in to an existing AWS account if you already have AWS account
+
+https://portal.aws.amazon.com/billing/signup#/start/email
+
+After login, click EC2, select Launch instacne to set a virtual server in the cloud  
+Give a Name to your server, for "IS-Seq", select "Ubuntu".
+
+Select "Create new key pair", give a key pair name, for example, I give "IS-Seq"
+
+After you generate this key, for example: "IS-Seq.pem" , you can download this file to your local Mac machine, here I put ~/Downloads
+
+Check this file, and change permission:
+
+ls -lrth ~/Downloads/IS-Seq.pem
+chmod 400 ~/Downloads/IS-Seq.pem
+
+In the Configure storage, you can put 30 GiB if you are a Free tier eligible customer account, then click Launch instance
+
+After "IS-Seq" instance is running, click its instance ID, you can see all settings of this instance. click "Connect", you will see how you can SSH to this virtual server.
+
+If you want to connect to this virtual server by nomachine(https://www.nomachine.com/), you need to add the additional settings on "Security". click "Security", select "Security groups", for "Inbound rules", select "Edit inbound rules", click "add rule", put "Custom TCP" for Type,"TCP" for Protocol, "4000" for Port range, "0.0.0.0/0" for Source, click Save rules. 
+
+Download NoMachine from (https://www.nomachine.com/), select nomachine_7.10.1_1_amd64.deb, then copy this file using the following commands:
+
+scp -i ~/Downloads/IS-Seq.pem ~/Downloads/nomachine_7.10.1_1_amd64.deb ubuntu@ec2-3-88-9-20.compute-1.amazonaws.com:~/
+
+Then login your AWS virtual server by the following command:
+
+ssh -i ~/Downloads/IS-Seq.pem ubuntu@ec2-3-88-9-20.compute-1.amazonaws.com
+
+Install NoMachine on your AWS virtual server after login, type the following commands:
+
+sudo apt-get install ~/nomachine_7.10.1_1_amd64.deb
+sudo /usr/NX/bin/nxserver --restart
+
+mkdir -p ~/.nx/config
+cp -p .ssh/authorized_keys ~/.nx/config/authorized.crt 
+
+Then your need to install the following packages:
+
+sudo apt-get update -y
+sudo apt-get install build-essential
+sudo apt-get install xinit
+
+Download another NoMachine Mac version to your local Mac machine from (https://www.nomachine.com/),then add your AWS virtual server to your NoMachine, give Name as "ubuntu", Host as "ec2-3-88-9-20.compute-1.amazonaws.com", for Configuration, select " Use key-based authentication with a key you provide", click "Modify", select " ~/Downloads/IS-Seq.pem" file.
+
+After this setting, click "Connect",then you connect to your AWS virtual server.
+
+After connecting your AWS virtual ubuntu server, you can set IS-Seq by following steps:
+
+# Install the software that are required by IS-Seq
+
+
+conda install -c bioconda fastx_toolkit
+
+
+
+
 
 ```
 
