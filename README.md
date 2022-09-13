@@ -175,6 +175,11 @@ docker run --rm -v "/your/data/dir:/data" pegi3s/bwa bwa mem /data/chr19_KI27086
  
 docker run --rm -v "/Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/data" --rm -v "/Users/aiminyan/DEMO/ISseqOutput/test/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq:/data1" --rm -v "/Users/aiminyan/DEMO/ISseqOutput/test/RandomBarcodRemovalOutPut4R2CuReRun:/data2" dceoy/bwa-mem2 mem -t 8 /data/hg38ChrOnly.fa /data1/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort /data2/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
+staphb/samtools;
+docker run --rm -v "/Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/data" staphb/samtools /data/GRCh38.primary_assembly.genome.fa
+
+
+
 
 docker run --rm -v "/Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq/hg38:/data" dceoy/bwa-mem2 index /data/hg38ChrOnly.fa
 
@@ -209,6 +214,9 @@ java --version
 
  
 nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipelineFv3_test.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /Users/aiminyan/DEMO/ISseqOutput -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a read -c nothing -q 0 > logRead.txt 2>&1 &
+
+nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipelineFv3_test.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /Users/aiminyan/DEMO/ISseqOutput -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a read -c nothing -q 0 > logRead.txt 2>&1 &
+
 ```
 
 ### To use this IS-Seq version in Linux workstation, you need to install the following software and modules
