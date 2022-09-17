@@ -9,8 +9,8 @@ print(paste("Sourcing",other.name,"from",script.name))
 source(other.name)
 
 # CRAN PACKAGES
-cranpackages <- c("curl","stringr","ggplot2","ggpubr","cowplot","usethis", "covr", "httr", "roxygen2", "rversions","devtools","plyr","optparse")
-ipak(cranpackages, repository='CRAN')
+#cranpackages <- c("curl","stringr","ggplot2","ggpubr","cowplot","usethis", "covr", "httr", "roxygen2", "rversions","devtools","plyr","optparse")
+#ipak(cranpackages, repository='CRAN')
 
 # # BIOCONDUCTOR
 # #biocpackages <- c("AnnotationDbi", "baySeq", "Biobase", "BiocGenerics", 
