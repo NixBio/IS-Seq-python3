@@ -294,74 +294,15 @@ conda install -c bioconda fastx_toolkit
 ### To use Docker
 
 
-
-    docker build --platform=linux/amd64 -t ivan/isseq:1.0 . 
-
-    docker run -it --platform=linux/amd64 ivan/isseq:1.0
-
-    docker build --platform=linux/amd64 --no-cache -f Dockerfile -t ivan/isseq:1.0 .
-
-    docker build --no-cache -t r_apt -f Dockerfile-r-apt .
-
-    docker build --no-cache -t r_apt -f Dockerfile-r-apt .
-
-    /flexbar-3.5.0-linux/flexbar
-    conda install -c bioconda fastx_toolkit
-    conda install -c bioconda seqtk
-    conda install -c bioconda -y ea-utils
-    conda install -c bioconda -y bwa-mem2
-    conda install -c bioconda -y blat
-    conda install -c bioconda -y starcode
-
-    git clone https://github.com/CGATOxford/UMI-tools.git
-    cd UMI-tools/
-    python setup.py install --user
-
-
-    nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipeline_docker.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o POOL-ISA-AVRO-6-Preclin -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a umi -c nothing -q 0 > logUmi.txt 2>&1 &
-
-    python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R1_001.fastq.gz -2 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R2_001.fastq.gz -s POOL-UCL-CPL-Re -o /home/ayan/Aimin/UploadToEgnyte/Aimin/ISseqOutput -t Mar04 -r /home/ayan/Aimin/ispipe/sample_research/Association_pool_CPL_Nov19Fix.csv -u /home/ayan/Aimin/ispipe/utilsRefData -p /home/ayan/Aimin/ispipe/utils -a read -c nothing -q 30
-
-
-
-    nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipeline_docker.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /Users/aiminyan/DEMO/ISseqOutput -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a read -c nothing -q 0 > logRead.txt 2>&1 &
-
-
-    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 ---rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --platform=linux/amd64 ivan/isseq:1.0 -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R1.fq.gz -s POOL-ISA-AVRO-6-Preclin -o POOL-ISA-AVRO-6-Preclin -t test2 -r /in2/POOL-ISA-AVRO-6-Preclin -u /in2 -p /in3  -a read -c nothing -q 30
-
-
-
-
-
-
-    mem -t 8 /data/hg38ChrOnly.fa /data1/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort /data2/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
-
-
+    cd /Users/aiminyan/Docker
+    docker build --platform=linux/amd64 -t ivan/isseq:1.0 .
     docker run -it --platform=linux/amd64 ivan/isseq:1.0  
-
-
-    docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R1.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test2 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker.txt 2>&1 &
-
-    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test7 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker4.txt 2>&1 &
-
-
-    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test8 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker8.txt 2>&1 &
-
-
-    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test7 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker4.txt 2>&1 &
-
-
-    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test9 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker9.txt 2>&1 &
-
 
     nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker10.txt 2>&1 &
 
-
     nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a umi -c nothing -q 30 > logUmi_docker10.txt 2>&1 &
 
-
-
-
+    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a fragment -c nothing -q 30 > logFragment_docker10.txt 2>&1 &
 
 ### To generate the reference genome data(mm10,hg19,hg38), you can run the following command:
 
