@@ -11,9 +11,12 @@ using viral vectors in gene therapy.
 
 ## Introduction
 
-This is a Docker version of IS-Seq pipeline.
+This is a new version of IS-Seq pipeline maintained by Docker, the
+purpose of this version is to let users not need to spend time to
+install the tools required for IS-Seq across different platforms except
+git, git-lfs and Docker.
 
-### To use this IS-Seq version on Macs, you need to install git, git-lfs, and Docker,and perform the folliwng steps
+### To use this IS-Seq version on Macs, you need to install git, git-lfs, and Docker,and perform the following steps
 
 
     brew install git
@@ -21,6 +24,12 @@ This is a Docker version of IS-Seq pipeline.
     git clone https://github.com/aiminy/IS-Seq-python3.git
     cd IS-Seq-python3
     git lfs pull
+
+    Please following link to install docker on your system
+
+    https://docs.docker.com/engine/install/
+
+    After docker is installed, you can pull IS-Seq Docker image like the following
 
     docker pull aiminy/isseq:1.0
 
