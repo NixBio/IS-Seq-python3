@@ -18,6 +18,9 @@ git, git-lfs and Docker.
 
 ### To use this IS-Seq version on Macs, you need to install git, git-lfs, and Docker,and perform the following steps
 
+We supplied a [video](https://youtu.be/hA-cIGBQ1_w) tutorial here to
+demonstrate how to install and use IS-Seq on Macs machine
+
 
     # Install Homebrew firstly if you don't have brew installed on your Macs 
 
