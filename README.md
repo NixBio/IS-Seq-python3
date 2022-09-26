@@ -36,7 +36,7 @@ demonstrate how to install and use IS-Seq on Macs machine
     cd IS-Seq-python3
     git lfs pull
 
-    # Install Docker by useing the following link on your system
+    # Install Docker by using the following link on your system
 
     https://docs.docker.com/engine/install/
 
