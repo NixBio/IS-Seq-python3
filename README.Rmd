@@ -23,6 +23,8 @@ This is a new version of IS-Seq pipeline maintained by Docker, the purpose of th
 
 ### To use this IS-Seq version on Macs, you need to install git, git-lfs, and Docker,and perform the following steps
 
+We supplied a [video](https://youtu.be/hA-cIGBQ1_w) tutorial here to demonstrate how to install and use IS-Seq on Macs machine
+
 ```
 
 # Install Homebrew firstly if you don't have brew installed on your Macs 
@@ -39,7 +41,7 @@ git clone https://github.com/aiminy/IS-Seq-python3.git
 cd IS-Seq-python3
 git lfs pull
 
-# Install Docker by useing the following link on your system
+# Install Docker by using the following link on your system
 
 https://docs.docker.com/engine/install/
 
