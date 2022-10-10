@@ -1,0 +1,2 @@
+From sana:isseq
+CMD ["Rscript","/usr/src/IS-Seq-python3/R/ISpipelineFv3_test.py"]
