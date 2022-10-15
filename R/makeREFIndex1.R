@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-packages <- c("optparse","stringr","rtracklayer","curl")
+packages <- c("optparse","stringr","curl","rtracklayer")
 
 zzz<-lapply(packages, function(xxx) suppressMessages(require(xxx, character.only = TRUE,quietly=TRUE,warn.conflicts = FALSE)))
 
@@ -9,11 +9,13 @@ option_list = list(
               help="input file", metavar="character"),
   make_option(c("-g", "--gene_annotation"), type="character", default=NULL,
           help="input gene annotation", metavar="character"),
+  make_option(c("-r", "--rmsk"), type="character", default=NULL,
+              help="input rmsk", metavar="character"),
   make_option(c("-o", "--out_file"), type="character", default=NULL,
               help="output file", metavar="character")
 );
 
-example.use <- "Example: Rscript $HOME/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -o /home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
+example.use <- "Example: Rscript $HOME/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -o /home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
 
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);
@@ -25,7 +27,10 @@ if (is.null(opt$input_file)){
 
 input.file <- opt$input_file
 input.gene.annotation <- opt$gene_annotation
+input.rmsk <- opt$rmsk
 output.file <- opt$out_file
+
+input.rmsk <- 'https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz'
 
 out.dir.name <- dirname(output.file)
 if (!dir.exists(out.dir.name)){dir.create(out.dir.name, recursive = TRUE)}
@@ -82,20 +87,37 @@ if(is.na(t.output)){
 
 w <- file.path(x,paste0('repeatMasker',y,'BED'))
 
+w <- 'repeatMaskerhg38BED'
+
 t.w <- file.info(w)$mtime
 
 if(is.na(t.w)){
   
 cat("get repeatMaskerBED\n")
 
-mySession = browserSession("UCSC")
-genome(mySession) <- y
+# mySession = browserSession("UCSC")
+# genome(mySession) <- y
+# 
+# query <- ucscTableQuery(mySession, "rmsk")
+# 
+# rmsk.table <- track(query)
+# con <- file(w)
+# export(rmsk.table,con,format = "bed",trackLine = FALSE)
+  
+  url = input.rmsk
+  tmp <- tempfile()
+  curl_download(url, tmp)
+  
+  zz=gzfile(tmp,'rt')
+  
+  dat=read.table(zz,header=F,sep = "\t")
+  dat= dat[,c(6,7,8,11,2,10)]
+  dat <- dat[order(dat$V1,dat$V2),]
+  
+  colnames(dat) <- c("V1","V2","V3","V4","V5","V6")
+  
+  write.table(dat,file = w, quote = FALSE, sep = "\t",eol = "\n", na = "NA", dec = ".", row.names = FALSE,col.names = FALSE)
 
-query <- ucscTableQuery(mySession, "rmsk")
-
-rmsk.table <- track(query)
-con <- file(w)
-export(rmsk.table,con,format = "bed",trackLine = FALSE)
 }
 
 gene.file <- file.path(x,paste0(y,'_genesKNOWN_sorted.bed'))
