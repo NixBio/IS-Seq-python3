@@ -19,15 +19,23 @@ RUN apt-get update && apt-get -y upgrade && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+#RUN apt-get update && apt-get -y upgrade && \
+#        apt-get install -y lsb-release build-essential wget curl git default-jdk ant \
+#                libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev && \
+#        apt-get clean && apt-get purge && \
+#        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 #RUN apt-get update && \
 #    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-ggpubr r-cran-plyr r-cran-optparse r-cran-reshape
 
-RUN apt-get update && \
-    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape r-cran-rtracklayer
+#RUN apt-get update && \
+#    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
+
+#r-cran-rtracklayer
 
 WORKDIR /
-RUN wget https://github.com/compgen-io/ngsutilsj/releases/download/ngsutilsj-0.4.17/ngsutilsj
-RUN chmod a+x /ngsutilsj 
+#RUN wget https://github.com/compgen-io/ngsutilsj/releases/download/ngsutilsj-0.4.17/ngsutilsj
+#RUN chmod a+x /ngsutilsj 
 ENV PATH "/":${PATH}
 RUN echo "${PATH}" >> .bashrc
 
@@ -85,5 +93,5 @@ WORKDIR /usr/src
 
 RUN git clone https://github.com/aiminy/IS-Seq-python3
 
-CMD ["python","/usr/src/IS-Seq-python3/ISpipelineFv3_test.py"]
+#CMD ["python","/usr/src/IS-Seq-python3/ISpipelineFv3_test.py"]
 
