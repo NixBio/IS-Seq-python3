@@ -23,7 +23,7 @@ RUN apt-get update && apt-get -y upgrade && \
 #    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-ggpubr r-cran-plyr r-cran-optparse r-cran-reshape
 
 RUN apt-get update && \
-    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
+    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape r-cran-rtracklayer
 
 WORKDIR /
 RUN wget https://github.com/compgen-io/ngsutilsj/releases/download/ngsutilsj-0.4.17/ngsutilsj
