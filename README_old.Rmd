@@ -659,4 +659,10 @@ docker run --platform=linux/amd64 aiminy/isseq:1.5 python /usr/src/IS-Seq-python
 
 docker run --platform=linux/amd64 aiminy/isseq:1.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R
 
+docker build --platform=linux/amd64 --no-cache -f /Users/aiminyan/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.5 .
 
+docker run -it aiminy/isseq:1.5 bash
+docker run --platform=linux/amd64 aiminy/isseq:1.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R
+
+docker run -it aiminy/isseq:1.5 bash
+ 
