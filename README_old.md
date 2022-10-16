@@ -1,37 +1,30 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 # IS-Seq
 
 <!-- badges: start -->
 <!-- badges: end -->
-IS-Seq is a pipeline for identifying insert sites on host genome when using viral vectors in gene therapy.
+
+IS-Seq is a pipeline for identifying insert sites on host genome when
+using viral vectors in gene therapy.
 
 ## Introduction
-This is a version of IS-Seq pipeline under Python 3.10.5 and R/Rscript(4.2.0) environment.
+
+This is a version of IS-Seq pipeline under Python 3.10.5 and
+R/Rscript(4.2.0) environment.
 
 ### To use this IS-Seq version in Linux workstation, you need to install the following software and modules
 
 Under Python 2.7.17 environment
 
-  - Install Python 3.10.5
+-   Install Python 3.10.5
 
-    conda create --name 2to3 python=3.10.5
+    conda create –name 2to3 python=3.10.5
 
     conda activate 2to3
 
-  - Other required software under Python 3.10.5 environment
-
+-   Other required software under Python 3.10.5 environment
 
 ``` bash
 The list of tools and how to install it 
@@ -236,12 +229,11 @@ nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipelineFv3_test.py -1 /Users/a
 
 nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipelineFv3_test.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /Users/aiminyan/DEMO/ISseqOutput -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a read -c nothing -q 0 > logRead.txt 2>&1 &
 
-
 ```
 
 ### To use this IS-Seq version in Linux workstation, you need to install the following software and modules
 
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+``` bash
 
 # Go to the following link to sign up for AWS(if you don't have an AWS account) or sign in to an existing AWS account if you already have AWS account
 
@@ -297,70 +289,63 @@ After connecting your AWS virtual ubuntu server, you can set IS-Seq by following
 
 
 conda install -c bioconda fastx_toolkit
-
-
-
-
-
 ```
 
 ### To use Docker
-```
-
-
-docker build --platform=linux/amd64 -t ivan/isseq:1.0 . 
-
-docker run -it --platform=linux/amd64 ivan/isseq:1.0
-
-docker build --platform=linux/amd64 --no-cache -f Dockerfile -t ivan/isseq:1.0 .
-
-docker build --no-cache -t r_apt -f Dockerfile-r-apt .
-
-docker build --no-cache -t r_apt -f Dockerfile-r-apt .
-
-/flexbar-3.5.0-linux/flexbar
-conda install -c bioconda fastx_toolkit
-conda install -c bioconda seqtk
-conda install -c bioconda -y ea-utils
-conda install -c bioconda -y bwa-mem2
-conda install -c bioconda -y blat
-conda install -c bioconda -y starcode
-
-git clone https://github.com/CGATOxford/UMI-tools.git
-cd UMI-tools/
-python setup.py install --user
-
-
-nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipeline_docker.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o POOL-ISA-AVRO-6-Preclin -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a umi -c nothing -q 0 > logUmi.txt 2>&1 &
-
-python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R1_001.fastq.gz -2 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R2_001.fastq.gz -s POOL-UCL-CPL-Re -o /home/ayan/Aimin/UploadToEgnyte/Aimin/ISseqOutput -t Mar04 -r /home/ayan/Aimin/ispipe/sample_research/Association_pool_CPL_Nov19Fix.csv -u /home/ayan/Aimin/ispipe/utilsRefData -p /home/ayan/Aimin/ispipe/utils -a read -c nothing -q 30
 
 
 
-nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipeline_docker.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /Users/aiminyan/DEMO/ISseqOutput -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a read -c nothing -q 0 > logRead.txt 2>&1 &
+    docker build --platform=linux/amd64 -t ivan/isseq:1.0 . 
+
+    docker run -it --platform=linux/amd64 ivan/isseq:1.0
+
+    docker build --platform=linux/amd64 --no-cache -f Dockerfile -t ivan/isseq:1.0 .
+
+    docker build --no-cache -t r_apt -f Dockerfile-r-apt .
+
+    docker build --no-cache -t r_apt -f Dockerfile-r-apt .
+
+    /flexbar-3.5.0-linux/flexbar
+    conda install -c bioconda fastx_toolkit
+    conda install -c bioconda seqtk
+    conda install -c bioconda -y ea-utils
+    conda install -c bioconda -y bwa-mem2
+    conda install -c bioconda -y blat
+    conda install -c bioconda -y starcode
+
+    git clone https://github.com/CGATOxford/UMI-tools.git
+    cd UMI-tools/
+    python setup.py install --user
 
 
-nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 ---rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --platform=linux/amd64 ivan/isseq:1.0 -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R1.fq.gz -s POOL-ISA-AVRO-6-Preclin -o POOL-ISA-AVRO-6-Preclin -t test2 -r /in2/POOL-ISA-AVRO-6-Preclin -u /in2 -p /in3  -a read -c nothing -q 30
+    nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipeline_docker.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o POOL-ISA-AVRO-6-Preclin -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a umi -c nothing -q 0 > logUmi.txt 2>&1 &
+
+    python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R1_001.fastq.gz -2 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R2_001.fastq.gz -s POOL-UCL-CPL-Re -o /home/ayan/Aimin/UploadToEgnyte/Aimin/ISseqOutput -t Mar04 -r /home/ayan/Aimin/ispipe/sample_research/Association_pool_CPL_Nov19Fix.csv -u /home/ayan/Aimin/ispipe/utilsRefData -p /home/ayan/Aimin/ispipe/utils -a read -c nothing -q 30
+
+
+
+    nohup python -u /Users/aiminyan/IS-Seq-python3/ISpipeline_docker.py -1 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 /Users/aiminyan/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /Users/aiminyan/DEMO/ISseqOutput -t test -r /Users/aiminyan/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq -p /Users/aiminyan/IS-Seq-python3/utils -a read -c nothing -q 0 > logRead.txt 2>&1 &
+
+
+    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 ---rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --platform=linux/amd64 ivan/isseq:1.0 -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R1.fq.gz -s POOL-ISA-AVRO-6-Preclin -o POOL-ISA-AVRO-6-Preclin -t test2 -r /in2/POOL-ISA-AVRO-6-Preclin -u /in2 -p /in3  -a read -c nothing -q 30
 
 
 
 
 
 
-mem -t 8 /data/hg38ChrOnly.fa /data1/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort /data2/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+    mem -t 8 /data/hg38ChrOnly.fa /data1/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_ReadyToAlignSort /data2/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_ReadyToAlignSort > /Users/aiminyan/DEMO/ISseqOutput/test/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
 
-cd /Users/aiminyan/Docker
-docker build --platform=linux/amd64 -t ivan/isseq:1.0 .
-docker run -it --platform=linux/amd64 ivan/isseq:1.0  
+    cd /Users/aiminyan/Docker
+    docker build --platform=linux/amd64 -t ivan/isseq:1.0 .
+    docker run -it --platform=linux/amd64 ivan/isseq:1.0  
 
-nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker10.txt 2>&1 &
+    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead_docker10.txt 2>&1 &
 
-nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a umi -c nothing -q 30 > logUmi_docker10.txt 2>&1 &
+    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a umi -c nothing -q 30 > logUmi_docker10.txt 2>&1 &
 
-nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a fragment -c nothing -q 30 > logFragment_docker10.txt 2>&1 &
-
-
+    nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/aiminyan/IS-Seq-python3/sample_research:/in1 --rm -v /Users/aiminyan/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v /Users/aiminyan/IS-Seq-python3/utils:/in3 --rm -v /Users/aiminyan/DEMO/ISseqOutput:/out --platform=linux/amd64 ivan/isseq:1.0 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test10 -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a fragment -c nothing -q 30 > logFragment_docker10.txt 2>&1 &
 
 
 
@@ -368,44 +353,44 @@ nohup docker run --rm -v /Users/aiminyan/IS-Seq-python3/data:/in --rm -v /Users/
 
 
 
-```
 ### To generate the reference genome data(mm10,hg19,hg38), you can run the following command:
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+``` bash
 # To have a quick look at how to generate
 Rscript path/to/IS-Seq/R/makeREFIndex.R -h
 
 # For example: hg38
 Rscript path/to/IS-Seq/R/makeREFIndex.R -i ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz -g ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.annotation.gtf.gz -o path/to/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa
-
 ```
 
 ### The data set we used for testing IS-Seq:
 
-* One public available data set, and can be downloaded from the folllowing website
+-   One public available data set, and can be downloaded from the
+    folllowing website
 
-  https://github.com/BushmanLab/intSiteCaller/tree/master/testCases/intSiteValidation/Data
+    <https://github.com/BushmanLab/intSiteCaller/tree/master/testCases/intSiteValidation/Data>
 
-* 3 in-house generated data sets, and can be downloaded from GEO
+-   3 in-house generated data sets, and can be downloaded from GEO
 
-  https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE203211
+    <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE203211>
 
-  Note: These data sets will be available after our IS-Seq paper is accepted for publication. Before this, if you want 
-  to review these data sets, please send an email to aimin.at.work@gmail.com, we will let you know how to access them. 
-  
+    Note: These data sets will be available after our IS-Seq paper is
+    accepted for publication. Before this, if you want to review these
+    data sets, please send an email to <aimin.at.work@gmail.com>, we
+    will let you know how to access them.
+
 ### if you have BCL files from sequencing run, convert BCL files to fastq.gz files using bcl2fastq
 
-```
 
-# Example:
+    # Example:
 
-# serial dilutions data set 1
+    # serial dilutions data set 1
 
-nohup bcl2fastq --runfolder-dir path/to/BCL files/Files --output-dir path/to/output_Fastq_files > log.txt 2>&1 &
-
-```
+    nohup bcl2fastq --runfolder-dir path/to/BCL files/Files --output-dir path/to/output_Fastq_files > log.txt 2>&1 &
 
 ### To have a quick start to using IS-Seq, you can run the following command:
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+``` bash
 python path/to/IS-Seq/ISpipelineFv3_test.py
 
 Usage: python path/to/IS-Seq/ISpipelineFv3_test.py -1 <r1.fq.gz> -2 <r2.fq.gz> -s <sampleName> -o <outputFolder> -t <suffix> -r <researchFile> -u <referenceDataDir> -p <utilsProgramDir> -a <analysisType>
@@ -415,109 +400,150 @@ Usage: python path/to/IS-Seq/ISpipelineFv3_test.py -1 <r1.fq.gz> -2 <r2.fq.gz> -
 # serial dilutions data set 1
 
 python path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/assiciation_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a read
-
 ```
 
-* Command line arguments:
+-   Command line arguments:
 
-  * -1 R1 read file for pair-ended sequencing files
-  
-  * -2 R2 read file for pair-ended sequencing files
-  
-  * -s sample name, e.g. "POOL-UCL-CPL-Re"  
-  
-  * -o The folder name of your output
-  
-  note: user should not use underscore(_) in the output folder name and file name because of special meanings of
-  underscore(_) in Python
-  
-  * -t time you run this pipeline
-  
-  * -r association file. User should prepare an assocation file based on the formats in "Association_File_format.png" in "sample_research" folder. you can check the detailed format information here ![SampleInfor](sample_research/Association_File_format.png){width=100%}. The following is the detailed information of each column in this format:
-    
-    * 1: LAM-PCR-ID	
-    * 2: PT-DONOR-MOUSE	
-    * 3: PT-Transduction-ID	
-    * 4  Source	
-    * 5: Sample-Type	
-    * 6: Research-(-R-)-Clinic-(-C-)	
-    * 7: TimePoint-R(d)-C(m) use month as measurement unit	
-    * 8: Fusion-Primer-LTR.-ID	note: you shoud use give this like "FB-P5-Rd1-LTR.1",FB-P5-Rd1-LTR-1 will give an error  
-    * 9: Fusion-Primer-LC.-ID	note: format requirement for LC barcode is like format requirement as LTR barcode
-    * 10: Library, this is same as sample name in comand line arguments	
-    * 11: Sequencing-date-(mm-dd-yy)	
-    * 12: Organism	
-    * 13: VectorType	
-    * 14: VectorMask	
-    * 15: Linker-Cassette	
-    * 16: Transgene	
-    * 17: Other-Infos	
-    * 18: Other-infos-2
-  
-      note: user should not use underscore(_) in these column name and their entries in this table because of special meanings in Python
-  
-  * -u The folder you put reference data 
-  
-  * -p The folder for auxiliary scripts you need in IS-SeqlineFv3_test.py
-  
-  * -a analysis type, e.g. "read","missingIS","VectorCount","align2Vector","umi" or "fragment", 
-  
-  * -c the previous folder, this is a folder including those *grouped_IS file from previous run:
-  
+    -   -1 R1 read file for pair-ended sequencing files
+
+    -   -2 R2 read file for pair-ended sequencing files
+
+    -   -s sample name, e.g. “POOL-UCL-CPL-Re”
+
+    -   -o The folder name of your output
+
+    note: user should not use underscore(*) in the output folder name
+    and file name because of special meanings of underscore(*) in Python
+
+    -   -t time you run this pipeline
+
+    -   -r association file. User should prepare an assocation file
+        based on the formats in “Association_File_format.png” in
+        “sample_research” folder. you can check the detailed format
+        information here
+        <img src="sample_research/Association_File_format.png"
+        style="width:100.0%" alt="SampleInfor" />. The following is the
+        detailed information of each column in this format:
+
+        -   1: LAM-PCR-ID
+
+        -   2: PT-DONOR-MOUSE
+
+        -   3: PT-Transduction-ID
+
+        -   4 Source
+
+        -   5: Sample-Type  
+
+        -   6: Research-(-R-)-Clinic-(-C-)  
+
+        -   7: TimePoint-R(d)-C(m) use month as measurement unit  
+
+        -   8: Fusion-Primer-LTR.-ID note: you shoud use give this like
+            “FB-P5-Rd1-LTR.1”,FB-P5-Rd1-LTR-1 will give an error  
+
+        -   9: Fusion-Primer-LC.-ID note: format requirement for LC
+            barcode is like format requirement as LTR barcode
+
+        -   10: Library, this is same as sample name in comand line
+            arguments
+
+        -   11: Sequencing-date-(mm-dd-yy)  
+
+        -   12: Organism  
+
+        -   13: VectorType  
+
+        -   14: VectorMask  
+
+        -   15: Linker-Cassette  
+
+        -   16: Transgene
+
+        -   17: Other-Infos  
+
+        -   18: Other-infos-2
+
+            note: user should not use underscore(\_) in these column
+            name and their entries in this table because of special
+            meanings in Python
+
+    -   -u The folder you put reference data
+
+    -   -p The folder for auxiliary scripts you need in
+        IS-SeqlineFv3_test.py
+
+    -   -a analysis type,
+        e.g. “read”,“missingIS”,“VectorCount”,“align2Vector”,“umi” or
+        “fragment”,
+
+    -   -c the previous folder, this is a folder including those
+        \*grouped_IS file from previous run:
+
 Note: you need to follow these order to run IS-Seq:
 
-* You need to set up which genome will be used as reference genome in the association file Organism column, currently, the accepted genome is Human(hg19),hg38 and Mouse(mm10).
+-   You need to set up which genome will be used as reference genome in
+    the association file Organism column, currently, the accepted genome
+    is Human(hg19),hg38 and Mouse(mm10).
 
-* You need to run ReadBased("-a read") firstly because the runs for "missingIS","VectorCount","umi" or "fragment" depends on the intermediate files from ReadBased.
+-   You need to run ReadBased(“-a read”) firstly because the runs for
+    “missingIS”,“VectorCount”,“umi” or “fragment” depends on the
+    intermediate files from ReadBased.
 
-* After you finished ReadBased run, if you want to get "missingIS", you just need to set '-a missingIS'.
+-   After you finished ReadBased run, if you want to get “missingIS”,
+    you just need to set ‘-a missingIS’.
 
-* If you want to run '-a VectorCount', you need to finish '-a missingIS' firstly.
+-   If you want to run ‘-a VectorCount’, you need to finish ‘-a
+    missingIS’ firstly.
 
-* align2Vector If you want to align all reads(not missing reads) on vector, use this analysis type
+-   align2Vector If you want to align all reads(not missing reads) on
+    vector, use this analysis type
 
-* To set the previous folder in -c, you need to follow the following rule:
+-   To set the previous folder in -c, you need to follow the following
+    rule:
 
-  for example:
-  
-  You can find "*grouped_IS" files by using /home/user/Seagate/ISseqOutput/Oct22New/CutAdapt/filterNo/db/*grouped_IS
-  
-  The previous folder name you need to give is /home/user/Seagate/ISseqOutput/Oct22New
-  
-  
+    for example:
+
+    You can find “*grouped_IS” files by using
+    /home/user/Seagate/ISseqOutput/Oct22New/CutAdapt/filterNo/db/*grouped_IS
+
+    The previous folder name you need to give is
+    /home/user/Seagate/ISseqOutput/Oct22New
+
 ### To get ReadBased results, you need to run the following command:
 
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+``` bash
 
 nohup python -u path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/association_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a read -c nothing > logRead.txt 2>&1 &
 
 Rscript path/to/IS-Seq/utils/getReadsFromSam.R -n 'pCDY.MND.GFP' -v path/to/Output/April20/vector/align -a path/to/assiciation_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -o path/to/Output/April20/total_vector_host_sam.rds
-
 ```
 
-
 ### To get UmiBased results, you need to run the following command:
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+``` bash
 
 nohup python -u path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/association_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a umi -c nothing > logUmi.txt 2>&1 &
-
 ```
 
 ### To get FragmentBased results, you need to run the following command:
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+``` bash
 
 nohup python -u path/to/IS-Seq/ISpipelineFv3_test.py -1 path/to/Undetermined_S0_L001_R1_001.fastq.gz -2 path/to/Undetermined_S0_L001_R2_001.fastq.gz -s POOL-ISA-AVRO-TEST1 -o path/to/Output -t April20 -r path/to/association_file/Association_pool_ISA_AVRO_TEST1_add_hg38.csv -u path/to/IS-Seq/utilsRefData -p path/to/IS-Seq/utils -a fragment -c nothing > logFragment.txt 2>&1 &
-
 ```
 
-Notes : For one sample of paired-end data with R1(2.4G) and R2(2.6G), you need to have 145G work space for read, umi and fragment based resutls totally.
+Notes : For one sample of paired-end data with R1(2.4G) and R2(2.6G),
+you need to have 145G work space for read, umi and fragment based
+resutls totally.
 
-The following Figure shows the differences on some insert sites among 3 methods 
-![results](doc/resultsOf3methods.png){width=80%}
+The following Figure shows the differences on some insert sites among 3
+methods <img src="doc/resultsOf3methods.png" style="width:80.0%"
+alt="results" />
 
 ### To use IS-Seq on the data set from INSPIIRED pipeline, you need to run the following command:
 
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+``` bash
 
 # Convert the data set in INSPIIRED pipeline to the format that can be used in IS-Seq firstly
 
@@ -537,22 +563,24 @@ nohup python -u path/to/IS-Seq/IsSeqToINSPIIRED.py -1 path/to/Output/R1.fq.gz -2
 # After finishing read based, you can run fragment based
 
 nohup python -u path/to/IS-Seq/IsSeqToINSPIIRED.py -1 path/to/Output/R1.fq.gz -2 path/to/Output/R2.fq.gz -s POOL-ISA-AVRO-19-Clin -o path/to/ISseqOutput -t clone1 -r path/to/clone1association_example_use_IsSeq_on_INSP.csv -u path/to/IS-Seq/utilsRefData/INSPIIRED -p path/to/IS-Seq/utils -a fragment -c nothing -q 30 > clone1_logfragment.txt 2>&1 &
-
 ```
 
-### Use INSPIIRED pipeline to get IS: 
+### Use INSPIIRED pipeline to get IS:
 
-In order to use INSPIIRED pipleine on our in-house generated data sets, we implemented a concise version of INSPIIRED pipeline by re-using some codes in INSPIIRED pipeline. We used this concise version on both our in-house generated data sets and INSPIIRED data set.
+In order to use INSPIIRED pipleine on our in-house generated data sets,
+we implemented a concise version of INSPIIRED pipeline by re-using some
+codes in INSPIIRED pipeline. We used this concise version on both our
+in-house generated data sets and INSPIIRED data set.
 
 #### For the INSPIIRED data set
 
 The input FASTQ files needs to be downloaded from the folllowing website
 
-https://github.com/BushmanLab/intSiteCaller/tree/master/testCases/intSiteValidation/Data
-
+<https://github.com/BushmanLab/intSiteCaller/tree/master/testCases/intSiteValidation/Data>
 
 ##### demultiplex
-```bash
+
+``` bash
 
 # check which python is used
 
@@ -562,11 +590,11 @@ https://github.com/BushmanLab/intSiteCaller/tree/master/testCases/intSiteValidat
 # /home/ubuntu/miniconda2/lib/python2.7/site-packages
 
 Rscript path/to/IS-Seq/R/demultiplex.R path/to/Undetermined_S0_L001_I1_001.fastq.gz path/to/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData path/to/Undetermined_S0_L001_R1_001.fastq.gz path/to/Undetermined_S0_L001_R2_001.fastq.gz path/to/INSPIIRED_test_output /home/ubuntu/miniconda2/lib/python2.7/site-packages
-
 ```
 
 ##### Trim_After_Demultiplex
-```bash
+
+``` bash
 
 # Make hg18ChrOnly.2bit file firstly 
 
@@ -575,23 +603,22 @@ Rscript path/to/IS-Seq/R/makeREFIndex4INSPIIRED.R -i hg18 -o path/to/output
 # Read the demultiplexed *R1.fastq.gz and *R2.fastq.gz, and align by blat to get R1-1.fa.psl and R2-1.fa.psl
 
 Rscript path/to/IS-Seq/R/Trim_After_Demultiplex.R path/to/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData path/to/INSPIIRED_test_output/demultiplexedReps/clone1-1_R1.fastq.gz path/to/INSPIIRED_test_output/demultiplexedReps/clone1-1_R2.fastq.gz path/to/IS-Seq/utilsRefData/INSPIIRED/p746vector.fasta path/to/output/hg18/hg18ChrOnly.2bit path/to/INSPIIRED_test_output clone1-1
-
 ```
 
 ##### call IS using blat-aligned R1 and R2 psl files
-```bash
+
+``` bash
 
 # INSPIIRED clone1-1
 Rscript ~/IS-Seq/R/PslToIs_one_replicate_change_sequence_similarity.R path/to/INSPIIRED_test_output/clone1-1/R1-1.fa.psl path/to/INSPIIRED_test_output/clone1-1/R2-1.fa.psl path/to/INSPIIRED_test_output/clone1-1/keys.rds ~/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData path/to/INSPIIRED_test_output/clone1-1/IS_0 hg18 1 0
 
 # Get Fragment MLE
 Rscript ~/IS-Seq/R/GetFragMLE.R path/to/INSPIIRED_test_output/clone1-1/IS_0/allSites.rds clone1-1 path/to/INSPIIRED_test_output/clone1-1/IS_0
-
 ```
 
 ### A DEMO using a simulated data set to show how to run IS-Seq
 
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+``` bash
 mkdir DEMO
 cd DEMO
 
@@ -631,12 +658,11 @@ nohup python -u /home/ubuntu/DEMO/IS-Seq/ISpipelineFv3_test.py -1 /home/ubuntu/D
 vi /home/ubuntu/DEMO/ISseqOutput/DEMO/FragmentBased2/collision/Lenti_Human/filterNo/db/DEMO/FinalOut_DEMO/POOL-ISA-AVRO-6-Preclin_HL60POS-CTRL-1CL-6_HL60_DEMO_CollisionClean_CollisionTable.txt
 
 vi /home/ubuntu/DEMO/ISseqOutput/DEMO/FragmentBased2/collision/Lenti_Human/filter60/db/DEMO/FinalOut_DEMO/POOL-ISA-AVRO-6-Preclin_HL60POS-CTRL-1CL-6_HL60_DEMO_CollisionClean_CollisionTable.txt
-
 ```
 
 ### Apply INSPIIRED pipeline on the simulated data set
 
-```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+``` bash
  
 Rscript /home/ubuntu/DEMO/IS-Seq/R/FqToFa.R /home/ubuntu/DEMO/ISseqOutput/DEMO/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt /home/ubuntu/DEMO/ISseqOutput/DEMO/CutAdapt/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_trimmedID demo /home/ubuntu/DEMO/ISseqOutput/DEMO/INSPIIRED /home/ubuntu/DEMO/IS-Seq/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa
 
@@ -647,16 +673,16 @@ Rscript /home/ubuntu/DEMO/IS-Seq/R/MakeKeys.R /home/ubuntu/DEMO/ISseqOutput/DEMO
 Rscript /home/ubuntu/DEMO/IS-Seq/R/PslToIs_one_replicate_change_sequence_similarity.R /home/ubuntu/DEMO/ISseqOutput/DEMO/INSPIIRED/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.9.fq_trimwithCutAdapt_demo_ReadyToAlignSort.fa.psl /home/ubuntu/DEMO/ISseqOutput/DEMO/INSPIIRED/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.9.fq_trimwithCutAdapt_demo_ReadyToAlignSort.fa.psl /home/ubuntu/DEMO/ISseqOutput/DEMO/INSPIIRED/keys.rds /home/ubuntu/DEMO/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData /home/ubuntu/DEMO/ISseqOutput/DEMO/INSPIIRED hg38 1 0
 
 Rscript /home/ubuntu/DEMO/IS-Seq/R/GetFragMLE.R /home/ubuntu/DEMO/ISseqOutput/DEMO/INSPIIRED/allSites.rds demo /home/ubuntu/DEMO/ISseqOutput/DEMO/INSPIIRED
+```
 
-``` 
+docker build –platform=linux/amd64 -f
+/Users/aiminyan/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.3 .
 
-docker build --platform=linux/amd64 -f /Users/aiminyan/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.3 .
+docker system prune docker build –platform=linux/amd64 –no-cache -f
+/Users/aiminyan/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.5 .
 
-docker system prune
-docker build --platform=linux/amd64 --no-cache -f /Users/aiminyan/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.5 .
- 
-docker run --platform=linux/amd64 aiminy/isseq:1.5 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py
+docker run –platform=linux/amd64 aiminy/isseq:1.5 python
+/usr/src/IS-Seq-python3/ISpipelineFv3_test.py
 
-docker run --platform=linux/amd64 aiminy/isseq:1.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R
-
-
+docker run –platform=linux/amd64 aiminy/isseq:1.5 Rscript
+/usr/src/IS-Seq-python3/R/makeREFIndex1.R

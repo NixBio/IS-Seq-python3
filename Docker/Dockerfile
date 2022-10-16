@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6494C6D6997C215E
 
 RUN apt-get update && apt-get -y upgrade && \
-	apt-get install -y lsb-release build-essential wget curl r-base git default-jdk ant \
+	apt-get install -y lsb-release build-essential wget curl git default-jdk ant \
 		libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -34,8 +34,10 @@ RUN apt-get update && apt-get -y upgrade && \
 #r-cran-rtracklayer
 
 WORKDIR /
-#RUN wget https://github.com/compgen-io/ngsutilsj/releases/download/ngsutilsj-0.4.17/ngsutilsj
-#RUN chmod a+x /ngsutilsj 
+
+RUN wget https://github.com/compgen-io/ngsutilsj/releases/download/ngsutilsj-0.4.17/ngsutilsj
+RUN chmod a+x /ngsutilsj 
+
 ENV PATH "/":${PATH}
 RUN echo "${PATH}" >> .bashrc
 
@@ -92,6 +94,28 @@ WORKDIR /usr/src
 #IS-Seq
 
 RUN git clone https://github.com/aiminy/IS-Seq-python3
+
+RUN apt update -qq && \
+    apt install -y --no-install-recommends software-properties-common dirmngr && \
+    wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
+    add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" && \
+    apt install -y --no-install-recommends r-base
+
+#RUN apt-get update && \
+#    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
+
+RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','reshape','curl'))"
+
+#RUN Rscript -e 'BiocManager::install(ask = F)' && R -e 'BiocManager::install(c("rtracklayer"))
+
+RUN apt-get update && \
+    apt-get install libxml2-dev
+
+RUN Rscript -e "install.packages(c('XML'))"
+
+RUN Rscript -e "install.packages(c('restfulr'))"
+
+RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && R -e 'BiocManager::install("rtracklayer")'
 
 #CMD ["python","/usr/src/IS-Seq-python3/ISpipelineFv3_test.py"]
 
