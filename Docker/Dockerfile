@@ -34,8 +34,8 @@ RUN apt-get update && apt-get -y upgrade && \
 #r-cran-rtracklayer
 
 WORKDIR /
-#RUN wget https://github.com/compgen-io/ngsutilsj/releases/download/ngsutilsj-0.4.17/ngsutilsj
-#RUN chmod a+x /ngsutilsj 
+RUN wget https://github.com/compgen-io/ngsutilsj/releases/download/ngsutilsj-0.4.17/ngsutilsj
+RUN chmod a+x /ngsutilsj 
 ENV PATH "/":${PATH}
 RUN echo "${PATH}" >> .bashrc
 
