@@ -668,4 +668,11 @@ docker run -it aiminy/isseq:1.5 bash
 docker run --platform=linux/amd64 aiminy/isseq:1.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R
 
 docker run -it aiminy/isseq:1.5 bash
- 
+
+
+docker build --network 'host' --no-cache -f $HOME/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.5 .
+
+nohup docker run --network 'host' --rm -v /local_scratch/ISseqOutput:/out aiminy/isseq:1.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -o /out/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa > logMakeHg38.txt 2>&1
+
+
+

@@ -125,7 +125,21 @@ Note: you need to follow these order to run IS-Seq:
   
   The previous folder name you need to give is /home/user/Seagate/ISseqOutput/Oct22New
   
-  
+
+### Generate hg38 reference genome bwa index,repeatMasker,gene information
+
+```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+#on AWS, 
+
+## build docker image 
+docker build --network 'host' --no-cache -f $HOME/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.5 .
+
+## generate data from this docker image  
+nohup docker run --network 'host' --rm -v /local_scratch/ISseqOutput:/out aiminy/isseq:1.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -o /out/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa > logMakeHg38.txt 2>&1
+
+```
+
 ### To get ReadBased results, you need to run the following command:
 
 ```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
