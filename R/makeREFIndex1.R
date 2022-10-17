@@ -87,7 +87,7 @@ if(is.na(t.output)){
 
 w <- file.path(x,paste0('repeatMasker',y,'BED'))
 
-w <- 'repeatMaskerhg38BED'
+#w <- 'repeatMaskerhg38BED'
 
 t.w <- file.info(w)$mtime
 
