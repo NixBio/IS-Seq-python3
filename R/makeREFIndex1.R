@@ -111,10 +111,11 @@ cat("get repeatMaskerBED\n")
   zz=gzfile(tmp,'rt')
   
   dat=read.table(zz,header=F,sep = "\t")
-  dat= dat[,c(6,7,8,11,2,10)]
-  dat <- dat[order(dat$V1,dat$V2),]
+  dat=dat[,c(6,7,8,11,2,10)]
   
-  colnames(dat) <- c("V1","V2","V3","V4","V5","V6")
+  colnames(dat) <- c("genoName","genoStart","genoEnd","repName","swScore","strand")
+  
+  dat=dat[order(dat$genoName,dat$genoStart),]
   
   write.table(dat,file = w, quote = FALSE, sep = "\t",eol = "\n", na = "NA", dec = ".", row.names = FALSE,col.names = FALSE)
 
