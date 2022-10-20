@@ -31,7 +31,7 @@ RUN apt-get update && apt-get -y upgrade && \
 #RUN apt-get update && \
 #    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
 
-#r-cran-rtracklayer
+r-cran-rtracklayer
 
 WORKDIR /
 
