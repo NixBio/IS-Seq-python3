@@ -1,7 +1,6 @@
 # docker build --network 'host' --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.8 .
 
 From ubuntu:focal
-#FROM ubuntu:latest
 
 MAINTAINER Aimin Yan <aimin.at.work@gmail.com>
 
