@@ -1,3 +1,5 @@
+# docker build --network 'host' --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.8 .
+
 From ubuntu:focal
 #FROM ubuntu:latest
 
@@ -15,7 +17,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y lsb-release build-essential wget curl git default-jdk ant \
-		libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev && \
+		libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev libncurses5 && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -31,7 +33,7 @@ RUN apt-get update && apt-get -y upgrade && \
 #RUN apt-get update && \
 #    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
 
-r-cran-rtracklayer
+#r-cran-rtracklayer
 
 WORKDIR /
 
@@ -104,7 +106,11 @@ RUN apt update -qq && \
 #RUN apt-get update && \
 #    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
 
-RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','reshape','curl'))"
+RUN Rscript -e "install.packages(c('reshape'),lib='/usr/lib/R/site-library')"
+
+RUN Rscript -e "install.packages(c('reshape2'),lib='/usr/lib/R/site-library')"
+
+RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl'))"
 
 #RUN Rscript -e 'BiocManager::install(ask = F)' && R -e 'BiocManager::install(c("rtracklayer"))
 
