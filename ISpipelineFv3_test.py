@@ -65,15 +65,12 @@ def getInputDataFromSampleResearch(sampleResearch,sampleName):
 def reNameFile(DiversityOut,outputDir,inputPattern,sampleResearch):
 
     ####### Rename files ###################
-    #/lustre2/scratch/dpellin/collision/Lenti_Human/filter60/MLD01
 
-    #dwdcFilter60=dwdc+"filter60/"+sampleName+"/"
     dwdcFilter60=os.path.join(outputDir,inputPattern+"/db/")
     print("collision Folder "+inputPattern+':' +dwdcFilter60)
 
     if not os.path.exists(dwdcFilter60):
         os.makedirs(dwdcFilter60)
-        #print(l[9]+"\t"+l[7]+"\t"+l[8]+"\n")
 
     inputFiles = []
     for f in fnmatch.filter(os.listdir(DiversityOut),'*'+inputPattern+'_grouped_IS.txt'):
@@ -82,10 +79,6 @@ def reNameFile(DiversityOut,outputDir,inputPattern,sampleResearch):
     outputFiles = []
     for f in fnmatch.filter(os.listdir(dwdcFilter60),'*_grouped_IS'):
         outputFiles.append(os.path.join(dwdcFilter60,f))
-
-    #print inputFiles
-
-    #print outputFiles
 
     check = compareFilesTime(inputFiles,outputFiles)
 
@@ -110,7 +103,6 @@ def reNameFile(DiversityOut,outputDir,inputPattern,sampleResearch):
                 temp = os.path.basename(a)
                 a= temp
                 a=a.split('_')
-                #print(a[0]+"\t"+l[9]+"\n"+a[1]+"\t"+l[7]+"\n"+a[2]+"\t"+l[8]+"\n")
                 if ((a[0]==l[9]) and (a[1]==l[7])  and (a[2]==l[8])):
                     destFile=l[9]+'''_'''+l[1]+'''_'''+l[2]+'''_'''+l[3]+'''_'''+l[4]+'''_'''+l[6]+'''_grouped_IS'''
                     copyfile(sourceFile,dwdcFilter60+destFile)
@@ -261,13 +253,8 @@ def main():
         elif o == '-q':
             repRegQual=int(a)
 
-    #if not 'tmpFolder' in globals():
-    #       tmpFolder=sampleName
 
     NT=3
-    #repRegQual=30
-    #repRegQual=5
-    #repRegQual=0
 
     print(repRegQual)
 
@@ -388,8 +375,6 @@ def main():
     # Display input and output file name passed as the args
     print(("R1 file : %s and r2 file: %s" % (r1,r2) ))
     print(("sampleName: %s  Library: %s  Organism: %s   collisionFolder: %s  LTRFileFa: %s    LCFileFa: %s    randBrc: %s   seqPlat: %s" % (sampleName,Library,Organism,collisionFolder,LTRFileFa,LCFileFa,randBrc,seqPlat)))
-    #print tmpFolder
-
 
     fqGzinput = inputFolder
     inputFiles = []
@@ -431,8 +416,6 @@ def main():
         for f in fnmatch.filter(os.listdir(dir_4_DEMULTIPLEXING),'*_Barcode_*'):
             outputFiles.append(os.path.join(dir_4_DEMULTIPLEXING,f))
 
-    #print inputFiles
-    #print outputFiles
     check = compareFilesTime(inputFiles,outputFiles)
     print(check)
 
@@ -596,7 +579,6 @@ def main():
 
         inputDir = os.path.join(dwdt,"LCbrcdCu")
 
-        #getUmiOut= os.path.join(dwdt,"GroupBasedUmi")
         getUmiOut= os.path.join(dwdt,"UmiBased")
         if not os.path.exists(getUmiOut):
             os.makedirs(getUmiOut)
@@ -914,7 +896,6 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
             continue
         l= l.split('\t')
         tmp= l[4], l[5]
-        #print "tmp:"+str(tmp)
         try:
             mydict[tmp].append(l[0])
             mydictUmi[tmp].append(l[6])
@@ -922,9 +903,7 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
             mydict[tmp]=[l[0]]
             mydictUmi[tmp]=[l[6]]
 
-    #print "mydictUmi"
     for chr,pos in mydictUmi:
-        #print chr,pos,mydictUmi[chr,pos]
         umiList=[]
         for x in mydictUmi[chr,pos]:
             umiList.append(str(x).strip("['']"))
@@ -1020,7 +999,6 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
         except:
             myData[item[2]]=[int(item[1])]
 
-    #
     for chr in myData:
         if len(myData[chr])>=2:
             count=0
@@ -1094,8 +1072,6 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
         print_array= np.dstack((c,m,n,strand))
         my_array= np.vstack(([c],[m],[n],[strand]))
 
-        #print ("my_array:\n ", my_array)
-
         #Print a report in which the reads of the same integration sites are grouped together
         for i in my_array[[2],:]:
             count=0
@@ -1113,8 +1089,6 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
                         print('\n')
                 count+=1
 
-    #print len(list_item3)
-                        #
     for c in list_item3:
         NonGrouped.write(str(c[0])+'\t'+str(c[1])+'\t'+str(c[2])+'\t'+str(c[3])+'\t'+str(c[4])+'\n')
         final_list.append([str(c[0]), str(c[1]), str(c[2]), str(c[3]), str(c[4])])
@@ -1122,7 +1096,6 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
     for y in sorted(final_list, key=lambda x: (int(x[2]), int(x[1]))):
         grouped_IS.write('\t'.join(y)+'\n')
 
-    #
     myblast.close()
     my_legend.close()
     my_report.close()
@@ -1822,7 +1795,7 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
         for x in threads[i:i+NT]:
             x.join()
 
-    ## b
+    ## blastn
     threads = []
     def call_script_Blast(filename,seqFile):
         inputFile = filename
@@ -1866,8 +1839,6 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
                         if int(l[6])==7 and int(l[7])==12:
                             myout_7.write('\t'.join(l)+'\n')
                             goodID+=[l[0]]
-                    #if int(l[6])==6 and int(l[7])==11:
-                    #    myout_6.write('\t'.join(l)+'\n')
                 goodIDset = set(goodID)
                 with open(os.path.join(outputDir,filename[:-4]+'_ID_blast_7.lst'), "w") as myblastOutID:
                     myblastOutID.write('\n'.join(goodIDset))
@@ -2809,26 +2780,6 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
                 x.join()
 
 
-    #inputFiles = []
-    #for f in fnmatch.filter(os.listdir(DiversityOut),'*_final_parse_*.txt'):
-    #       inputFiles.append(os.path.join(DiversityOut,f))
-
-    #inputPattern="filter60"
-    #dwdcFilter=os.path.join(outputDir,inputPattern+"/db/")
-    #print "collision Folder "+inputPattern+':' +dwdcFilter60
-
-    #if not os.path.exists(dwdcFilter):
-    #       os.makedirs(dwdcFilter)
-
-    #outputCollFiles = []
-    #for f in fnmatch.filter(os.listdir(dwdcFilter),'*'):
-    #       outputCollFiles.append(os.path.join(dwdcFilter,f))
-
-    #check = compareFilesTime(inputFiles,outputCollFiles)
-    #check = True
-
-    #print check
-
 
     inputPattern="filter60"
     reNameFile(DiversityOut,outputDir,inputPattern,sampleResearch)
@@ -2938,9 +2889,7 @@ def getMissIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,
         t1.join()
 
         my_legend=open(chrList)
-    #
         myleg={}
-    #
         threads = []
 
         if (VectorMask==""):
@@ -3051,7 +3000,6 @@ def getVectorIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,sampleNa
             if fnmatch.fnmatch(filename,'*filterNo_grouped_IS.txt'):
                 my_file.append(os.path.join(outputDir,filename))
 
-            #Open a legend were the real name are stored
         mylegend=open(sampleResearch)
 
         for l in mylegend.readlines():
@@ -3103,9 +3051,7 @@ def getVectorIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,sampleNa
         t1.join()
 
         my_legend=open(chrList)
-    #
         myleg={}
-    #
         threads = []
 
         if (VectorMask==""):
@@ -3203,7 +3149,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
 
     my_report=open(os.path.join(outDir,baseFile[:-4]+'_report.txt'),'w')
     NonGrouped=open(os.path.join(outDir,baseFile[:-4]+'_NonGrouped.txt'),'w')
-    #final_IS= open(os.path.join(outDir,baseFile[:-4]+'_final_IS.txt'),'w')
     grouped_IS=open(os.path.join(outDir,baseFile[:-4]+'_grouped_IS.txt'),'w')
 
     list_pos=[]
@@ -3224,12 +3169,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
         if fnmatch.fnmatch(f,'*LTR*LC*filter*_chr*.txt'):
             list_pos.append(os.path.join(dwdt,f))
 
-    #ISfiles=open(os.path.join(outDir,'ISfiles.txt'),'w')
-
-    #for f in list_pos:
-    #       ISfiles.write(f+'\n')
-    #ISfiles.close()
-
     #Read the input file (final_parse) and store the infos about strand, chr and pos
     for l in myblast.readlines():
         l= l.rstrip()
@@ -3245,30 +3184,15 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
             mydict[tmp]=[l[0]]
             mydictUmi[tmp]=[l[1]]
 
-    #print "myDictLen:"+str(len(mydict))
-
-    #for chr,pos in mydict:
-    #       print chr,pos,mydict[chr,pos]
-    #       print str(set(mydict[chr,pos]))[6:-3]
-    #       print str(len(mydict[chr,pos]))
-
     #print "mydictUmi"
     for chr,pos in mydictUmi:
-        #print chr,pos,mydictUmi[chr,pos]
         umiList=[]
         for x in mydictUmi[chr,pos]:
             if x in umi:
                 umiList.append(str(umi[x]).strip("['']"))
         umiCount = len(umiList)
         umiUniqCount = len(set(umiList))
-        #print umiList
-        #print umiCount
-        #print set(umiList)
-        #print umiUniqCount
         mydictUmi[chr,pos]=umiUniqCount
-
-    #for chr,pos in mydictUmi:
-    #       print chr,pos,mydictUmi[chr,pos]
 
     for l in my_legend.readlines():
         l= l.rstrip()
@@ -3280,14 +3204,12 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
         except:
             myleg[l[1]]=[l[0]]
 
-    #Defines the corrispondence between the input file and the files into the list
+    #Defines the correspondence between the input file and the files into the list
     finalParseFileTmp=re.split('\.|\_', baseFile)
     print(finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
 
     for element in list_pos:
         element=re.split('\.|\_', element)
-        #print 'elementLen:'+str(len(element))
-        #print element[2]+'\n'
         #Finds the correct LTR and LC barcode
         if element[2]==finalParseFileTmp[2] and element[4]==finalParseFileTmp[4]:
             #Finds the correct filter: filterNo, filter30, filter45, filter60
@@ -3342,13 +3264,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
 
 
 
-    #final_IS= open(os.path.join(outDir,baseFile[:-4]+'_list_strand.txt'),'w')
-
-    #print(*list_strand, sep = "\n")
-    #if analysis == read:
-        #print "read_based"
-    #       fin('\n'.join(map(str, list_strand)))
-
     if analysisType == 'umi':
 
         for x in list_strand:
@@ -3360,10 +3275,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
                 if  y[0] == chr and y[1]==pos:
                     umiCount=str(mydictUmi[y])
             x[4]=umiCount
-        #print 'umi_based'
-
-    #final_IS.write('\n'.join(map(str, list_strand)))
-    #final_IS.close()
 
     #Sorts the list by chr and pos
     for item in sorted(list_strand, key=lambda x: (int(x[2]), int(x[1]))):
@@ -3371,11 +3282,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
             myData[item[2]].append(int(item[1]))
         except:
             myData[item[2]]=[int(item[1])]
-
-    #print "myData"
-    #for x, y in myData.items():
-    #       print(x, y)
-    #       print str(len(myData[x]))
 
     #
     for chr in myData:
@@ -3391,8 +3297,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
                     if abs(myDiff)<= dist_cutoff:
                         #if the distance between two element of this list is lower than the cut_off, make another list
                         list_diff.append([chr, myData[chr][count], myData[chr][next_count]])
-
-    #print('\n'.join(map(str, list_diff)))
 
     #
     for item in sorted(list_strand, key=lambda x: (int(x[2]), int(x[1]))):
@@ -3415,9 +3319,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
         except:
             my_pos[int(i[2])]=[tmp]
 
-    #print "my_pos"
-    #for x,y in my_pos.items():
-    #       print(x,y)
 
     for a in my_pos:
         b=my_pos[a]
@@ -3457,8 +3358,6 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
         print_array= np.dstack((c,m,n,strand))
         my_array= np.vstack(([c],[m],[n],[strand]))
 
-        #print ("my_array:\n ", my_array)
-
         #Print a report in which the reads of the same integration sites are grouped together
         for i in my_array[[2],:]:
             count=0
@@ -3476,15 +3375,11 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
                         print('\n')
                 count+=1
 
-    #print len(list_item3)
                         #
     for c in list_item3:
         NonGrouped.write(str(c[0])+'\t'+str(c[1])+'\t'+str(c[2])+'\t'+str(c[3])+'\t'+str(c[4])+'\n')
         final_list.append([str(c[0]), str(c[1]), str(c[2]), str(c[3]), str(c[4])])
 
-    #print len(final_list)
-    #for y in final_list:
-    #       final_IS.write('\t'.join(y)+'\n')
 
     for y in sorted(final_list, key=lambda x: (int(x[2]), int(x[1]))):
         grouped_IS.write('\t'.join(y)+'\n')
@@ -3537,8 +3432,6 @@ def align2vector(seqPlat,R1Out,R2Out,outputDir,sampleResearch,dirGenome,sampleNa
                 barCodeline=barCodeline.rstrip()
                 lineSplitBrc=barCodeline.split(',')
 
-                #print lineSplitBrc[9]
-                #print sampleName
 
                 if (lineSplitBrc[9]==sampleName):
                     r1filename=os.path.join(R1Out,"R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_"+lineSplitBrc[7]+".fq_trimwithCutAdapt")
@@ -3554,7 +3447,6 @@ def align2vector(seqPlat,R1Out,R2Out,outputDir,sampleResearch,dirGenome,sampleNa
                                 if pattern.search(r1line):
                                     lineSplit=r1line.split(' ')
                                     r1ID.append(lineSplit[0][1:])
-                                    #print lineSplit[0][1:]
                         with open(r2filename) as r2infile:
                             for r2line in r2infile:
                                 if pattern.search(r2line):
