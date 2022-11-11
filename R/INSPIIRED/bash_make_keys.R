@@ -18,7 +18,9 @@ if (length(args)==0) {
   # default output file
   input.file=args[1]
   input.dir=args[2]
-  output.dir=args[3]
+  input.completeMetadata=args[3]
+  input.seq.similarity=args[4]
+  output.dir=args[5]
 }
 
 print(input.file)
@@ -31,6 +33,8 @@ input <- read.table(input.file,sep=',',header=T)
 
 #print(input)
 
+input.completeMetadata='/home/ubuntu/DEMO/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData'
+input.seq.similarity=80
 
 #print(input)
 
@@ -76,8 +80,7 @@ null <- lapply(1:dim(input.all)[1], function(u){
   
   #system(cmd.R1)
 
-  cmd.R2 <- paste0('Rscript ',file.path(script.dirname,'PslToIs_one_replicate_change_sequence_similarity.R '),paste0(input.all[u,]$R2,'.fa.psl'),' ',paste0(input.all[u,]$R1,'.fa.psl'),' ',file.path(sample.dir,'keys.rds '),'/home/ubuntu/DEMO/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData ',file.path(sample.dir,'IS803 '),'hg38 ',1,' ',80)
-
+  cmd.R2 <- paste0('Rscript ',file.path(script.dirname,'PslToIs_one_replicate_change_sequence_similarity.R '),paste0(input.all[u,]$R2,'.fa.psl'),' ',paste0(input.all[u,]$R1,'.fa.psl'),' ',file.path(sample.dir,'keys.rds '),input.completeMetadata,file.path(sample.dir,paste0('IS',input.seq.similarity)),' hg38 ',1,' ',input.seq.similarity)
 
   print(cmd.R2)
   system(cmd.R2)
