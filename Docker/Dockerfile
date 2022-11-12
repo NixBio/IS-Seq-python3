@@ -109,7 +109,7 @@ RUN Rscript -e "install.packages(c('reshape'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e "install.packages(c('reshape2'),lib='/usr/lib/R/site-library')"
 
-RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl','IRanges'),lib='/usr/lib/R/site-library')"
+RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl','IRanges','data.table'),lib='/usr/lib/R/site-library')"
 
 #RUN Rscript -e 'BiocManager::install(ask = F)' && R -e 'BiocManager::install(c("rtracklayer"))
 
