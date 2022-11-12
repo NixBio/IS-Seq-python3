@@ -109,18 +109,18 @@ RUN Rscript -e "install.packages(c('reshape'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e "install.packages(c('reshape2'),lib='/usr/lib/R/site-library')"
 
-RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl'))"
+RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl','IRanges'),lib='/usr/lib/R/site-library')"
 
 #RUN Rscript -e 'BiocManager::install(ask = F)' && R -e 'BiocManager::install(c("rtracklayer"))
 
 RUN apt-get update && \
     apt-get install libxml2-dev
 
-RUN Rscript -e "install.packages(c('XML'))"
+RUN Rscript -e "install.packages(c('XML'),lib='/usr/lib/R/site-library')"
 
-RUN Rscript -e "install.packages(c('restfulr'))"
+RUN Rscript -e "install.packages(c('restfulr'),lib='/usr/lib/R/site-library')"
 
-RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && R -e 'BiocManager::install("rtracklayer")'
+RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager",lib="/usr/lib/R/site-library")' && R -e 'BiocManager::install(c("rtracklayer","GenomicRanges","BSgenome.Hsapiens.UCSC.hg38"),lib="/usr/lib/R/site-library")'
 
 #CMD ["python","/usr/src/IS-Seq-python3/ISpipelineFv3_test.py"]
 
