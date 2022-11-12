@@ -33,8 +33,8 @@ input <- read.table(input.file,sep=',',header=T)
 
 #print(input)
 
-input.completeMetadata='/home/ubuntu/DEMO/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData'
-input.seq.similarity=80
+#input.completeMetadata='/home/ubuntu/DEMO/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData'
+#input.seq.similarity=80
 
 #print(input)
 
