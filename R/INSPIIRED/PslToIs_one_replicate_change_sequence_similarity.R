@@ -225,10 +225,15 @@ library(IRanges)
       which(unique_key_pairs$R1 %in% x)
     }))
   
+  #loci.key$R2.readPairs <- IRanges::IntegerList(lapply(
+  #  loci.key$R2.qNames, function(x){
+  #    which(unique_key_pairs$R2 %in% x)
+  #  }))
+  
   loci.key$R2.readPairs <- IRanges::IntegerList(lapply(
     loci.key$R2.qNames, function(x){
       which(unique_key_pairs$R2 %in% x)
-    }))
+    }),compress = FALSE)
   
   paired.loci <- GRanges(
     seqnames = seqnames(R2.loci), 
