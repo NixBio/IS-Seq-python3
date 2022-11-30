@@ -187,63 +187,6 @@ num.common.reads <- lapply(1:11, function(u){
 
 allSites <- readRDS(allSites.input)
 
-GetReaId4Is <- function() {
-  
-  multihit.allSites <- readRDS('~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihit_allSites.rds')
-  
-  multihit.allSites.reduced <- flank(multihit.allSites, -1, start=TRUE)
-  
-  multihit.allSites.reduced$IS.index <- paste0(seqnames(multihit.allSites.reduced),'_',start(multihit.allSites.reduced),'_',strand(multihit.allSites.reduced))
-         
-  IS.index <- unique(multihit.allSites.reduced$IS.index)
-  
-read.ID <- lapply(IS.index, function(u){
-    ID <- multihit.allSites.reduced[multihit.allSites.reduced$IS.index==u,]$ID
-    ID
-  })
- 
-names(read.ID) <- IS.index
 
-GetJC <- function(df) {
-  d <- sapply(names(df), function(x) sapply(names(df), function(y) {
-      n <- length(intersect(df[[x]],df[[y]]))
-      m <- length(union(df[[x]],df[[y]]))
-      d <- n/m
-      d
-  }))
-  d
-}
-
-d <- 1-GetJC(read.ID)
-
-IS.name <- colnames(d)
-
-colnames(d) <- seq(1,782,1)
-rownames(d) <- seq(1,782,1)
-
-hc.rd <- hclust(as.dist(d))
-plot(hc.rd, labels = colnames(d), xlab="",ylab = "Share # reads", main = "Cluster Dendrogram between ISs")
-
-group.index<- cutree(hc.rd,k=20)
-
-N <- lapply(1:20, function(u){
-  
-  n <- length(IS.name[which(group.index==u)])
-  
-})
-
-
-IS.name[which(group.index==1)]
-
-d1 <- d[upper.tri(d, diag = FALSE)] 
-
-library(rstatix)
-
-d2 <- d %>% pull_upper_triangle()
-
-CDF <- ecdf(d1)
-plot(CDF)
-
-}
 
 

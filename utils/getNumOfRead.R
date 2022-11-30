@@ -182,3 +182,19 @@ saveRDS(T.M.1,file = output.file)
 #     ylab(y.lab)+xlab("trt")+ggtitle(plot.title) + theme_bw() +theme(axis.text.x = element_text(angle = angle, hjust = 1,size = size),legend.position = "bottom", legend.justification = 0)
 #   
 # }
+
+# test <- lapply(red.hits.R2$revmap, function(x){as(x,"SimpleList")})
+# 
+# test <- as(red.hits.R2$revmap,"SimpleList")
+# mcols(red.hits.R2) <- test
+# colnames(mcols(red.hits.R2)) <- "revmap"
+# 
+# R2.loci <- red.hits.R2[subjectHits(pairs)]
+# 
+# 
+# R2.loci.temp <- lapply(R2.loci$revmap, function(x){as.integer(hits.R2$qName[x])})
+# 
+# 
+# loci.key$R2.qNames <- IRanges::IntegerList(lapply(R2.loci$revmap, function(x){
+#   as.integer(hits.R2$qName[x])
+# }),compress = FALSE)

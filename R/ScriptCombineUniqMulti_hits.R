@@ -18,6 +18,10 @@ zzz<-lapply(packages, function(xxx) suppressMessages(library(xxx, character.only
 
 # Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE_multihitData/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0
 
+# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80
+
+# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE_multihitData/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95
+
 #/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0
 
 if (length(args)==0) {
@@ -77,6 +81,33 @@ CombineUniqAndMulti1 <- function(IS.all, IS.multihit) {
   IS.all.with.multihit
 }
 
+CombineUniqAndMultiUseSpecificIS <- function(IS.all, IS.multihit) {
+  
+ 
+  #IS.multihit[subjectHits(ov)]
+  #IS.multihit[-subjectHits(ov)]
+  
+  #IS.all <- IS.uniq.hit
+  #IS.multihit <-  IS.multihit 
+  
+  ov <- suppressWarnings(findOverlaps(IS.all, IS.multihit,maxgap=7))
+  
+  IS.all$is.index <- paste0(seqnames(IS.all),'_',start(IS.all),'_',strand(IS.all))
+  
+  one.uniq.IS <-  IS.all[which(IS.all$is.index %in% c('chr7_75504993_-'))]
+  
+  IS.common <- IS.multihit[subjectHits(ov)]
+  IS.common$is.index <- paste0(seqnames(IS.common),'_',start(IS.common),'_',strand(IS.common))
+  one.IS.common <- IS.common[which(IS.common$is.index %in% c('chr7_75504993_-'))]
+  
+  IS.all[which(IS.all$is.index %in% c('chr7_75504993_-'))]$Frag.MLE <- one.uniq.IS$Frag.MLE+one.IS.common$Frag.MLE
+  
+  IS.all$REL <- IS.all$Frag.MLE/sum(IS.all$Frag.MLE)
+  
+  IS.all
+  
+}
+
 MakeDataSet <- function(IS.all.with.multihit) {
   
   n <- length(IS.all.with.multihit)
@@ -122,11 +153,15 @@ GenerateBarPlot <- function(all.IS,outout.dir,title) {
   
 }
 
+#input_multi_hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE_multihitData/Results.RData' 
+
 IS.multihit <- GetIsRel(input_multi_hit)
 IS.multihit.top.10 <- MakeDataSet(IS.multihit)
 GenerateBarPlot(IS.multihit.top.10,output.dir,'Multihit')
 
 #input.0.CL6 <- "/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE/Results.RData"
+
+#input_uniq_hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE/Results.RData'
 
 IS.uniq.hit <- GetIsRel(input_uniq_hit)
 IS.unique.top.10 <- MakeDataSet(IS.uniq.hit)
@@ -135,3 +170,10 @@ GenerateBarPlot(IS.unique.top.10,output.dir,'Uniqhit')
 IS.uniq.multihit <- CombineUniqAndMulti1(IS.uniq.hit,IS.multihit)
 IS.uniq.multihit.top.10 <- MakeDataSet(IS.uniq.multihit)
 GenerateBarPlot(IS.uniq.multihit.top.10,output.dir,"UniqAndMultihit")
+
+IS.uniq.multihit.4.one.IS <- CombineUniqAndMultiUseSpecificIS(IS.uniq.hit,IS.multihit)
+IS.uniq.multihit.4.one.IS.top.10 <- MakeDataSet(IS.uniq.multihit.4.one.IS )
+GenerateBarPlot(IS.uniq.multihit.4.one.IS.top.10,output.dir,"UniqAndMultihit4OneIS")
+
+
+
