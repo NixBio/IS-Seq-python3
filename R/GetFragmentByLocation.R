@@ -82,7 +82,8 @@ if(fragment.type=="random"){
   
   colnames(hg38.df) <- c('chr','length')
   
-  hg38.df.is <- data.frame(hg38.df,num_is=round((100/sum(hg38.df$length))*hg38.df$length,0))
+  num.of.IS <- 1000
+  hg38.df.is <- data.frame(hg38.df,num_is=round((num.of.IS/sum(hg38.df$length))*hg38.df$length,0))
   
   set.seed(1)
   is <- lapply(1:dim(hg38.df.is)[1], function(u){
@@ -94,8 +95,14 @@ if(fragment.type=="random"){
   })
   names(is) <- hg38.df.is$chr
   is1 <- do.call(rbind,is)
-  is1[is1$chr=='chr19'&is1$z==24958819,]$z <- 49461738
-  is1[is1$chr=='chr19'&is1$z==49461738,]$std <- '-'
+  
+  positive.IS <- data.frame(chr='chr19',z=49461738,std='-')   
+  
+  is1 <- rbind(is1,positive.IS)
+  
+  #is1[is1$chr=='chr19'&is1$z==24958819,]$z <- 49461738
+  #is1[is1$chr=='chr19'&is1$z==49461738,]$std <- '-'
+  
   
   chr.index <- data.frame(as.data.frame(unique(is1$chr)),index=rownames(as.data.frame(unique(is1$chr))))
   
