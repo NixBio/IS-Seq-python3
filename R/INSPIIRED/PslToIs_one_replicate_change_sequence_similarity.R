@@ -163,6 +163,15 @@ library(GenomicRanges)
   )
   
   R1.loci <- red.hits.R1[queryHits(pairs)]
+  
+  
+  #test <- lapply(red.hits.R2$revmap, function(x){as(x,"SimpleList")})
+  
+  test <- as(red.hits.R2$revmap,"SimpleList")
+  mcols(red.hits.R2) <- test
+  colnames(mcols(red.hits.R2)) <- "revmap"
+  
+  
   R2.loci <- red.hits.R2[subjectHits(pairs)]
   
   #' Check isDownstream and isOppositeStrand
@@ -202,19 +211,29 @@ library(IRanges)
     as.integer(hits.R1$qName[x])
   }))
   
+  #loci.key$R2.qNames <- IRanges::IntegerList(lapply(R2.loci$revmap, function(x){
+  #  as.integer(hits.R2$qName[x])
+  #}))
+  
   loci.key$R2.qNames <- IRanges::IntegerList(lapply(R2.loci$revmap, function(x){
     as.integer(hits.R2$qName[x])
-  }))
+  }),compress = FALSE)
+  
   
   loci.key$R1.readPairs <- IRanges::IntegerList(lapply(
     loci.key$R1.qNames, function(x){
       which(unique_key_pairs$R1 %in% x)
     }))
   
+  #loci.key$R2.readPairs <- IRanges::IntegerList(lapply(
+  #  loci.key$R2.qNames, function(x){
+  #    which(unique_key_pairs$R2 %in% x)
+  #  }))
+  
   loci.key$R2.readPairs <- IRanges::IntegerList(lapply(
     loci.key$R2.qNames, function(x){
       which(unique_key_pairs$R2 %in% x)
-    }))
+    }),compress = FALSE)
   
   paired.loci <- GRanges(
     seqnames = seqnames(R2.loci), 
