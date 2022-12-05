@@ -126,10 +126,8 @@ getFrag <- function(rfa.host,chr.index=19,fragment.strand='negative',fragment.st
   
 }
 
-
-output.dir <- '~/SHARE/Aimin/Simulation100IS'
-output.fasta <- 'fragment.fasta'
-
+#output.dir <- '~/SHARE/Aimin/Simulation100IS'
+#output.fasta <- 'fragment.fasta'
 
 null <- lapply(1:dim(is2)[1],function(u){
   
