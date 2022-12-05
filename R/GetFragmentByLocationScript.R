@@ -40,7 +40,9 @@ hg38.df <- cbind(as.data.frame(rfa.host@id),as.data.frame(width(rfa.host@sread))
 
 colnames(hg38.df) <- c('chr','length')
 
-hg38.df.is <- data.frame(hg38.df,num_is=round((num.of.IS/sum(hg38.df$length))*hg38.df$length,0))
+cat(num.of.IS,"\n")
+
+hg38.df.is <- data.frame(hg38.df,num_is=round((as.integer(num.of.IS)/sum(hg38.df$length))*hg38.df$length,0))
 
 set.seed(1)
 is <- lapply(1:dim(hg38.df.is)[1], function(u){

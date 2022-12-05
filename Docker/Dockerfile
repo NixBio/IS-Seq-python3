@@ -110,7 +110,7 @@ RUN Rscript -e "install.packages(c('reshape'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e "install.packages(c('reshape2'),lib='/usr/lib/R/site-library')"
 
-RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl','IRanges','data.table','igraph','ShortRead','tidysq'),lib='/usr/lib/R/site-library')"
+RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl','IRanges','data.table','igraph','tidysq'),lib='/usr/lib/R/site-library')"
 
 #RUN Rscript -e 'BiocManager::install(ask = F)' && R -e 'BiocManager::install(c("rtracklayer"))
 
@@ -121,7 +121,7 @@ RUN Rscript -e "install.packages(c('XML'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e "install.packages(c('restfulr'),lib='/usr/lib/R/site-library')"
 
-RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager",lib="/usr/lib/R/site-library")' && R -e 'BiocManager::install(c("rtracklayer","GenomicRanges","BSgenome.Hsapiens.UCSC.hg38"),lib="/usr/lib/R/site-library")'
+RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager",lib="/usr/lib/R/site-library")' && R -e 'BiocManager::install(c("rtracklayer","GenomicRanges","BSgenome.Hsapiens.UCSC.hg38","ShortRead"),lib="/usr/lib/R/site-library")'
 
 #CMD ["python","/usr/src/IS-Seq-python3/ISpipelineFv3_test.py"]
 
