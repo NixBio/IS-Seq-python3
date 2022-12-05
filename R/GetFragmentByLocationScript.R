@@ -25,7 +25,7 @@ if (length(args)==0) {
   output.dir=args[5]
   output.fasta=args[6]
   number.of.read=args[7]
-  output.sam=args[8]
+  #output.sam=args[8]
 }
 
 # Example:
@@ -129,18 +129,22 @@ getFrag <- function(rfa.host,chr.index=19,fragment.strand='negative',fragment.st
 #output.dir <- '~/SHARE/Aimin/Simulation100IS'
 #output.fasta <- 'fragment.fasta'
 
-null <- lapply(1:dim(is2)[1],function(u){
+if(!file.exists(file.path(output.dir,output.fasta))){
   
-  #u <- 1
+  null <- lapply(1:dim(is2)[1],function(u){
+    
+    #u <- 1
+    
+    chr.index <- as.integer(is2[u,]$chr.indx)
+    fragment.strand <- is2[u,]$std
+    fragment.start <- is2[u,]$position
+    fragment.name <- paste0(is2[u,]$chr,'_',fragment.start,'_',fragment.strand)
+    
+    getFrag(rfa.host,chr.index=chr.index,fragment.strand=fragment.strand,fragment.start=fragment.start,fragment.length=3000,fragment.name=fragment.name,output.dir,output.fasta)
+    
+  })
   
-  chr.index <- as.integer(is2[u,]$chr.indx)
-  fragment.strand <- is2[u,]$std
-  fragment.start <- is2[u,]$position
-  fragment.name <- paste0(is2[u,]$chr,'_',fragment.start,'_',fragment.strand)
-  
-  getFrag(rfa.host,chr.index=chr.index,fragment.strand=fragment.strand,fragment.start=fragment.start,fragment.length=3000,fragment.name=fragment.name,output.dir,output.fasta)
-  
-})
+}
 
 #read_out_prefix <- 'Simulation100IS'
 out <- file.path(output.dir,read_out_prefix)
@@ -152,6 +156,8 @@ output.file <- file.path(output.dir,output.fasta)
 #cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c 17274461 -m 1000 -s 300 -d "Random" -o ',out)
 
 number.of.read <- as.integer(number.of.read)
+
+cat(number.of.read,'\n')
 
 #number.of.read <- 200000000000
 #read.name <- 'Read100IS'
