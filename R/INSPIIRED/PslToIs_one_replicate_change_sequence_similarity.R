@@ -164,7 +164,6 @@ library(GenomicRanges)
   
   R1.loci <- red.hits.R1[queryHits(pairs)]
   
-  
   #test <- lapply(red.hits.R2$revmap, function(x){as(x,"SimpleList")})
   
   test <- as(red.hits.R2$revmap,"SimpleList")
