@@ -22,14 +22,17 @@ if (length(args)==0) {
   # default output file
   #input_uniq_hit=args[1]
   input.dir=args[1]
+  output.dir=args[2]
+}
+
+id(!dir.exists(output.dir)){
+  dir.create(output.dir,recursive = TRUE)
 }
 
 input.files <- list.files(input.dir,pattern = "multihitData.rds",recursive = TRUE,full.names=TRUE)
 
 null <- lapply(input.files, function(u){
-  cmd=paste0("Rscript ",file.path(script.dirname,"GetMultiReads.R ") ,u,' ',dirname(u))
+  cmd=paste0("Rscript ",file.path(script.dirname,"GetMultiReads.R ") ,u,' ',output.dir)
   cat(cmd,'\n')
   system(cmd)
 })
-
-

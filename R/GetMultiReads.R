@@ -15,8 +15,11 @@ if (length(args)==0) {
 }
 
 #print(input.multi.hit)
+sampleName1 <- basename(dirname(dirname(input.multi.hit)))
+sampleName2 <- basename(dirname(input.multi.hit))
 
 multihit <- readRDS(input.multi.hit)
-saveRDS(multihit$unclusteredMultihits,file.path(output.dir,"multihit_allSites.rds"))
+
+saveRDS(multihit$unclusteredMultihits,file.path(output.dir,paste0(sampleName1,"_",sampleName2,"_","multihit_allSites.rds")))
 
 
