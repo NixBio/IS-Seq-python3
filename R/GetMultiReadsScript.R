@@ -25,7 +25,7 @@ if (length(args)==0) {
   output.dir=args[2]
 }
 
-id(!dir.exists(output.dir)){
+if(!dir.exists(output.dir)){
   dir.create(output.dir,recursive = TRUE)
 }
 
