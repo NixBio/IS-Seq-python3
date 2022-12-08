@@ -162,7 +162,9 @@ cat(number.of.read,'\n')
 #number.of.read <- 200000000000
 #read.name <- 'Read100IS'
 
-cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c ',number.of.read,' -m 1000 -s 300 -d ',read.name,' -o ',out)
+#cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c ',number.of.read,' -m 1000 -s 300 -d ',read.name,' -o ',out)
+
+cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c ',number.of.read,' -m 1000 -s 300 -d ',read.name,' -o ',out,' -na')
 
 #read.name
 

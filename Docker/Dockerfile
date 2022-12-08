@@ -1,4 +1,8 @@
 # docker build --network 'host' --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.8 .
+# or
+# docker build --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:2.1 .
+
+# docker system prune --all --force --volumes
 
 From ubuntu:focal
 
@@ -15,8 +19,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 #RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6494C6D6997C215E
 
 RUN apt-get update && apt-get -y upgrade && \
-	apt-get install -y lsb-release build-essential wget curl git default-jdk ant \
-		libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev libncurses5 && \
+	apt-get install -y lsb-release build-essential wget curl git default-jdk ant && \
+	apt-get	install -y libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev libncurses5 && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -120,6 +124,10 @@ RUN apt-get update && \
 RUN Rscript -e "install.packages(c('XML'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e "install.packages(c('restfulr'),lib='/usr/lib/R/site-library')"
+
+RUN Rscript -e "install.packages(c('sonicLength'),lib='/usr/lib/R/site-library')"
+
+RUN Rscript -e "install.packages(c('tidyverse'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager",lib="/usr/lib/R/site-library")' && R -e 'BiocManager::install(c("rtracklayer","GenomicRanges","BSgenome.Hsapiens.UCSC.hg38","ShortRead"),lib="/usr/lib/R/site-library")'
 
