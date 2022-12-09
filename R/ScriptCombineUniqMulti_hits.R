@@ -110,6 +110,61 @@ CombineUniqAndMultiUseSpecificIS <- function(IS.all, IS.multihit) {
   
 }
 
+
+CombineUniqAndMultiBasedUniqTop10IS <- function(IS.all,IS.multihit) {
+  
+  #IS.multihit[subjectHits(ov)]
+  #IS.multihit[-subjectHits(ov)]
+  
+  #IS.all <- IS.uniq.hit
+  #IS.multihit <-  IS.multihit 
+  
+  #IS.all <- IS.uniq.hit
+  
+  IS.all$is.index <- paste0(seqnames(IS.all),'_',start(IS.all),'_',strand(IS.all))
+  
+  n <- length(IS.all)
+  
+  if(n>10){
+    
+  ov <- suppressWarnings(findOverlaps(IS.all[1:10], IS.multihit,maxgap=7))
+  
+  IS.common.in.multihit <- IS.multihit[subjectHits(ov)]
+  IS.common.in.uniq <- IS.all[queryHits(ov)]
+  
+  IS.common.in.uniq$Frag.MLE <- IS.common.in.uniq$Frag.MLE+IS.common.in.multihit$Frag.MLE
+  
+  IS.only.in.uniq <- IS.all[-queryHits(ov)]
+  
+  IS.uniq.multihit <- c(IS.only.in.uniq,IS.common.in.uniq)
+  
+  IS.uniq.multihit$REL <- IS.uniq.multihit$Frag.MLE/sum(IS.uniq.multihit$Frag.MLE)
+  
+  IS.uniq.multihit.sorted <- IS.uniq.multihit[order(IS.uniq.multihit$REL,decreasing = T)]
+  IS.uniq.multihit.sorted
+  }else{
+    
+    ov <- suppressWarnings(findOverlaps(IS.all, IS.multihit,maxgap=7))
+    
+    IS.common.in.multihit <- IS.multihit[subjectHits(ov)]
+    IS.common.in.uniq <- IS.all[queryHits(ov)]
+    
+    IS.common.in.uniq$Frag.MLE <- IS.common.in.uniq$Frag.MLE+IS.common.in.multihit$Frag.MLE
+    
+    IS.only.in.uniq <- IS.all[-queryHits(ov)]
+    
+    IS.uniq.multihit <- c(IS.only.in.uniq,IS.common.in.uniq)
+    
+    IS.uniq.multihit$REL <- IS.uniq.multihit$Frag.MLE/sum(IS.uniq.multihit$Frag.MLE)
+    
+    IS.uniq.multihit.sorted <- IS.uniq.multihit[order(IS.uniq.multihit$REL,decreasing = T)]
+    IS.uniq.multihit.sorted
+  }
+  
+  IS.uniq.multihit.sorted
+  
+}
+
 MakeDataSet <- function(IS.all.with.multihit) {
   
   n <- length(IS.all.with.multihit)
@@ -177,5 +232,15 @@ IS.uniq.multihit.4.one.IS <- CombineUniqAndMultiUseSpecificIS(IS.uniq.hit,IS.mul
 IS.uniq.multihit.4.one.IS.top.10 <- MakeDataSet(IS.uniq.multihit.4.one.IS )
 GenerateBarPlot(IS.uniq.multihit.4.one.IS.top.10,output.dir,"UniqAndMultihit4OneIS")
 
+
+#input_uniq_hit <- "/home/aimin.yan/Aimin/ISseqOutput/vcn/Uniq/MOI30CLB7_IS0/Results.RData"
+IS.uniq.hit <- GetIsRel(input_uniq_hit)
+
+#input_multi_hit <- "/home/aimin.yan/Aimin/ISseqOutput/MOI30CLB7_IS0/Results.RData"
+IS.multihit <- GetIsRel(input_multi_hit)
+
+IS.uniq.multihit.4.top.10.IS <- CombineUniqAndMultiBasedUniqTop10IS(IS.uniq.hit,IS.multihit)
+IS.uniq.multihit.4.10.IS.top.10 <- MakeDataSet(IS.uniq.multihit.4.top.10.IS)
+GenerateBarPlot(IS.uniq.multihit.4.10.IS.top.10,output.dir,"UniqAndMultihit4Top10IS")
 
 
