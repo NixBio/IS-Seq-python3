@@ -20,7 +20,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y lsb-release build-essential wget curl git default-jdk ant && \
-	apt-get	install -y libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev libncurses5 && \
+	apt-get	install -y libssl-dev libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev libncurses5 && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
