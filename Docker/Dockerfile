@@ -1,6 +1,9 @@
 # docker build --network 'host' --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.8 .
-# or
+# to RUN
+# docker run -it aiminy/isseq:2.1 bash
 # docker build --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:2.1 .
+
+# docker run --mount type=bind,source=/local_scratch,target=/home -it aiminy/isseq:2.1 bash
 
 # docker system prune --all --force --volumes
 
@@ -131,5 +134,6 @@ RUN Rscript -e "install.packages(c('tidyverse'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager",lib="/usr/lib/R/site-library")' && R -e 'BiocManager::install(c("rtracklayer","GenomicRanges","BSgenome.Hsapiens.UCSC.hg38","ShortRead"),lib="/usr/lib/R/site-library")'
 
+RUN mkdir /local_scratch
 #CMD ["python","/usr/src/IS-Seq-python3/ISpipelineFv3_test.py"]
 
