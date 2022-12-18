@@ -13,6 +13,8 @@ hsp_homology_perc <- ((MM/(MM+MiMath))*100
                       
 find /local_scratch/ISseqOutput/vcn/CutAdapt/align/  -name "*.sam" | sudo xargs -n1 rm
 
+find /local_scratch/ISseqOutput -name "*.fq" | sudo xargs -n1 echo
+
 sudo find /local_scratch/ -name "*.fq" -exec gzip {} \;
 
 cat /etc/os-release

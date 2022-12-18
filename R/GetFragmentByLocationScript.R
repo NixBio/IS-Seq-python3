@@ -146,50 +146,48 @@ if(!file.exists(file.path(output.dir,output.fasta))){
   
 }
 
+#/out/Simulation1000IS
+
 #read_out_prefix <- 'Simulation100IS'
+
 out <- file.path(output.dir,read_out_prefix)
 
-#output.file <- file.path(output.dir,'RandomFragment.fa')
+temp <- paste0(out,'1.fq')
 
-output.file <- file.path(output.dir,output.fasta)
+if(!file.exists(temp)){
+  
+  output.file <- file.path(output.dir,output.fasta)
+  
+  number.of.read <- as.integer(number.of.read)
+  
+  cat(number.of.read,'\n')
+  
+  cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c ',number.of.read,' -m 1000 -s 300 -d ',read.name,' -o ',out,' -na')
 
-#cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c 17274461 -m 1000 -s 300 -d "Random" -o ',out)
+  cat(cmd,'\n')
+  system(cmd)
+  
+}
 
-number.of.read <- as.integer(number.of.read)
+#if(fragment.type!="random"){
 
-cat(number.of.read,'\n')
+output.sam <- file.path(output.dir,output.sam)
 
-#number.of.read <- 200000000000
-#read.name <- 'Read100IS'
+  if(!file.exists(temp)){
+  
+  cmd1=paste0('bwa-mem2 mem -t 8 ',host.fa,' ',paste0(out,'1.fq'),' ',paste0(out,'2.fq'),' > ',output.sam)
 
-#cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c ',number.of.read,' -m 1000 -s 300 -d ',read.name,' -o ',out)
+  cat(cmd1,'\n')
 
-cmd= paste0('art_illumina -ss MSv3 -p -i ',output.file,' -l 250 -c ',number.of.read,' -m 1000 -s 300 -d ',read.name,' -o ',out,' -na')
+  system(cmd1)
+  #/home/ubuntu/DEMO/IS-Seq/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa
 
-#read.name
+  cmd2=paste0('Rscript ',file.path(script.dirname,"sam2filterNo.R"),' ',output.sam,' ',file.path(dirname(host.fa),'repeatMaskerhg38BED'),' ',0,' ',output.dir,' POOL-ISA-AVRO-6-Preclin')
 
-cat(cmd,'\n')
+  cat(cmd2,'\n')
+  system(cmd2)
 
-system(cmd)
-
-# if(fragment.type!="random"){
-#   
-#   output.sam <- file.path(output.dir,output.sam)
-#   
-#   cmd1=paste0('bwa-mem2 mem -t 8 ',host.fa,' ',paste0(out,'1.fq'),' ',paste0(out,'2.fq'),' > ',output.sam)
-#   
-#   cat(cmd1,'\n')
-#   
-#   system(cmd1)
-#   #/home/ubuntu/DEMO/IS-Seq/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa
-#   
-#   cmd2=paste0('Rscript ',file.path(script.dirname,"sam2filterNo.R"),' ',output.sam,' ',file.path(dirname(host.fa),'repeatMaskerhg38BED'),' ',0,' ',output.dir,' POOL-ISA-AVRO-6-Preclin')
-#   
-#   cat(cmd2,'\n')
-#   
-#   system(cmd2)
-#   
-# }
+}
 
 #Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimulation/CL6 POOL-ISA-AVRO-6-Preclin
 
