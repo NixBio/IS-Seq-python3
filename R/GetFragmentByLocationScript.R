@@ -25,7 +25,7 @@ if (length(args)==0) {
   output.dir=args[5]
   output.fasta=args[6]
   number.of.read=args[7]
-  #output.sam=args[8]
+  output.sam=args[8]
 }
 
 # Example:
@@ -173,7 +173,7 @@ if(!file.exists(temp)){
 
 output.sam <- file.path(output.dir,output.sam)
 
-  if(!file.exists(temp)){
+  if(!file.exists(output.sam)){
   
   cmd1=paste0('bwa-mem2 mem -t 8 ',host.fa,' ',paste0(out,'1.fq'),' ',paste0(out,'2.fq'),' > ',output.sam)
 
