@@ -297,27 +297,3 @@ if(is.na(t.output.16)|(t.output.14>t.output.16)){
   cat(cmd,'\n')
   system(cmd)
 }
- 
-# python /home/ubuntu/ispipe/utils/try_pysam.py /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/BAMSorted/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem_allFilter_rehead_exact3nt_nonSupplementary.bam POOL-ISA-AVRO-6-Preclin
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
