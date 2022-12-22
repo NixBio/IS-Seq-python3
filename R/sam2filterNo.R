@@ -223,7 +223,7 @@ output.file.11 <- file.path(output.bam.1,paste0(sampleName,'_aligned_mem_allFilt
 t.output.11 <- file.info(output.file.11)$mtime
 
 if(is.na(t.output.11)|(t.output.9>t.output.11)){
-  cmd= paste0('export PYTHONPATH=/home/ubuntu/miniconda2/lib/python2.7/site-packages;python2 /home/ubuntu/ispipe/utils/pysam_parse.py ',output.file.9)
+  cmd= paste0('python /usr/src/IS-Seq-python3/utils/pysam_parse.py ',output.file.9)
   cat(cmd,'\n')
   system(cmd)
 }
@@ -248,7 +248,7 @@ output.file.13 <- file.path(output.bam.1,paste0(sampleName,'_aligned_mem_allFilt
 t.output.13 <- file.info(output.file.13)$mtime
 
 if(is.na(t.output.13)|(t.output.11>t.output.13)){
-  cmd= paste0('samtools view -b -f 2048 ',output.file.11,' > ',output.file.12)
+  cmd= paste0('samtools view -b -f 2048 ',output.file.11,' > ',output.file.13)
   cat(cmd,'\n')
   system(cmd)
 }
@@ -293,7 +293,7 @@ output.file.16 <- file.path(output.dir,paste0(ISA_run,'_FB-P5-Rd1-LTR.9_FB-P7-Rd
 t.output.16 <- file.info(output.file.16)$mtime
 
 if(is.na(t.output.16)|(t.output.14>t.output.16)){
-  cmd= paste0('export PYTHONPATH=/home/ubuntu/miniconda2/lib/python2.7/site-packages;python /home/ubuntu/ispipe/utils/try_pysam.py ',output.file.14,' ',ISA_run)
+  cmd= paste0('python /usr/src/IS-Seq-python3/utils/try_pysam.py ',output.file.14,' ',ISA_run)
   cat(cmd,'\n')
   system(cmd)
 }
