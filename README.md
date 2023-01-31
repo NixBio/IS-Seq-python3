@@ -171,6 +171,7 @@ nohup docker run --network 'host' --rm -v /local_scratch/ISseqOutput:/out aiminy
 
 ``` bash
 
+
 nohup docker run --rm -v  $HOME/IS-Seq-python3/data:/in --rm -v  $HOME/IS-Seq-python3/sample_research:/in1 --rm -v $HOME/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v $HOME/IS-Seq-python3/utils:/in3 --rm -v $HOME/DEMO/ISseqOutput:/out aiminy/isseq:1.8 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead.txt 2>&1 &
 ```
 
