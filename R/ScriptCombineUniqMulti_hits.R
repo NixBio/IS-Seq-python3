@@ -83,6 +83,67 @@ CombineUniqAndMulti1 <- function(IS.all, IS.multihit) {
   IS.all.with.multihit
 }
 
+CombineUniqAndMulti2 <- function(IS.all, IS.multihit, output.dir) {
+  
+  
+  IS.all$Type <- 'Uniq'
+  IS.all$REL <- NULL
+  IS.all.df <- as.data.frame(IS.all)
+  write.table(IS.all.df,file = file.path(output.dir,'UniqhitIS.csv'),quote=FALSE,row.names=FALSE,col.names = TRUE,sep=',')
+  
+  
+  IS.multihit$Type <- 'Multi'
+  IS.multihit$REL <- NULL
+  IS.multihit.df <- as.data.frame(IS.multihit)
+  write.table(IS.multihit.df,file = file.path(output.dir,'MultihitIS.csv'),quote=FALSE,row.names=FALSE,col.names = TRUE,sep=',')
+  
+  
+  ov <- suppressWarnings(findOverlaps(IS.all, IS.multihit,maxgap=7))
+  
+  #IS.multihit[subjectHits(ov)]
+  #IS.multihit[-subjectHits(ov)]
+  
+  #print(IS.all)
+  
+  #print(IS.multihit)
+  
+  #IS.common
+  IS.common <- IS.all[queryHits(ov)]
+  IS.common$Frag.MLE <- IS.all[queryHits(ov)]$Frag.MLE+IS.multihit[subjectHits(ov)]$Frag.MLE
+  IS.common$Type <- 'Common'
+  
+  # Unique-hit IS only
+  IS.uniq <- IS.all[-queryHits(ov)]
+  IS.uniq$Type <- 'Uniq'
+  
+  # Multi-hit IS only
+  IS.multi <- IS.multihit[-subjectHits(ov)]
+  IS.multi$Type <- 'Multi'
+ 
+  #IS.common
+  IS.single.multihit <- suppressWarnings(c(IS.uniq,IS.common,IS.multi))
+  
+  IS.single.multihit$REL <- NULL
+  
+  IS.single.multihit.df <- as.data.frame(IS.single.multihit)
+  
+  print(IS.single.multihit.df)
+  
+  write.table(IS.single.multihit.df,file = file.path(output.dir,'UniqAndMultihitIS.csv'),quote=FALSE,row.names=FALSE,col.names = TRUE,sep=',')
+  
+  # IS.single.multihit$REL <- IS.single.multihit$Frag.MLE/sum(IS.single.multihit$Frag.MLE)
+  # 
+  # IS.single.multihit[order(IS.single.multihit$REL,decreasing = T)]
+  # 
+  # IS.all.with.multihit <- c(IS.all[-queryHits(ov)],IS.common)
+  # IS.all.with.multihit
+  # 
+  # IS.all.with.multihit$REL <- IS.all.with.multihit$Frag.MLE/sum(IS.all.with.multihit$Frag.MLE)
+  # 
+  # IS.all.with.multihit[order(IS.all.with.multihit$REL,decreasing = T)]
+  # IS.all.with.multihit
+}
+
 CombineUniqAndMultiUseSpecificIS <- function(IS.all, IS.multihit) {
   
  
@@ -227,6 +288,8 @@ GenerateBarPlot(IS.unique.top.10,output.dir,'Uniqhit')
 IS.uniq.multihit <- CombineUniqAndMulti1(IS.uniq.hit,IS.multihit)
 IS.uniq.multihit.top.10 <- MakeDataSet(IS.uniq.multihit)
 GenerateBarPlot(IS.uniq.multihit.top.10,output.dir,"UniqAndMultihit")
+
+CombineUniqAndMulti2(IS.uniq.hit,IS.multihit,output.dir)
 
 IS.uniq.multihit.4.one.IS <- CombineUniqAndMultiUseSpecificIS(IS.uniq.hit,IS.multihit)
 IS.uniq.multihit.4.one.IS.top.10 <- MakeDataSet(IS.uniq.multihit.4.one.IS )
