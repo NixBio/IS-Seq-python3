@@ -11,11 +11,13 @@ option_list = list(
           help="input gene annotation", metavar="character"),
   make_option(c("-r", "--rmsk"), type="character", default=NULL,
               help="input rmsk", metavar="character"),
+  make_option(c("-m", "--chrom"), type="character", default=NULL,
+              help="input chromInfo", metavar="character"),
   make_option(c("-o", "--out_file"), type="character", default=NULL,
               help="output file", metavar="character")
 );
 
-example.use <- "Example: Rscript $HOME/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -o /home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
+example.use <- "Example: Rscript $HOME/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -m https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz -o /home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
 
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);
@@ -28,9 +30,11 @@ if (is.null(opt$input_file)){
 input.file <- opt$input_file
 input.gene.annotation <- opt$gene_annotation
 input.rmsk <- opt$rmsk
+input.chrom <- opt$chrom
+
 output.file <- opt$out_file
 
-input.rmsk <- 'https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz'
+#input.rmsk <- 'https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz'
 
 out.dir.name <- dirname(output.file)
 if (!dir.exists(out.dir.name)){dir.create(out.dir.name, recursive = TRUE)}
@@ -156,6 +160,21 @@ if(is.na(hg38.genome.num.time)){
 cat("get hg38.genome.num file\n")
   
 hg38.genome <- as.data.frame(SeqinfoForUCSCGenome(y))
+hg38.genome.size <- data.frame(chr=row.names(hg38.genome),length=hg38.genome$seqlengths)
+hg38.genome.num <- data.frame(chr.index=seq(1,length(row.names(hg38.genome))),chr=row.names(hg38.genome))
+
+#file <- "https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz"
+
+con <- gzcon(url(input.chrom))
+txt <- readLines(con)
+hg38.genome <- read.csv(
+  textConnection(txt),
+  sep = "\t",
+  header = FALSE,
+  row.names = 1,
+)
+
+colnames(hg38.genome) <- c("seqlengths", "bit_file")
 hg38.genome.size <- data.frame(chr=row.names(hg38.genome),length=hg38.genome$seqlengths)
 hg38.genome.num <- data.frame(chr.index=seq(1,length(row.names(hg38.genome))),chr=row.names(hg38.genome))
 

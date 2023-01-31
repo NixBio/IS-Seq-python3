@@ -21,3 +21,4 @@ cat /etc/os-release
 
 sudo yum -y update
 
+aws s3 sync /local_scratch/ISseqOutput/vcn s3://sana-hsc-gene-therapy/ISA/ISseqOutput/vcn
