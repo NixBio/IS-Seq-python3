@@ -159,9 +159,9 @@ if(is.na(hg38.genome.num.time)){
   
 cat("get hg38.genome.num file\n")
   
-hg38.genome <- as.data.frame(SeqinfoForUCSCGenome(y))
-hg38.genome.size <- data.frame(chr=row.names(hg38.genome),length=hg38.genome$seqlengths)
-hg38.genome.num <- data.frame(chr.index=seq(1,length(row.names(hg38.genome))),chr=row.names(hg38.genome))
+#hg38.genome <- as.data.frame(SeqinfoForUCSCGenome(y))
+#hg38.genome.size <- data.frame(chr=row.names(hg38.genome),length=hg38.genome$seqlengths)
+#hg38.genome.num <- data.frame(chr.index=seq(1,length(row.names(hg38.genome))),chr=row.names(hg38.genome))
 
 #file <- "https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz"
 
