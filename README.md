@@ -16,10 +16,12 @@ purpose of this version is to let users not need to spend time to
 install the tools required for IS-Seq across different platforms except
 git, git-lfs and Docker.
 
-### To use this IS-Seq version on Macs, you need to install git, git-lfs, and Docker,and perform the following steps
+### To use this IS-Seq version, you need to install Docker, git and git-lfs through the following insturction:
 
-We supplied a [video](https://youtu.be/hA-cIGBQ1_w) tutorial here to
-demonstrate how to install and use IS-Seq on Macs machine
+
+    # Install Docker by using the following link on your system
+
+    https://docs.docker.com/engine/install/
 
 
     # Install Homebrew firstly if you don't have brew installed on your Macs 
@@ -36,20 +38,17 @@ demonstrate how to install and use IS-Seq on Macs machine
     cd IS-Seq-python3
     git lfs pull
 
-    # Install Docker by using the following link on your system
-
-    https://docs.docker.com/engine/install/
-
     # Pull IS-Seq Docker image
+
     After docker is installed, you can pull IS-Seq Docker image like the following
 
-    docker pull aiminy/isseq:1.0
+    docker pull aiminy/isseq:2.4
 
 ### To have a quick start to using IS-Seq, you can run the following command:
 
 ``` bash
 
-docker run -it --platform=linux/amd64 aiminy/isseq:1.0
+docker run aiminy/isseq:2.4 python IS-Seq-python3/ISpipelineFv3_test.py -h
 ```
 
 -   Command line arguments:
@@ -164,27 +163,26 @@ Note: you need to follow these order to run IS-Seq:
 
 ``` bash
 
-nohup docker run --network 'host' --rm -v /local_scratch/ISseqOutput:/out aiminy/isseq:1.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -m https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz -o /out/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa > logMakeHg38.txt 2>&1 &
+nohup docker run --network 'host' --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.4 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -m https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz -o /out/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa > logMakeHg38.txt 2>&1 &
 ```
 
 ### To get ReadBased results, you need to run the following command:
 
 ``` bash
 
-
-nohup docker run --rm -v  $HOME/IS-Seq-python3/data:/in --rm -v  $HOME/IS-Seq-python3/sample_research:/in1 --rm -v $HOME/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v $HOME/IS-Seq-python3/utils:/in3 --rm -v $HOME/DEMO/ISseqOutput:/out aiminy/isseq:1.8 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a read -c nothing -q 30 > logRead.txt 2>&1 &
+nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/ISseqOutput/utilsRefData:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.4 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a read -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_read.txt 2>&1 &
 ```
 
 ### To get UmiBased results, you need to run the following command:
 
 ``` bash
 
-nohup docker run --rm -v  $HOME/IS-Seq-python3/data:/in --rm -v  $HOME/IS-Seq-python3/sample_research:/in1 --rm -v $HOME/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v $HOME/IS-Seq-python3/utils:/in3 --rm -v $HOME/DEMO/ISseqOutput:/out aiminy/isseq:1.8 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a umi -c nothing -q 30 > logUmi.txt 2>&1 &
+nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/ISseqOutput/utilsRefData:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.4 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a umi -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_umi.txt 2>&1 &
 ```
 
 ### To get FragmentBased results, you need to run the following command:
 
 ``` bash
 
-nohup docker run --rm -v  $HOME/IS-Seq-python3/data:/in --rm -v  $HOME/IS-Seq-python3/sample_research:/in1 --rm -v $HOME/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v $HOME/IS-Seq-python3/utils:/in3 --rm -v $HOME/DEMO/ISseqOutput:/out aiminy/isseq:1.8 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t test -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /in3  -a fragment -c nothing -q 30 > logFragment.txt 2>&1 &
+nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/ISseqOutput/utilsRefData:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.4 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a fragment -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_Frag.txt 2>&1 &
 ```
