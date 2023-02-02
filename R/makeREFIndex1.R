@@ -163,7 +163,7 @@ cat("get hg38.genome.num file\n")
 #hg38.genome.size <- data.frame(chr=row.names(hg38.genome),length=hg38.genome$seqlengths)
 #hg38.genome.num <- data.frame(chr.index=seq(1,length(row.names(hg38.genome))),chr=row.names(hg38.genome))
 
-#file <- "https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz"
+#input.chrom <- "https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz"
 
 con <- gzcon(url(input.chrom))
 txt <- readLines(con)
@@ -176,9 +176,49 @@ hg38.genome <- read.csv(
 
 colnames(hg38.genome) <- c("seqlengths", "bit_file")
 hg38.genome.size <- data.frame(chr=row.names(hg38.genome),length=hg38.genome$seqlengths)
-hg38.genome.num <- data.frame(chr.index=seq(1,length(row.names(hg38.genome))),chr=row.names(hg38.genome))
 
-write.table(hg38.genome.size,file = outputFile1, quote = FALSE, sep = "\t",eol = "\n", na = "NA", dec = ".", row.names = FALSE,col.names = FALSE)
+makeChrInt <- function(hg38.genome.size) {
+  
+  chr2 <- lapply(hg38.genome.size$chr,function(u){
+    simple.names = gsub("^chr", "",u)
+    rs <- data.frame(chrInt=simple.names,chr=u)
+  })
+  
+  chr3 <- do.call(rbind,chr2)
+  
+  chr3[chr3$chrInt=="X",]$chrInt <- '23'
+  
+  chr3[chr3$chrInt=="Y",]$chrInt <- '24'
+  
+  chr3[chr3$chrInt=="M",]$chrInt <- '25'
+  
+  chr3.p1 <- chr3[which(!is.na(as.integer(chr3$chrInt))),]
+  
+  chr3.p1$chrInt <- as.integer(chr3.p1$chrInt)
+  
+  chr3.p2 <- chr3[which(is.na(as.integer(chr3$chrInt))),]
+  
+  chr3.p2$chrInt <- seq(max(chr3.p1$chrInt)+1,max(chr3.p1$chrInt)+dim(chr3.p2)[1],1)
+
+  chr4 <- rbind(chr3.p1,chr3.p2)
+  
+  chr5  <- chr4[order(chr4$chrInt),]
+  
+  chr5
+  
+}
+
+oldw <- getOption("warn")
+
+options(warn = -1)
+
+hg38.genome.num <- makeChrInt(hg38.genome.size)
+
+options(warn = oldw)
+
+hg38.genome.size.sorted <- hg38.genome.size[match(hg38.genome.num$chr,hg38.genome.size$chr),]
+
+write.table(hg38.genome.size.sorted,file = outputFile1, quote = FALSE, sep = "\t",eol = "\n", na = "NA", dec = ".", row.names = FALSE,col.names = FALSE)
 
 write.table(hg38.genome.num,file = outputFile2, quote = FALSE, sep = "\t",eol = "\n", na = "NA", dec = ".", row.names = FALSE,col.names = FALSE)
 
