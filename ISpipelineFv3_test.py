@@ -31,6 +31,7 @@ def unique(seq):
     [noDupes.append(i) for i in seq if not noDupes.count(i)]
     return noDupes
 
+# Get sample information from the association file 
 def getInputDataFromSampleResearch(sampleResearch,sampleName):
 
     dataSOfSampleResearch=[]
@@ -391,7 +392,8 @@ def main():
     print(outputFiles)
     print(check)
     dwd=inputFolder
-
+    
+    # Select the reads that align to LTR and LC sequence by blast
     if check:
         fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lcminMatch,lcFaSeqLength,check,NT)
 
@@ -423,7 +425,7 @@ def main():
         demultiplexingWithBarcode(VectorType,check,dwdt,utilsRef)
         trimwithCutAdapt(dwdt,utilsRef,LTRFileFa,LCFileFa)
 
-    ########Random Barcode removal start ! ################################
+    ########Random Barcode removal start !(remove sample barcode) ################################
     inputFiles = []
     temp = os.path.join(dwdt,"R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq")
     for f in fnmatch.filter(os.listdir(temp),'*'):
@@ -460,6 +462,7 @@ def main():
         outputDir = os.path.join(dwdt,"CutAdapt")
         if not os.path.exists(outputDir):
             os.makedirs(outputDir)
+        # Get processed FATSQ files     
         getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,repRegQual,PreviousCollision)
 
     if analysisType == "align2Vector":
@@ -1227,7 +1230,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
     t2.join()
     print ("Unzip ended!\n")
 
-    ###### split fa files for blast######################
+    ###### split FASTQ files to small chunks for blast######################
 
     if check:
         def call_script(FileRx):
@@ -1250,7 +1253,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
         t2.join()
         print ("Splitted Fq\n")
 
-        # #### TRIM FIRST 12 NT START ####################
+        # #### TRIM FIRST 12 NT START (trim adapter sequence)####################
     if check:
         if not 'ftrimmer' in globals():
             ftrimmer=13
@@ -1347,7 +1350,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
 
 
 
-        ##### LTR in R1 ####################
+        ##### align LTR in R1 ####################
         if check:
             threads = []
             def call_script_filterMap(filename):
@@ -1379,7 +1382,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
                     x.join()
             print(("LTR sequence: %s searched on R1" % (LTRFileFa)))
 
-            ##### LC in R2 ####################
+            ##### align LC in R2 ####################
 
             if check:
                 threads = []
@@ -1412,7 +1415,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
                         x.join()
                 print(("LC sequence: %s searched on R2" % (LCFileFa)))
 
-                #####Merge blast output#################################
+                #####Merge blast output from each chunks of alignment#################################
                 if check:
                     def call_script(FileRx):
                         temp= os.path.join(dwdt,"fqSplit")
