@@ -74,7 +74,7 @@ docker run aiminy/isseq:2.4 python IS-Seq-python3/ISpipelineFv3_test.py -h
   
   * -t time you run this pipeline
   
-  * -r association file. User should prepare an assocation file based on the formats in "Association_File_format.png" in "sample_research" folder. you can check the detailed format information here ![SampleInfor](sample_research/Association_File_format.png){width=100%}. The following is the detailed information of each column in this format:
+  * -r association file. User should prepare an assocation file based on the formats in "Association_File_format.png" in "sample_research" folder. you can check the detailed format information here ![SampleInfor](sample_research/Association_File_Format.png){width=100%}. The following is the detailed information of each column in this format:
     
     * 1: LAM-PCR-ID(required)	
     * 2: PT-DONOR-MOUSE(required)	

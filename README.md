@@ -70,7 +70,7 @@ docker run aiminy/isseq:2.4 python IS-Seq-python3/ISpipelineFv3_test.py -h
         based on the formats in “Association_File_format.png” in
         “sample_research” folder. you can check the detailed format
         information here
-        <img src="sample_research/Association_File_format.png"
+        <img src="sample_research/Association_File_Format.png"
         style="width:100.0%" alt="SampleInfor" />. The following is the
         detailed information of each column in this format:
 
