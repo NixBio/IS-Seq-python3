@@ -76,24 +76,25 @@ docker run aiminy/isseq:2.4 python IS-Seq-python3/ISpipelineFv3_test.py -h
   
   * -r association file. User should prepare an assocation file based on the formats in "Association_File_format.png" in "sample_research" folder. you can check the detailed format information here ![SampleInfor](sample_research/Association_File_format.png){width=100%}. The following is the detailed information of each column in this format:
     
-    * 1: LAM-PCR-ID	
-    * 2: PT-DONOR-MOUSE	
-    * 3: PT-Transduction-ID	
-    * 4  Source	
-    * 5: Sample-Type	
-    * 6: Research-(-R-)-Clinic-(-C-)	
-    * 7: TimePoint-R(d)-C(m) use month as measurement unit	
-    * 8: Fusion-Primer-LTR.-ID	note: you shoud use give this like "FB-P5-Rd1-LTR.1",FB-P5-Rd1-LTR-1 will give an error  
-    * 9: Fusion-Primer-LC.-ID	note: format requirement for LC barcode is like format requirement as LTR barcode
-    * 10: Library, this is same as sample name in comand line arguments	
-    * 11: Sequencing-date-(mm-dd-yy)	
-    * 12: Organism	
-    * 13: VectorType	
-    * 14: VectorMask	
-    * 15: Linker-Cassette	
-    * 16: Transgene	
-    * 17: Other-Infos	
-    * 18: Other-infos-2
+    * 1: LAM-PCR-ID(required)	
+    * 2: PT-DONOR-MOUSE(required)	
+    * 3: PT-Transduction-ID(required)	
+    * 4  Source(required)	
+    * 5: Sample-Type(required)	
+    * 6: Research-(-R-)-Clinic-(-C-)(required)	
+    * 7: TimePoint-R(d)-C(m) use month as measurement unit(required)	
+    * 8: Fusion-Primer-LTR.-ID	note: you shoud use give this like "FB-P5-Rd1-LTR.1",FB-P5-Rd1-LTR-1 will give an error(required)  
+    * 9: Fusion-Primer-LC.-ID	note: format requirement for LC barcode is like format requirement as LTR barcode(required)
+    * 10: Library, this is same as sample name in comand line arguments(required)	
+    * 11: Sequencing-date-(mm-dd-yy)(required)	
+    * 12: Organism(required)	
+    * 13: VectorType(required)	
+    * 14: VectorMask(required)	
+    * 15: Linker-Cassette(required)
+    * 16: Vector(required)
+    * 16: Transgene	(optional)
+    * 17: Other-Infos (optional)	
+    * 18: Other-infos-2 (optional)
   
       note: user should not use underscore(_) in these column name and their entries in this table because of special meanings in Python
   

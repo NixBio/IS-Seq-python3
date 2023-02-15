@@ -74,44 +74,48 @@ docker run aiminy/isseq:2.4 python IS-Seq-python3/ISpipelineFv3_test.py -h
         style="width:100.0%" alt="SampleInfor" />. The following is the
         detailed information of each column in this format:
 
-        -   1: LAM-PCR-ID
+        -   1: LAM-PCR-ID(required)  
 
-        -   2: PT-DONOR-MOUSE
+        -   2: PT-DONOR-MOUSE(required)  
 
-        -   3: PT-Transduction-ID
+        -   3: PT-Transduction-ID(required)  
 
-        -   4 Source
+        -   4 Source(required)  
 
-        -   5: Sample-Type  
+        -   5: Sample-Type(required)  
 
-        -   6: Research-(-R-)-Clinic-(-C-)  
+        -   6: Research-(-R-)-Clinic-(-C-)(required)  
 
-        -   7: TimePoint-R(d)-C(m) use month as measurement unit  
+        -   7: TimePoint-R(d)-C(m) use month as measurement
+            unit(required)  
 
         -   8: Fusion-Primer-LTR.-ID note: you shoud use give this like
-            “FB-P5-Rd1-LTR.1”,FB-P5-Rd1-LTR-1 will give an error  
+            “FB-P5-Rd1-LTR.1”,FB-P5-Rd1-LTR-1 will give an
+            error(required)  
 
         -   9: Fusion-Primer-LC.-ID note: format requirement for LC
-            barcode is like format requirement as LTR barcode
+            barcode is like format requirement as LTR barcode(required)
 
         -   10: Library, this is same as sample name in comand line
-            arguments
+            arguments(required)  
 
-        -   11: Sequencing-date-(mm-dd-yy)  
+        -   11: Sequencing-date-(mm-dd-yy)(required)  
 
-        -   12: Organism  
+        -   12: Organism(required)  
 
-        -   13: VectorType  
+        -   13: VectorType(required)  
 
-        -   14: VectorMask  
+        -   14: VectorMask(required)  
 
-        -   15: Linker-Cassette  
+        -   15: Linker-Cassette(required)
 
-        -   16: Transgene
+        -   16: Vector(required)
 
-        -   17: Other-Infos  
+        -   16: Transgene (optional)
 
-        -   18: Other-infos-2
+        -   17: Other-Infos (optional)  
+
+        -   18: Other-infos-2 (optional)
 
             note: user should not use underscore(\_) in these column
             name and their entries in this table because of special
