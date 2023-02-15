@@ -108,6 +108,7 @@ def reNameFile(DiversityOut,outputDir,inputPattern,sampleResearch):
                     destFile=l[9]+'''_'''+l[1]+'''_'''+l[2]+'''_'''+l[3]+'''_'''+l[4]+'''_'''+l[6]+'''_grouped_IS'''
                     copyfile(sourceFile,dwdcFilter60+destFile)
 
+# Use *_grouped_IS and PT-Transduction-ID in the association file to perform collision detection
 def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder):
 
     inputFiles = []
@@ -136,6 +137,7 @@ def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder):
         t1.start()
         t1.join()
 
+# Find the closed gene for IS and the IS that are located in vector region defined by VectMask
 def annotateISite(dwdcFilter60,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix):
 
     threads = []
