@@ -92,7 +92,6 @@ docker run aiminy/isseq:2.4 python IS-Seq-python3/ISpipelineFv3_test.py -h
     * 14: VectorMask(required)	
     * 15: Linker-Cassette(required)
     * 16: Vector(required)
-    * 16: Transgene	(optional)
     * 17: Other-Infos (optional)	
     * 18: Other-infos-2 (optional)
   
