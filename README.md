@@ -7,19 +7,18 @@
 <!-- badges: end -->
 
 IS-Seq is a pipeline for identifying integration sites on host genome
-when using viral vectors in gene therapy using sequencing data. The
-detailed information about this pipeline, user can read this
+when using viral vectors in gene therapy. The detailed information about
+this pipeline, user can read this
 [paper](https://doi.org/10.1101/2023.02.06.527381), Particular, Figure1
 and Figure2 of this paper describe the steps of this pipeline.
 
 ## Introduction
 
-This is a new version of IS-Seq pipeline maintained by Docker, the
-purpose of this version is to let users not need to spend time to
-install the tools required for IS-Seq across different platforms except
-git, git-lfs and Docker.
+The IS-Seq pipeline is maintained by Docker, the purpose of using Docker
+is to let users not need to spend time to install the tools required for
+IS-Seq across different platforms except git, git-lfs and Docker.
 
-### To use this IS-Seq version, you need to install Docker, git and git-lfs through the following steps:
+### To use this IS-Seq, you need to install Docker, git and git-lfs through the following steps:
 
 
     # Install Docker by using the following link on your system
