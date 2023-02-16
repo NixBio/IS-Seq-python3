@@ -26,41 +26,41 @@ if (length(args)==0) {
 
 if(!dir.exists(output.dir)){dir.create(output.dir,recursive = TRUE)}
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa/MOI30CLB7/IS0/multihitData.rds /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa/MOI30CLB7/IS0
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa/MOI30CLB7/IS0/multihitData.rds /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa/MOI30CLB7/IS0
 
-#/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0
+#$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/allSites.rds MOI30CLB7 SST80 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/allSites.rds MOI30CLB7 SST80 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/Uniq_cluster
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/allSites.rds MOI30CLB7 SST95 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/allSites.rds MOI30CLB7 SST95 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/Uniq_cluster
 
 
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS95/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS95/allSites.rds MOI50CLH6 SST95 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS95/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS95/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS95/allSites.rds MOI50CLH6 SST95 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS95/Uniq_cluster
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS80/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS80/allSites.rds MOI50CLH6 SST80 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS80/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS80/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS80/allSites.rds MOI50CLH6 SST80 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS80/Uniq_cluster
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS0/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS0/allSites.rds MOI50CLH6 SST0 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS0/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS0/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS0/allSites.rds MOI50CLH6 SST0 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI50CLH6/IS0/Uniq_cluster
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/allSites.rds CL6 SST0 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/allSites.rds CL6 SST0 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/Uniq_cluster
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS80/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS80/allSites.rds CL6 SST80 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS80/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS80/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS80/allSites.rds CL6 SST80 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS80/Uniq_cluster
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReads.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS95/multihitData.rds /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS95/allSites.rds CL6 SST95 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS95/Uniq_cluster
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReads.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS95/multihitData.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS95/allSites.rds CL6 SST95 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS95/Uniq_cluster
 
 #MOI50CLH6
 
 
-#/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0
+#$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0
 
 
 #print(input.multi.hit)
 
-#input.multi.hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/multihitData.rds'
+#input.multi.hit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/multihitData.rds'
 
-#input.uniq.hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/allSites.rds'
+#input.uniq.hit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/allSites.rds'
 
 #sampleName1 <- basename(dirname(dirname(input.multi.hit)))
 #sampleName2 <- basename(dirname(input.multi.hit))
@@ -222,7 +222,7 @@ res.uniq.multi <- rbind(res.uniq,res.multi)
 
 
 #              )
-#Rscript ~/Aimin/IS-Seq-pyhton3/R/GetFragMLE.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/allSites.rds MOI30CLB7_IS0 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/uniq
+#Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetFragMLE.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/allSites.rds MOI30CLB7_IS0 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/uniq
 
 
 # uniqhit <- readRDS(input.uniq.hit)
@@ -251,7 +251,7 @@ res.uniq.multi <- rbind(res.uniq,res.multi)
 
 
 
-#output.directory.ISSeq.paper <- '~/OneDrive/Aimin/IS-Seq/submission/final_from_luca/ReSubmission'
+#output.directory.ISSeq.paper <- '$HOME/IS-Seq_output/IS-Seq/submission/final_from_luca/ReSubmission'
 
 #output.file <- file.path(output.directory.ISSeq.paper,paste0('MOI30CLB7_uniq_cluster_Frag_MLE_SST0','.xls'))
 
@@ -261,6 +261,6 @@ output.file <- file.path(output.dir,paste0(sampleName,'_uniq_cluster_Frag_MLE_',
 
 write.table(res.uniq.multi,file = output.file, append = FALSE, quote=FALSE,row.names=FALSE,col.names = TRUE,sep = "\t")
 
-# Rscript ~/Aimin/IS-Seq-pyhton3/R/GetFragMLE.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/allSites.rds MOI30CLB7_IS0 /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/uniq
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetFragMLE.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/allSites.rds MOI30CLB7_IS0 $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/uniq
 
 

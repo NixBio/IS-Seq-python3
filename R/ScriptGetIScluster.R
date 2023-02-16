@@ -16,7 +16,7 @@ zzz<-lapply(packages, function(xxx) suppressMessages(library(xxx, character.only
 
 source(file.path(script.dirname,"functionMul.R"))
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptGetIScluster.R ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihit_allSites.rds ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80 20
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/ScriptGetIScluster.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihit_allSites.rds $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80 20
 
 if (length(args)==0) {
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
@@ -41,9 +41,9 @@ GetJC <- function(df) {
 
 GetReaId4MultihitIs <- function(input_multi_hit,input_multi_hit_MLE,input_uniq_hit_MLE,output.dir,num.is.clusters) {
   
-  #input_multi_hit <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihit_allSites.rds'
+  #input_multi_hit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihit_allSites.rds'
   
-  input_multi_hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihit_allSites.rds'
+  input_multi_hit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihit_allSites.rds'
   
   multihit.allSites <- readRDS(input_multi_hit)
   multihit.allSites.reduced <- flank(multihit.allSites, -1, start=TRUE)
@@ -66,7 +66,7 @@ GetReaId4MultihitIs <- function(input_multi_hit,input_multi_hit_MLE,input_uniq_h
   
   IS.each <- GetEachIs(multihit.allSites.reduced)
   
-  input_uniq_hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/allSites.rds'
+  input_uniq_hit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/allSites.rds'
   
   uniq.hit.allSites <- readRDS(input_uniq_hit)
   uniq.hit.allSites.reduced <- flank(uniq.hit.allSites, -1, start=TRUE)
@@ -107,9 +107,9 @@ GetReaId4MultihitIs <- function(input_multi_hit,input_multi_hit_MLE,input_uniq_h
     
   })
   
-  #input_multi_hit_MLE <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData'
+  #input_multi_hit_MLE <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData'
   
-  input_multi_hit_MLE <- "/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData"
+  input_multi_hit_MLE <- "$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData"
   
   multi.hit.MLE <- GetIsRel(input_multi_hit_MLE)
   
@@ -147,9 +147,9 @@ GetReaId4MultihitIs <- function(input_multi_hit,input_multi_hit_MLE,input_uniq_h
   
   clusters.all <- do.call(c,clusters)
   
-  #input_uniq_hit_MLE <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData'
+  #input_uniq_hit_MLE <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData'
   
-  #input_multi_hit_MLE <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData'
+  #input_multi_hit_MLE <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData'
   
   uniq.hit.MLE <- GetIsRel(input_uniq_hit_MLE)
   

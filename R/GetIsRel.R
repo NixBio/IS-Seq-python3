@@ -1,6 +1,6 @@
-output.dir <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80'
+output.dir <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80'
 
-input <- "~/Library/CloudStorage/OneDrive-SanaBiotechnology/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData"
+input <- "~/Library/CloudStorage/OneDrive-SanaBiotechnology/user/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData"
 
 GetIsRel <- function(input) {
   load(input)
@@ -14,19 +14,19 @@ GetIsRel <- function(input) {
 
 IS.all <- GetIsRel(input)
 
-input.95 <- "~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE/Results.RData"
+input.95 <- "$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE/Results.RData"
 
 IS.all.95 <- GetIsRel(input.95)
 
-output.dir.95 <- "~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95"
+output.dir.95 <- "$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95"
 
 IS.unique.mapping.95 <- MakeDataSet(IS.all.95)
 GenerateBarPlot(IS.unique.mapping.95,output.dir.95,'Uniqhit')
 
-multihit.95 <- readRDS('~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/multihitData.rds')
-saveRDS(multihit.95$unclusteredMultihits,'~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/multihit_allSites.rds')
+multihit.95 <- readRDS('$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/multihitData.rds')
+saveRDS(multihit.95$unclusteredMultihits,'$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/multihit_allSites.rds')
 
-input.95.multihit <- "~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE_multihitData/Results.RData"
+input.95.multihit <- "$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE_multihitData/Results.RData"
 IS.multihit.mapping.95 <- GetIsRel(input.95.multihit)
 
 IS.multihit.mapping.95.1 <- MakeDataSet(IS.multihit.mapping.95)
@@ -36,7 +36,7 @@ GenerateBarPlot(IS.multihit.mapping.95.1,output.dir.95,'Multihit')
 
 
 
-input.multihit <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData'
+input.multihit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData'
 
 IS.multihit <- GetIsRel(input.multihit)
 
@@ -158,7 +158,7 @@ IS.multihit.mapping <- MakeDataSet(IS.multihit)
 GenerateBarPlot(IS.multihit.mapping,output.dir,'Multihit')
 
 
-allSites.input <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/allSites.rds'
+allSites.input <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/allSites.rds'
 
 GetIsReadId <- function(allSites.input,index) {
   allSites <- readRDS(allSites.input)
@@ -171,7 +171,7 @@ GetIsReadId <- function(allSites.input,index) {
 
 IS.common
 
-multihit.allSites.input <- '~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihit_allSites.rds'
+multihit.allSites.input <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/multihit_allSites.rds'
 
 num.common.reads <- lapply(1:11, function(u){
   

@@ -35,7 +35,7 @@ if (length(args)==0) {
 
 # Example:
 
-# Rscript ~/ispipe/R/GetRandomFragment.R /home/ubuntu/DEMO/IS-Seq/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa "target" 3000 "negative" 49461738 "chr19_49461738" "target" "chr19_49461738_" /home/ubuntu/SHARE/Aimin/Test_3000_negative_fragment hg38Chr19OnlyUpIS3000Fragment.fa 2000 UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+# Rscript ~/ispipe/R/GetRandomFragment.R /home/ubuntu/DEMO/IS-Seq/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa "target" 3000 "negative" 49461738 "chr19_49461738" "target" "chr19_49461738_" /home/ubuntu/SHARE/user/Test_3000_negative_fragment hg38Chr19OnlyUpIS3000Fragment.fa 2000 UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
 
 if (!dir.exists(output.dir)){dir.create(output.dir, recursive = TRUE)}
@@ -48,7 +48,7 @@ if(fragment.type=="random"){
   
   Fragment.random.1 <- DNAStringSet(Fragment.random)
   
-  #output.dir <- '/home/ubuntu/SHARE/Aimin/RandomFragment'
+  #output.dir <- '/home/ubuntu/SHARE/user/RandomFragment'
   
   
   #names(Fragment.random.1) <- 'ChrRandom'
@@ -203,14 +203,14 @@ system(cmd2)
   
 }
 
-#Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimulation/CL6 POOL-ISA-AVRO-6-Preclin
+#Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimulation/CL6 POOL-ISA-AVRO-6-Preclin
 
 
 
-#/home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/Aimin/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+#/home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/user/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
 
-#bwa mem -t 8 /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/Aimin/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+#bwa mem -t 8 /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/user/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
 
 

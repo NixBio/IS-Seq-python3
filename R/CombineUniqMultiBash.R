@@ -23,9 +23,9 @@ if (length(args)==0) {
   #IS.type=args[3]
 }
 
-# Example: Rscript /home/aimin.yan/Aimin/IS-Seq-python3/R/CombineUniqMultiBash.R /home/aimin.yan/Aimin/ISseqOutput
+# Example: Rscript $HOME/IS-Seq/IS-Seq-python3/R/CombineUniqMultiBash.R $HOME/IS-Seq/ISseqOutput
 
-#input.dir <- "~/Aimin/ISseqOutput"
+#input.dir <- "~/user/ISseqOutput"
 
 input.files <- list.files(input.dir,pattern = "Results.RData",recursive = TRUE,full.names=TRUE)
 
@@ -47,7 +47,7 @@ null <- lapply(1:dim(input.data)[1], function(u){
   
   cat(sampleName,"\t",UniqfileName,"\t",MultiName,"\n")
   
-  cmd <- paste0(paste0("nohup docker run --rm -v ",paste0(UniqfileName,":/in1")," --rm -v ",paste0(MultiName,":/in2")," --rm -v ",paste0(input.dir,"/vcn/UniqAndMulti/",sampleName,"/:/out"),paste0(" aiminy/isseq:2.1 Rscript /usr/src/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /in1 /in2 /out"),paste0(" > ~/Aimin/log/logCombineUniqWithMulti.txt 2>&1 &")))
+  cmd <- paste0(paste0("nohup docker run --rm -v ",paste0(UniqfileName,":/in1")," --rm -v ",paste0(MultiName,":/in2")," --rm -v ",paste0(input.dir,"/vcn/UniqAndMulti/",sampleName,"/:/out"),paste0(" aiminy/isseq:2.1 Rscript /usr/src/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /in1 /in2 /out"),paste0(" > ~/user/log/logCombineUniqWithMulti.txt 2>&1 &")))
   
   cat(cmd,"\n")
   

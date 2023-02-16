@@ -1,6 +1,6 @@
 # Examples:
 
-# Rscript ~/IS-Seq/R/GetFragMLE.R ~/SHARE/Aimin/INSPIIRED_test_output/clone1-1/IS_0/allSites.rds clone1-1 ~/SHARE/Aimin/INSPIIRED_test_output/clone1-1/IS_0
+# Rscript ~/IS-Seq/R/GetFragMLE.R ~/SHARE/user/INSPIIRED_test_output/clone1-1/IS_0/allSites.rds clone1-1 ~/SHARE/user/INSPIIRED_test_output/clone1-1/IS_0
 
 initial.options <- commandArgs(trailingOnly = FALSE)
 print(initial.options)

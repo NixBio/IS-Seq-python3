@@ -1,4 +1,4 @@
-# Rscript ~/IS-Seq/R/Trim_After_Demultiplex.R ~/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData ~/SHARE/Aimin/INSPIIRED_test_output/demultiplexedReps/clone1-1_R1.fastq.gz ~/SHARE/Aimin/INSPIIRED_test_output/demultiplexedReps/clone1-1_R2.fastq.gz ~/IS-Seq/utilsRefData/INSPIIRED/p746vector.fasta ~/SHARE/Aimin/INSPIIRED_test_output/hg18/hg18ChrOnly.2bit ~/SHARE/Aimin/INSPIIRED_test_output clone1-1
+# Rscript ~/IS-Seq/R/Trim_After_Demultiplex.R ~/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData ~/SHARE/user/INSPIIRED_test_output/demultiplexedReps/clone1-1_R1.fastq.gz ~/SHARE/user/INSPIIRED_test_output/demultiplexedReps/clone1-1_R2.fastq.gz ~/IS-Seq/utilsRefData/INSPIIRED/p746vector.fasta ~/SHARE/user/INSPIIRED_test_output/hg18/hg18ChrOnly.2bit ~/SHARE/user/INSPIIRED_test_output clone1-1
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)<6) {

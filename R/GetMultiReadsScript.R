@@ -1,4 +1,4 @@
-# Rscript $HOME/Aimin/IS-Seq-python3/R/GetMultiReadsScript.R /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetMultiReadsScript.R /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa
 
 initial.options <- commandArgs(trailingOnly = FALSE)
 print(initial.options)

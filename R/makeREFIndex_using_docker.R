@@ -13,7 +13,7 @@ option_list = list(
               help="output file", metavar="character")
 );
 
-example.use <- "Example: Rscript $HOME/Aimin/ispipe/R/makeREFIndex.R -i ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz -g ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.annotation.gtf.gz -o /home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
+example.use <- "Example: Rscript $HOME/IS-Seq/ispipe/R/makeREFIndex.R -i ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz -g ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.annotation.gtf.gz -o /home/ayan/user/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
 
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);
@@ -50,7 +50,7 @@ if(is.na(t.output)){
   cat("samtools faidx fasta file\n")
   #cmd2 <- paste0('samtools faidx ',output.file)
   
-  #docker run --rm -v $(pwd)/Aimin/IS-Seq-python3/utilsRefData/IsSeq/hg38:/in -w /in  chrishah/samtools:1.9 samtools faidxGRCh38.primary_assembly.genome.fa
+  #docker run --rm -v $(pwd)/user/IS-Seq-python3/utilsRefData/IsSeq/hg38:/in -w /in  chrishah/samtools:1.9 samtools faidxGRCh38.primary_assembly.genome.fa
   
   cmd2 <- paste0('docker run --rm -v ', file.path('$(pwd)',dirname(output.file),':/in -w /in '),'chrishah/samtools:1.9 samtools faidx ',basename(output.file))
   
@@ -63,7 +63,7 @@ if(is.na(t.output)){
   chr<-c(paste("chr",1:22,sep=""),"chrX","chrY","chrM")
   
   # chr
-  # output.file <- '/home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa'
+  # output.file <- '/home/ayan/user/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa'
   # x <- dirname(output.file)
   # y <- basename(x)
   # z <- file.path(x,paste0(y,"ChrOnly.fa"))

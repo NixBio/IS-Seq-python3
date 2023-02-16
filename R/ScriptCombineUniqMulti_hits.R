@@ -14,17 +14,17 @@ packages <- c("GenomicRanges","ggplot2")
 
 zzz<-lapply(packages, function(xxx) suppressMessages(library(xxx, character.only = TRUE,quietly=TRUE,warn.conflicts = FALSE)))
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE_multihitData/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE_multihitData/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80/FragMLE_multihitData/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS80
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE_multihitData/Results.RData /Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95/FragMLE_multihitData/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS95
 
-#/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData ~/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0
+#$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData $HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0
 
-# Rscript $HOME/Aimin/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R ~/Aimin/ISseqOutput/vcn/Uniq/MOI30CLC9_IS0/Results.RData ~/Aimin/ISseqOutput/vcn/Uniq/MOI30CLC9_IS0/Results.RData ~/Aimin/ISseqOutput/vcn/UniqAndMulti/MOI30CLC9_IS0
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/ScriptCombineUniqMulti_hits.R ~/user/ISseqOutput/vcn/Uniq/MOI30CLC9_IS0/Results.RData ~/user/ISseqOutput/vcn/Uniq/MOI30CLC9_IS0/Results.RData ~/user/ISseqOutput/vcn/UniqAndMulti/MOI30CLC9_IS0
 
 if (length(args)==0) {
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
@@ -37,13 +37,13 @@ if (length(args)==0) {
 
 library(ggplot2)
 
-#multihit.95 <- readRDS('/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihitData.rds')
+#multihit.95 <- readRDS('$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihitData.rds')
 
-#saveRDS(multihit.95$unclusteredMultihits,'/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihit_allSites.rds')
+#saveRDS(multihit.95$unclusteredMultihits,'$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/multihit_allSites.rds')
 
-#input.95.multihit <- "/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData"
+#input.95.multihit <- "$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData"
 
-#load("/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData")
+#load("$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE_multihitData/Results.RData")
 
 GetIsRel <- function(input) {
   load(input)
@@ -271,15 +271,15 @@ GenerateBarPlot <- function(all.IS,outout.dir,title) {
   
 }
 
-#input_multi_hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE_multihitData/Results.RData' 
+#input_multi_hit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE_multihitData/Results.RData' 
 
 IS.multihit <- GetIsRel(input_multi_hit)
 IS.multihit.top.10 <- MakeDataSet(IS.multihit)
 GenerateBarPlot(IS.multihit.top.10,output.dir,'Multihit')
 
-#input.0.CL6 <- "/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE/Results.RData"
+#input.0.CL6 <- "$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/CL6/IS0/FragMLE/Results.RData"
 
-#input_uniq_hit <- '/Users/c-aimin.yan/OneDrive/Aimin/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE/Results.RData'
+#input_uniq_hit <- '$HOME/IS-Seq_output/Vcn_INSPIIRED/share/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa/MOI30CLB7/IS0/FragMLE/Results.RData'
 
 IS.uniq.hit <- GetIsRel(input_uniq_hit)
 IS.unique.top.10 <- MakeDataSet(IS.uniq.hit)
@@ -296,10 +296,10 @@ IS.uniq.multihit.4.one.IS.top.10 <- MakeDataSet(IS.uniq.multihit.4.one.IS )
 GenerateBarPlot(IS.uniq.multihit.4.one.IS.top.10,output.dir,"UniqAndMultihit4OneIS")
 
 
-#input_uniq_hit <- "/home/aimin.yan/Aimin/ISseqOutput/vcn/Uniq/MOI30CLB7_IS0/Results.RData"
+#input_uniq_hit <- "$HOME/IS-Seq/ISseqOutput/vcn/Uniq/MOI30CLB7_IS0/Results.RData"
 IS.uniq.hit <- GetIsRel(input_uniq_hit)
 
-#input_multi_hit <- "/home/aimin.yan/Aimin/ISseqOutput/MOI30CLB7_IS0/Results.RData"
+#input_multi_hit <- "$HOME/IS-Seq/ISseqOutput/MOI30CLB7_IS0/Results.RData"
 IS.multihit <- GetIsRel(input_multi_hit)
 
 IS.uniq.multihit.4.top.10.IS <- CombineUniqAndMultiBasedUniqTop10IS(IS.uniq.hit,IS.multihit)

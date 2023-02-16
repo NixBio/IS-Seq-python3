@@ -9,7 +9,7 @@
 # Then PYTHONPATH will be
 # PYTHONPATH='/home/ubuntu/miniconda2/lib/python2.7/site-packages'
 
-# Rscript ~/IS-Seq/R/demultiplex.R ~/intsitecaller/testCases/intSiteValidation/Data/Undetermined_S0_L001_I1_001.fastq.gz ~/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData ~/intsitecaller/testCases/intSiteValidation/Data/Undetermined_S0_L001_R1_001.fastq.gz ~/intsitecaller/testCases/intSiteValidation/Data/Undetermined_S0_L001_R2_001.fastq.gz ~/SHARE/Aimin/INSPIIRED_test_output /home/ubuntu/miniconda2/lib/python2.7/site-packages
+# Rscript ~/IS-Seq/R/demultiplex.R ~/intsitecaller/testCases/intSiteValidation/Data/Undetermined_S0_L001_I1_001.fastq.gz ~/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData ~/intsitecaller/testCases/intSiteValidation/Data/Undetermined_S0_L001_R1_001.fastq.gz ~/intsitecaller/testCases/intSiteValidation/Data/Undetermined_S0_L001_R2_001.fastq.gz ~/SHARE/user/INSPIIRED_test_output /home/ubuntu/miniconda2/lib/python2.7/site-packages
 
 initial.options <- commandArgs(trailingOnly = FALSE)
 print(initial.options)

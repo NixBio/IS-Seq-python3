@@ -23,7 +23,7 @@ if (length(args)==0) {
   IS.type=args[3]
 }
 
-# Example: Rscript /home/aimin.yan/Aimin/IS-Seq-python3/R/GetFragMLEBash.R /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa ~/Aimin/ISseqOutput/vcn/Uniq Uniq
+# Example: Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetFragMLEBash.R /local_scratch/ISseqOutput/vcn/IsaByINSPIIRED/fa ~/user/ISseqOutput/vcn/Uniq Uniq
 
 input.files <- list.files(input.dir,pattern = "*allSites.rds",recursive = TRUE,full.names=TRUE)
 
@@ -33,10 +33,10 @@ null <- lapply(input.files, function(u,IS.type){
   
   
   
-  #u <- '/home/aimin.yan/Aimin/ISseqOutput/MOI50CLH6_IS95_multihit_allSites.rds'
+  #u <- '$HOME/IS-Seq/ISseqOutput/MOI50CLH6_IS95_multihit_allSites.rds'
   
-  #input.dir <- '/home/aimin.yan/Aimin/ISseqOutput'
-  #output.dir <- '/home/aimin.yan/Aimin/ISseqOutput'
+  #input.dir <- '$HOME/IS-Seq/ISseqOutput'
+  #output.dir <- '$HOME/IS-Seq/ISseqOutput'
   
    cat(u,"\n")
   
@@ -51,7 +51,7 @@ null <- lapply(input.files, function(u,IS.type){
     y <- paste0(ss2,'_',ss1)
     
     cat(dirname(u),'\n')
-    cmd <- paste0('nohup docker run --rm -v ',paste0(dirname(u),':/in')," --rm -v ",paste0(output.dir,":/out "),"aiminy/isseq:2.1 Rscript /usr/src/IS-Seq-python3/R/GetFragMLE.R ", paste0("/in/",x),' ',y,' ',paste0("/out/",y)," > ~/Aimin/log/logGetMultiHitsFragMLE.txt 2>&1 &")
+    cmd <- paste0('nohup docker run --rm -v ',paste0(dirname(u),':/in')," --rm -v ",paste0(output.dir,":/out "),"aiminy/isseq:2.1 Rscript /usr/src/IS-Seq-python3/R/GetFragMLE.R ", paste0("/in/",x),' ',y,' ',paste0("/out/",y)," > ~/user/log/logGetMultiHitsFragMLE.txt 2>&1 &")
     cat(cmd,"\n")
     system(cmd)
     
@@ -62,7 +62,7 @@ null <- lapply(input.files, function(u,IS.type){
     ss2 <- unique(as.character(sapply(strsplit(x,"_"), `[`, 2)))
     y <- paste0(ss1,'_',ss2)
     
-    cmd <- paste0('nohup docker run --rm -v ',paste0(input.dir,':/in')," --rm -v ",paste0(output.dir,":/out "),"aiminy/isseq:2.1 Rscript /usr/src/IS-Seq-python3/R/GetFragMLE.R ", paste0("/in/",x),' ',y,' ',paste0("/out/",y)," > ~/Aimin/log/logGetMultiHitsFragMLE.txt 2>&1 &")
+    cmd <- paste0('nohup docker run --rm -v ',paste0(input.dir,':/in')," --rm -v ",paste0(output.dir,":/out "),"aiminy/isseq:2.1 Rscript /usr/src/IS-Seq-python3/R/GetFragMLE.R ", paste0("/in/",x),' ',y,' ',paste0("/out/",y)," > ~/user/log/logGetMultiHitsFragMLE.txt 2>&1 &")
     
     cat(cmd,"\n")
     system(cmd)

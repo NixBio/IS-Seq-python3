@@ -30,7 +30,7 @@ if (length(args)==0) {
 
 # Example:
 
-# Rscript /home/aimin.yan/Aimin/IS-Seq-python3/R/GetFragmentByLocationScript.R /home/ubuntu/DEMO/IS-Seq/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa 1000 IS1000 Simulation1000IS /local_scratch/ISseqOutput/Simulation fragment.fasta 200000000000
+# Rscript $HOME/IS-Seq/IS-Seq-python3/R/GetFragmentByLocationScript.R /home/ubuntu/DEMO/IS-Seq/utilsRefData/IsSeq/hg38/hg38ChrOnly.fa 1000 IS1000 Simulation1000IS /local_scratch/ISseqOutput/Simulation fragment.fasta 200000000000
 
 #host.fa <-'/local_scratch/ISseqOutput/utilsRefData/hg38/hg38ChrOnly.fa'
 
@@ -126,7 +126,7 @@ getFrag <- function(rfa.host,chr.index=19,fragment.strand='negative',fragment.st
   
 }
 
-#output.dir <- '~/SHARE/Aimin/Simulation100IS'
+#output.dir <- '~/SHARE/user/Simulation100IS'
 #output.fasta <- 'fragment.fasta'
 
 if(!file.exists(file.path(output.dir,output.fasta))){
@@ -189,14 +189,14 @@ output.sam <- file.path(output.dir,output.sam)
 
 }
 
-#Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimulation/CL6 POOL-ISA-AVRO-6-Preclin
+#Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimulation/CL6 POOL-ISA-AVRO-6-Preclin
 
 
 
-#/home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/Aimin/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+#/home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/user/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
 
-#bwa mem -t 8 /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/Aimin/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+#bwa mem -t 8 /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/hg38ChrOnly.fa /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag1.fq /home/ubuntu/SHARE/user/INSPIIRED_test_output/simulationUp_3000_49461738_Frag2.fq > /home/ubuntu/SHARE/user/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
 
 

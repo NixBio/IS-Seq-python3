@@ -17,7 +17,7 @@ option_list = list(
               help="output file", metavar="character")
 );
 
-example.use <- "Example: Rscript $HOME/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -m https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz -o /home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
+example.use <- "Example: Rscript $HOME/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -m https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz -o /home/ayan/user/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa\n"
 
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);
@@ -65,7 +65,7 @@ if(is.na(t.output)){
   chr<-c(paste("chr",1:22,sep=""),"chrX","chrY","chrM")
   
   # chr
-  # output.file <- '/home/ayan/Aimin/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa'
+  # output.file <- '/home/ayan/user/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa'
   # x <- dirname(output.file)
   # y <- basename(x)
   # z <- file.path(x,paste0(y,"ChrOnly.fa"))

@@ -19,28 +19,28 @@ if (length(args)==0) {
 }
 
 # Example:
-# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimulation/CL6 POOL-ISA-AVRO-6-Preclin
+# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/ISseqOutput/Dec282021/CutAdapt/align/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimulation/CL6 POOL-ISA-AVRO-6-Preclin
 
-# grep 49461738 /home/ubuntu/SHARE/Aimin/TestSimulation/CL6/POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt | wc -l
+# grep 49461738 /home/ubuntu/SHARE/user/TestSimulation/CL6/POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt | wc -l
 
 
-# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/Aimin/TestSimulation/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimulation POOL-ISA-AVRO-6-Preclin
+# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/user/TestSimulation/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimulation POOL-ISA-AVRO-6-Preclin
 
-# grep 49461738  /home/ubuntu/SHARE/Aimin/TestSimulation/POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt | wc -l
+# grep 49461738  /home/ubuntu/SHARE/user/TestSimulation/POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt | wc -l
 
-# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/Aimin/TestSimulation/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimu4 POOL-ISA-AVRO-6-Preclin
+# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/user/TestSimulation/R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimu4 POOL-ISA-AVRO-6-Preclin
 
-#Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/Aimin/TestSimulation/FragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimu5 POOL-ISA-AVRO-6-Preclin
+#Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/user/TestSimulation/FragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimu5 POOL-ISA-AVRO-6-Preclin
 
-# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/Aimin/TestSimulation/FragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimu7 POOL-ISA-AVRO-6-Preclin
+# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/user/TestSimulation/FragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimu7 POOL-ISA-AVRO-6-Preclin
 
-# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/Aimin/TestSimulation/FragRevR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimuRev POOL-ISA-AVRO-6-Preclin
+# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/user/TestSimulation/FragRevR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimuRev POOL-ISA-AVRO-6-Preclin
 
-#/home/ubuntu/SHARE/Aimin/TestSimulation/UpFragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
+#/home/ubuntu/SHARE/user/TestSimulation/UpFragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam
 
-# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/Aimin/TestSimulation/UpFragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimuUpFrag POOL-ISA-AVRO-6-Preclin
+# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/user/TestSimulation/UpFragR1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimuUpFrag POOL-ISA-AVRO-6-Preclin
 
-# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/Aimin/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/Aimin/TestSimuUpFrag Up-Frag-POOL-ISA-AVRO-6-Preclin
+# Rscript ~/ispipe/R/sam2filterNo.R /home/ubuntu/SHARE/user/TestSimulation/UpFrag49461738R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem.sam /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/utilsRefData/hg38/repeatMaskerhg38BED 0 /home/ubuntu/SHARE/user/TestSimuUpFrag Up-Frag-POOL-ISA-AVRO-6-Preclin
 
 
 
