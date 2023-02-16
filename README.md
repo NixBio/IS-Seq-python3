@@ -6,8 +6,11 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-IS-Seq is a pipeline for identifying insert sites on host genome when
-using viral vectors in gene therapy.
+IS-Seq is a pipeline for identifying integration sites on host genome
+when using viral vectors in gene therapy using sequencing data. The
+detailed information about this pipeline, user can read this
+[paper](https://doi.org/10.1101/2023.02.06.527381), Particular, Figure1
+and Figure2 of this paper describe the steps of this pipeline.
 
 ## Introduction
 
