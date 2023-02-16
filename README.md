@@ -190,3 +190,13 @@ nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq
 
 nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.4 python /usr/src/IS-Seq-python3/ISpipelineFv3_test.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a fragment -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_Frag.txt 2>&1 &
 ```
+
+### The outputs of IS-Seq pipeline:
+
+
+    IS-Seq pipeline outputs integration profiles in filterNO and filter60 files by 3 methods(ReadBased, UmiBased and FragmentBased), the format of these output files are same. Each row indicats each integration site and the 1st to the 4th coulumn are the coordinates of integration site(chromosome,position and strand), the 5th column is the closed gene to the integration site. The columns after the 5th column is abundance qutification of samples. 
+
+    The following is an example output from a simulated data set including 1 integration site only. 
+
+    chr     pos     chrInt  strand  V7      CL.6_POS.CTRL.1_1
+    chr19   49461738        19      -       ALDH16A1        2924
