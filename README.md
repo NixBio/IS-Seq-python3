@@ -9,8 +9,8 @@
 IS-Seq is a pipeline for identifying integration sites on host genome
 when using viral vectors in gene therapy. The detailed information about
 this pipeline, user can read this
-[paper](https://doi.org/10.1101/2023.02.06.527381), Particular, Figure1
-and Figure2 of this paper describe the steps of this pipeline.
+[paper](https://doi.org/10.1101/2023.02.06.527381), Particularly,
+Figure1 and Figure2 of this paper describe the steps of this pipeline.
 
 ## Introduction
 
@@ -194,9 +194,11 @@ nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq
 ### The outputs of IS-Seq pipeline:
 
 
-    IS-Seq pipeline outputs integration profiles in filterNO and filter60 files by 3 methods(ReadBased, UmiBased and FragmentBased), the format of these output files are same. Each row indicats each integration site and the 1st to the 4th coulumn are the coordinates of integration site(chromosome,position and strand), the 5th column is the closed gene to the integration site. The columns after the 5th column is abundance qutification of samples. 
+    IS-Seq pipeline outputs integration profiles in filterNO and filter60 files by 3 methods(ReadBased, UmiBased and FragmentBased), the format of these output files are same. Each row indicats one integration site and the 1st to the 4th coulumn of each row are the coordinates of integration site(chromosome,position and strand), the 5th column of each row is the closed gene to the integration site. The columns after the 5th column is abundance of the integration site for the corresponding samples. 
 
-    The following is an example output from a simulated data set including 1 integration site only. 
+    The following is an example output from a simulated data set supplied with this repository. 
+
+    Note: This simluated data includes 1 integration site for one sample only   
 
     chr     pos     chrInt  strand  V7      CL.6_POS.CTRL.1_1
     chr19   49461738        19      -       ALDH16A1        2924
