@@ -80,7 +80,8 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
 
         -   2: PT-DONOR-MOUSE(required)  
 
-        -   3: PT-Transduction-ID(required)  
+        -   3: PT-Transduction-ID(required, used for collision
+            detection)
 
         -   4 Source(required)  
 
@@ -93,17 +94,17 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
 
         -   8: Fusion-Primer-LTR.-ID note: you shoud use give this like
             “FB-P5-Rd1-LTR.1”,FB-P5-Rd1-LTR-1 will give an
-            error(required)  
+            error(required, used for R1 demultiplexing)  
 
         -   9: Fusion-Primer-LC.-ID note: format requirement for LC
             barcode is like format requirement as LTR barcode(required)
 
         -   10: Library, this is same as sample name in comand line
-            arguments(required)  
+            arguments(required, used for R2 demultiplexing)  
 
         -   11: Sequencing-date-(mm-dd-yy)(required)  
 
-        -   12: Organism(required)  
+        -   12: Organism(required, used for alignment)  
 
         -   13: VectorType(required)  
 
@@ -111,7 +112,7 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
 
         -   15: Linker-Cassette(required)
 
-        -   16: Vector(required)
+        -   16: Vector(required, used for selecting vector)
 
         -   17: Other-Infos (optional)  
 

@@ -25,6 +25,7 @@ def usage():
     print('Example:')
     print(('python '+sys.argv[0]+' -1 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o path/to/ISseqOutput -t 01212021 -r $HOME/IS-Seq/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u $HOME/IS-Seq/IS-Seq-python3/utilsRefData/IsSeq -p $HOME/IS-Seq/IS-Seq-python3/utils -a read -c nothing -q 30'))
 
+# helper funciton
 def unique(seq):
     # order preserving
     noDupes = []
@@ -63,6 +64,7 @@ def getInputDataFromSampleResearch(sampleResearch,sampleName):
 
     return dataSOfSampleResearch
 
+# Change file name using sample information in the association file 
 def reNameFile(DiversityOut,outputDir,inputPattern,sampleResearch):
 
     ####### Rename files ###################
@@ -811,6 +813,7 @@ def main():
             dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
             annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
+# Get alignment with at least 60 bp match after LTR 
 def filter60(outputDir):
     ###### filter alignment 60 bp ###########
     for filename in os.listdir(outputDir):
@@ -827,6 +830,7 @@ def filter60(outputDir):
                         outfile.write('\t'.join(l))
                         outfile.write('\n')
 
+# call IS
 def getISsite(utilsDir,outputDir,NT):
     ###### IS ###########
     threads = []
@@ -848,6 +852,7 @@ def getISsite(utilsDir,outputDir,NT):
         for x in threads[i:i+NT]:
             x.join()
 
+# Calculate Fragment length
 def getFragmentLength(utilsDir,sampleName,bamSortedOut,outputDir):
 
     for filename in os.listdir(bamSortedOut):
@@ -856,6 +861,7 @@ def getFragmentLength(utilsDir,sampleName,bamSortedOut,outputDir):
             mycmd='''python '''+os.path.join(utilsDir,'''try_pysam_with_fragment_length.py ''')+inputFile+ ''' '''+ sampleName +''' '''+outputDir
             subprocess.call(mycmd,shell=True)
 
+# Get IS abundance by number of unique fragment length
 def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisType):
 
     myblast=open(finalParseFile)
@@ -1105,11 +1111,13 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
     my_legend.close()
     my_report.close()
 
+# Call R script
 def callR(rDir,rScript,input,output):
 
     mycmd = '''Rscript ''' +os.path.join(rDir,rScript)+''' -i '''+input+''' -o '''+output
     subprocess.call(mycmd,shell=True)
 
+# Identify IS that could be located in vector region
 def callGetMissIS(rDir,rScript,refFasta,IdentityThreshold,input,output):
 
     check = compareFileTime(input,output)
@@ -1119,6 +1127,7 @@ def callGetMissIS(rDir,rScript,refFasta,IdentityThreshold,input,output):
         print(mycmd)
         subprocess.call(mycmd,shell=True)
 
+# Get UMI from R2
 def getUmi(file,outputDir):
     goodID=[]
 
@@ -1143,6 +1152,7 @@ def getUmi(file,outputDir):
         f.close()
         umi.close()
 
+# Get readname and UMI matching
 def getReadNameUmi(UmiFileDir):
 
     mydictUmi={}
@@ -1163,6 +1173,7 @@ def getReadNameUmi(UmiFileDir):
 
     return mydictUmi
 
+# Compare timestamp of input file  and output file for one file
 def compareFileTime(inputFile,outputFile):
 
     if not os.path.exists(outputFile):
@@ -1173,6 +1184,7 @@ def compareFileTime(inputFile,outputFile):
         check = True if InputTime > OutTime else False
     return check
 
+# Compare timestamp of input file  and output file for mutilple files
 def compareFilesTime(inputFiles,outputFiles):
 
     InputTime  = []
@@ -1196,6 +1208,7 @@ def compareFilesTime(inputFiles,outputFiles):
 
     return check
 
+# Perform FASTQ file spliting, trim, filter reads by LTR and LC matching
 def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lcminMatch,lcFaSeqLength,check,NT):
 
     #### UNZIP START ####################
@@ -1566,6 +1579,7 @@ def fq2MatchBlastltrLc(r1,r2,dwd,dwdt,utilsRef,LTRFileFa,LCFileFa,ltrminMatch,lc
 
                         print ("Select subseq matching LTR and LC (completo)")
 
+# Demultiplex R1 by LTR barcode, R2 by LC barcode
 def demultiplexingWithBarcode(VectorType,check,dwdt,utilsRef):
     if check:
         if (VectorType=="SIN-LV"):
@@ -1607,6 +1621,7 @@ def demultiplexingWithBarcode(VectorType,check,dwdt,utilsRef):
         t2.join()
         print ("DEMULTIPLEXING\n")
 
+# Trim LTR from R1, LC from R2 by cutadapt
 def trimwithCutAdapt(dwdt,utilsRef,LTRFileFa,LCFileFa):
 
     # #### trim LTR and LC withcutadapt ####################
@@ -1641,6 +1656,7 @@ def trimwithCutAdapt(dwdt,utilsRef,LTRFileFa,LCFileFa):
             t1.start()
             t1.join()
 
+# Trim LTR from R1, LC from R2 by another way(we are not this way anymore)
 def trimwithMCF(dwdt):
 
     ##### trim LTR and LC withMCF ####################
@@ -1773,6 +1789,7 @@ def trimwithMCF(dwdt):
         temp = os.path.join(dwdt,"R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGtrimwithMCF")
         mergeMCFandFLEXBAR(temp)
 
+# Process UMI in R2
 def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomBarcodRemovalOut,NT):
 
     ########Random Barcode removal start ! ##############
@@ -2037,6 +2054,7 @@ def RandomBarcodRemoval(inputDir,inputPattern,outputDir,seqFile,seqFile1,RandomB
         for x in threads[i:i+NT]:
             x.join()
 
+# Find reads with same UMI
 def clusterUmi(filename):
 
     inputFile = filename
@@ -2053,6 +2071,7 @@ def clusterUmi(filename):
         print(mycmd)
         subprocess.call(mycmd,shell=True)
 
+# Extract UMI
 def extractUmiOnly(filename,outDir):
 
     ########extract UMI from reads ! ####
@@ -2071,6 +2090,7 @@ def extractUmiOnly(filename,outDir):
         print(mycmd)
         subprocess.call(mycmd,shell=True)
 
+# Use processed FASTQ file to align to reference genome to get SAM, SM-BAM, BAM filtering, call IS, collision detection, annotation
 def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,repRegQual,PreviousCollision):
 
     ### getCollisionTable function #########
@@ -2812,6 +2832,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
     dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
     annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
+# Process IS that are located in vector region
 def getMissIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask):
 
     ####### Rename files ###################
@@ -2975,6 +2996,7 @@ def getMissIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,
         t1.start()
         t1.join()
 
+# Get IS profile for IS that are located in vector region
 def getVectorIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,VectorMask):
 
     ####### Rename files ###################
@@ -3137,6 +3159,7 @@ def getVectorIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,sampleNa
         t1.start()
         t1.join()
 
+# Use IS files from path/to/CutAdapt/ISout/ as input, merge IS using 7bp role for each sample
 def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisType):
 
     myblast=open(finalParseFile)
@@ -3395,6 +3418,8 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
     my_report.close()
     #
 
+
+# Check how many reads are aligned to vector sequence
 def align2vector(seqPlat,R1Out,R2Out,outputDir,sampleResearch,dirGenome,sampleName):
 
     ### getCollisionTable function #########
