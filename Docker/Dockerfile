@@ -1,12 +1,4 @@
-# docker build --network 'host' --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:1.8 .
-# to RUN
-# docker run -it aiminy/isseq:2.1 bash
-
-# docker build --no-cache -f $HOME/Aimin/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:2.1 .
-
-# docker run --mount type=bind,source=/local_scratch,target=/home -it aiminy/isseq:2.1 bash
-
-# docker system prune --all --force --volumes
+# docker build --no-cache -f $HOME/IS-Seq/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:2.5 .
 
 From ubuntu:focal
 
@@ -14,13 +6,6 @@ MAINTAINER Aimin Yan <aimin.at.work@gmail.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-#RUN apt-get update
-#RUN apt-get install gnupg
-
-#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6494C6D6997C215E
-#RUN apt-get update && apt-get install -y gnupg2 gnupg gnupg1
-
-#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6494C6D6997C215E
 
 RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y lsb-release build-essential wget curl git default-jdk ant && \
@@ -28,19 +13,6 @@ RUN apt-get update && apt-get -y upgrade && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#RUN apt-get update && apt-get -y upgrade && \
-#        apt-get install -y lsb-release build-essential wget curl git default-jdk ant \
-#                libtbb2 libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libcurl3-dev && \
-#        apt-get clean && apt-get purge && \
-#        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-#RUN apt-get update && \
-#    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-ggpubr r-cran-plyr r-cran-optparse r-cran-reshape
-
-#RUN apt-get update && \
-#    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
-
-#r-cran-rtracklayer
 
 WORKDIR /
 
@@ -111,16 +83,11 @@ RUN apt update -qq && \
     add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" && \
     apt install -y --no-install-recommends r-base
 
-#RUN apt-get update && \
-#    apt-get install -y -qq r-cran-stringr r-cran-ggplot2 r-cran-plyr r-cran-optparse r-cran-reshape
-
 RUN Rscript -e "install.packages(c('reshape'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e "install.packages(c('reshape2'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e "install.packages(c('stringr','ggplot2','plyr','optparse','curl','IRanges','data.table','igraph','tidysq'),lib='/usr/lib/R/site-library')"
-
-#RUN Rscript -e 'BiocManager::install(ask = F)' && R -e 'BiocManager::install(c("rtracklayer"))
 
 RUN apt-get update && \
     apt-get install libxml2-dev
@@ -134,7 +101,3 @@ RUN Rscript -e "install.packages(c('sonicLength'),lib='/usr/lib/R/site-library')
 RUN Rscript -e "install.packages(c('tidyverse'),lib='/usr/lib/R/site-library')"
 
 RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager",lib="/usr/lib/R/site-library")' && R -e 'BiocManager::install(c("rtracklayer","GenomicRanges","BSgenome.Hsapiens.UCSC.hg38","ShortRead"),lib="/usr/lib/R/site-library")'
-
-RUN mkdir /local_scratch
-#CMD ["python","/usr/src/IS-Seq-python3/ISpipelineFv3_test.py"]
-
