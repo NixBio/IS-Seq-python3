@@ -1656,7 +1656,7 @@ def trimwithCutAdapt(dwdt,utilsRef,LTRFileFa,LCFileFa):
             t1.start()
             t1.join()
 
-# Trim LTR from R1, LC from R2 by another way(we are not this way anymore)
+# Trim LTR from R1, LC from R2 by another way(we already retire this way)
 def trimwithMCF(dwdt):
 
     ##### trim LTR and LC withMCF ####################

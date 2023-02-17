@@ -12,6 +12,12 @@ this pipeline, user can read this
 [paper](https://doi.org/10.1101/2023.02.06.527381), Particularly,
 Figure1 and Figure2 of this paper describe the steps of this pipeline.
 
+Main structure of IS-Seq pipeline is based on processing and excluding a
+mosaic of oligos primer, adapters, sample barcodes, viral Long Terminal
+Repeat (LTR) sequences in order to release the host genomic DNA which
+will then be aligned to the host reference genome for the retrospective
+identification of the insertion sites.
+
 ## Introduction
 
 The IS-Seq pipeline is maintained by Docker, the purpose of using Docker
@@ -59,7 +65,7 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
 
     -   -2 R2 read file for pair-ended sequencing files
 
-    -   -s sample name, e.g. “POOL-UCL-CPL-Re”
+    -   -s sample name, e.g. “POOL-ISA-AVRO-6-Preclin”
 
     -   -o The folder name of your output
 
@@ -76,21 +82,22 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
         style="width:100.0%" alt="SampleInfor" />. The following is the
         detailed information of each column in this format:
 
-        -   1: LAM-PCR-ID(required)  
+        -   1: LAM-PCR-ID(required,used for sample information)  
 
-        -   2: PT-DONOR-MOUSE(required)  
+        -   2: PT-DONOR-MOUSE(required,used for sample information)  
 
         -   3: PT-Transduction-ID(required, used for collision
             detection)
 
-        -   4 Source(required)  
+        -   4 Source(required, used for sample information)  
 
-        -   5: Sample-Type(required)  
+        -   5: Sample-Type(required,used for sample information)  
 
-        -   6: Research-(-R-)-Clinic-(-C-)(required)  
+        -   6: Research-(-R-)-Clinic-(-C-)(required,used for sample
+            information)  
 
         -   7: TimePoint-R(d)-C(m) use month as measurement
-            unit(required)  
+            unit(required,used for sample information)  
 
         -   8: Fusion-Primer-LTR.-ID note: you shoud use give this like
             “FB-P5-Rd1-LTR.1”,FB-P5-Rd1-LTR-1 will give an
@@ -102,15 +109,16 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
         -   10: Library, this is same as sample name in comand line
             arguments(required, used for R2 demultiplexing)  
 
-        -   11: Sequencing-date-(mm-dd-yy)(required)  
+        -   11: Sequencing-date-(mm-dd-yy)(required,used for sample
+            information)  
 
         -   12: Organism(required, used for alignment)  
 
-        -   13: VectorType(required)  
+        -   13: VectorType(required,used for selecting vector type)  
 
-        -   14: VectorMask(required)  
+        -   14: VectorMask(required,but could be empty bed file)  
 
-        -   15: Linker-Cassette(required)
+        -   15: Linker-Cassette(required,used for R2 LC processing)
 
         -   16: Vector(required, used for selecting vector)
 
@@ -124,8 +132,7 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
 
     -   -u The folder you put reference data
 
-    -   -p The folder for auxiliary scripts you need in
-        IS-SeqlineFv3_test.py
+    -   -p The folder for auxiliary scripts you need in IS-Seq.py
 
     -   -a analysis type,
         e.g. “read”,“missingIS”,“VectorCount”,“align2Vector”,“umi” or
@@ -199,7 +206,7 @@ nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq
 
     The following is an example output from a simulated data set supplied with this repository. 
 
-    Note: This simluated data includes 1 integration site for one sample only   
+    Note: This simluated data set includes 1 integration site for one sample only   
 
     chr     pos     chrInt  strand  V7      CL.6_POS.CTRL.1_1
     chr19   49461738        19      -       ALDH16A1        2924
