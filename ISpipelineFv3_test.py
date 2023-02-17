@@ -23,7 +23,7 @@ tmpFolder = ""
 def usage():
     print(('Usage: python '+sys.argv[0]+' -1 <r1.fq.gz> -2 <r2.fq.gz> -s <sampleName> -o <outputFolder> -t <suffix> -r <researchFile> -u <referenceDataDir> -p <utilsProgramDir> -a <analysisType> -c <previousRun> -q <repRegQual>'))
     print('Example:')
-    print(('python '+sys.argv[0]+' -1 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R1_001.fastq.gz -2 /home/ayan/Aimin/ispipe/data/PL0431_S1_L001_R2_001.fastq.gz -s POOL-UCL-CPL-Re -o /home/ayan/Aimin/UploadToEgnyte/Aimin/ISseqOutput -t Mar04 -r /home/ayan/Aimin/ispipe/sample_research/Association_pool_CPL_Nov19Fix.csv -u /home/ayan/Aimin/ispipe/utilsRefData -p /home/ayan/Aimin/ispipe/utils -a read -c nothing -q 30'))
+    print(('python '+sys.argv[0]+' -1 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o path/to/ISseqOutput -t 01212021 -r $HOME/IS-Seq/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u $HOME/IS-Seq/IS-Seq-python3/utilsRefData/IsSeq -p $HOME/IS-Seq/IS-Seq-python3/utils -a read -c nothing -q 30'))
 
 def unique(seq):
     # order preserving
