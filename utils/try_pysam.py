@@ -1,14 +1,14 @@
+# This script uses pysam to parse bam alignment and select only those reads showing an exact match in the 3 nt following the end of the LTR, 
+# which ensures the insertion site is properly detected. 
+# This filter only applies to the read that is first in pair (R1) because these where carring the LTR before alignment.
+
+# input: R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem_allFilter_rehead_exact3nt_nonSupplementary.bam
+# ouput: path/to/CutAdapt/POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt(Note: ReadBased method doesn't include fragment length)
+
 import pysam
 import sys
 import re
 import os
-
-#This script uses pysam to parse bam alignment and select only those reads showing an exact match in the 3 nt following the end of the LTR, which ensures the insertion site is properly detected. This filter only applies to the read that is first in pair (R1) because these where carring the LTR before alignment.
-#R1 _ R2 _ Barcode _ FB-P5-Rd1-LTR . 9 _ FB-P7-Rd2-LC . 10 _ aligned _ mem _ allFilter _ rehead _ exact3nt _ nonSupplementary.bam
-#R1 R2 Barcode LTR 9 LC 9 aligned mem allFilter rehead_exact3nt_nonSupplementary.bam.
-
-#R1 R2 Barcode FB-P5-Rd1-LTR.1 FB-P7-Rd2-LC.1 aligned_mem_allFilter_rehead_exact3nt_nonSupplementary.bam
-
 
 samfile = pysam.AlignmentFile(sys.argv[1], 'rb')
 
