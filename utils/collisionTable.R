@@ -190,5 +190,4 @@ if(length(unique(allsoB$trasd))==1){
     write.table(allsoUniqueBed,file = file.path(out,paste(trasdSpec$library[1],trasdSpec$ptDonor[1],trasdSpec$trasd[1],suffixCollFile,"CollisionClean_BedFormat",sep="_")),sep = "\t",row.names = F,quote = F,col.names = F)
     
   }
-  
 }

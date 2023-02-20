@@ -17,7 +17,7 @@ option_list = list(
               help="output file", metavar="character")
 );
 
-example.use <- "Example: Rscript $HOME/Aimin/ispipe/R/getMissIS.R -i /home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/BAMSorted/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask.bam -r ~/Aimin/ispipe/utilsRefData/mm10.ebwt/mm10ChrOnly.fa -q 95 -o /home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask_missingIS.txt\n"
+example.use <- "Example: Rscript $HOME/IS-Seq/IS-Seq-python3/utils/getMissIS.R -i path/to/CutAdapt/BAMSorted/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask.bam -r path/to/utilsRefData/mm10.ebwt/mm10ChrOnly.fa -q 95 -o path/to/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask_missingIS.txt\n"
 
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);
@@ -65,17 +65,7 @@ system(cmd3)
 
 }
 
-#cols <- pslCols()
-
 cols <- c("matches","misMatches","repMatches","nCount","qNumInsert","qBaseInsert","tNumInsert","tBaseInsert","strand" ,"qName","qSize","qStart","qEnd","tName","tSize","tStart","tEnd","blockCount","blockSizes","qStarts","tStarts")
-
-
-#output_all_start_0_1_psl <- '~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask_le_30_start_0_1.psl'
-
-#output_all_start_0_1_psl <- '~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.4_aligned_mem_sort_inMask_le_30_start_0_1.psl'
-
-#output_all_start_0_1_psl <- '~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.3_aligned_mem_sort_inMask_le_30_start_0_1.psl'
- 
 
 s <- file.info(output_all_start_0_1_psl)$size
 
@@ -247,17 +237,5 @@ res <- res[order(res$seqnames,res$start),]
 results  <- data.frame(chr=res$seqnames,start=res$start,chr.index=as.integer(res$seqnames),strand=res$strand,count=res$count) 
 }
 
-#x <- paste0("POOL-ISA-AVRO-TEST2_",substr(basename(output_all_start_0_1_psl),15,nchar(basename(output_all_start_0_1_psl))-44),"_final_parse_filterNo_grouped_IS.txt")
-
-#output.file <- file.path('~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS',x)
- 
 write.table(results,file=output.file ,sep = "\t",row.names = F,quote = F,col.names = F)
 }
-
-#t1 <- file.info('~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/BAMSorted/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask.bam')$mtime
-
-
-#t2 <- file.info('~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.3_aligned_mem_sort_inMask_le_30_start_0_1.psl')$mtime
-
-
-

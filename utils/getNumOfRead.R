@@ -12,7 +12,7 @@ option_list = list(
               help="output file", metavar="character")
 );
 
-example.use <- "Example: Rscript $HOME/Aimin/ispipe/utils/getNumOfRead.R -i /home/ayan/Aimin/Seagate/ISseqOutput/Sept2/CutAdapt/align -p sam -o /home/ayan/Aimin/Seagate/ISseqOutput/Sept2/TotalReads/totalReads.rds\n"
+example.use <- "Example: Rscript $HOME/IS-Seq/IS-Seq-python3/utils/getNumOfRead.R -i path/to/CutAdapt/align -p sam -o path/to/TotalReads/totalReads.rds\n"
 
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);
@@ -26,14 +26,8 @@ input.file <- opt$input_file
 output.file <- opt$out_file
 input.pattern <- opt$input_pattern
 
-#input.file <- '/home/ayan/Aimin/Seagate/ISseqOutput/Sept2/CutAdapt/align'
-#output.file <- '/home/ayan/Aimin/Seagate/ISseqOutput/Sept2/TotalReads/totalReads.rds'
-
 getReadCount <- function(input.file,input.pattern,output.file) {
 
-  #input.file <- '/home/ayan/Aimin/Seagate/ISseqOutput/Sept2/CutAdapt/missingIS' 
-  #input.pattern <-'*mem_sort_inMask_qual.bam'
-  
   cat(input.file,'\n')
   cat(input.pattern,'\n')
 
@@ -73,18 +67,11 @@ getReadCount <- function(input.file,input.pattern,output.file) {
   
   total.read.data <- do.call(rbind,T)
   
-  # output.dir <- dirname(output.file)
-  # if(!dir.exists(output.dir)){dir.create(output.dir,recursive = TRUE)}
-  # saveRDS(total.read.data,file = output.file)
-  
   total.read.data
   
 }
 
 getMapped <- function(input.file,input.pattern,output.file) {
-  
-  #input.file <- '/home/ayan/Aimin/Seagate/ISseqOutput/Sept2/CutAdapt/missingIS' 
-  #input.pattern <-'*mem_sort_inMask_qual.bam'
   
   cat(input.file,'\n')
   cat(input.pattern,'\n')
@@ -125,10 +112,6 @@ getMapped <- function(input.file,input.pattern,output.file) {
   
   total.read.data <- do.call(rbind,T)
   
-  # output.dir <- dirname(output.file)
-  # if(!dir.exists(output.dir)){dir.create(output.dir,recursive = TRUE)}
-  # saveRDS(total.read.data,file = output.file)
-  
   total.read.data
   
 }
@@ -150,51 +133,3 @@ output.dir <- dirname(output.file)
 if(!dir.exists(output.dir)){dir.create(output.dir,recursive = TRUE)}
 saveRDS(T.M.1,file = output.file)
 
-
-# association.file <- "/media/aws_share/D32_Platform_Development/test/ISAtest/MiSeqTest/Association_pool_ISA_AVRO_TEST4_add_hg19.csv"
-# 
-# y.lab <- "Number of total reads"
-# angle <- 90
-# size <- 10
-# plot.title <- "Number of total reads"
-# 
-# getTotalReadsPlot <- function(total.read.data,association.file,y.lab,angle,size,plot.title) {
-# 
-#   data.association <- read.csv(association.file)
-#   
-#   index <-paste0(data.association$Fusion.Primer.LTR..ID,'_',data.association$Fusion.Primer.LC..ID)
-#   sample.name <- unique(paste0(data.association$Sample.Type,'_',data.association$TimePoint.R.d..C.m.))
-#   
-#   z <- data.frame(sampleName=sample.name)
-#   row.names(z) <- index
-#   
-#   res <- merge(total.read.data,z,by=0)
-#   
-#   df <- data.frame(Time=res$sampleName,IScount=res$V1)
-#   
-#   Category <- as.character(df$Time)
-#   color.codes <- rainbow(length(Category))
-#   
-#   df$Time <- factor(df$Time,levels = Category)
-#   
-#   sp <- ggplot(df, aes(x = Time, y = IScount, fill = Time)) +
-#     geom_bar(stat="identity",position = "dodge") + geom_text(aes(label=IScount)) + theme(plot.title=element_text(hjust=0.5)) +
-#     ylab(y.lab)+xlab("trt")+ggtitle(plot.title) + theme_bw() +theme(axis.text.x = element_text(angle = angle, hjust = 1,size = size),legend.position = "bottom", legend.justification = 0)
-#   
-# }
-
-# test <- lapply(red.hits.R2$revmap, function(x){as(x,"SimpleList")})
-# 
-# test <- as(red.hits.R2$revmap,"SimpleList")
-# mcols(red.hits.R2) <- test
-# colnames(mcols(red.hits.R2)) <- "revmap"
-# 
-# R2.loci <- red.hits.R2[subjectHits(pairs)]
-# 
-# 
-# R2.loci.temp <- lapply(R2.loci$revmap, function(x){as.integer(hits.R2$qName[x])})
-# 
-# 
-# loci.key$R2.qNames <- IRanges::IntegerList(lapply(R2.loci$revmap, function(x){
-#   as.integer(hits.R2$qName[x])
-# }),compress = FALSE)
