@@ -114,13 +114,16 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
 
         -   12: Organism(required, used for alignment)  
 
-        -   13: VectorType(required,used for selecting vector type)  
+        -   13: VectorType(required,used for selecting vector
+            type,currently we have ‘SIN-LV’ or ‘RV’ 2 options)  
 
         -   14: VectorMask(required,but could be empty bed file)  
 
         -   15: Linker-Cassette(required,used for R2 LC processing)
 
-        -   16: Vector(required, used for selecting vector)
+        -   16: Vector(required, used for selecting vector,currently we
+            have ‘MND-GFP’,‘GlucoCco’,‘IUPF-CTNS’ and ‘pCDY-EFS-hGLAco’
+            4 options)
 
         -   17: Other-Infos (optional)  
 
@@ -182,21 +185,21 @@ nohup docker run --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/out aiminy/i
 
 ``` bash
 
-nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.5 python /usr/src/IS-Seq-python3/IS-Seq.py-1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a read -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_read.txt 2>&1 &
+nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.5 python /usr/src/IS-Seq-python3/IS-Seq.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a read -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_read.txt 2>&1 &
 ```
 
 ### To get UmiBased results, you need to run the following command:
 
 ``` bash
 
-nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.5 python /usr/src/IS-Seq-python3/IS-Seq.py-1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a umi -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_umi.txt 2>&1 &
+nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.5 python /usr/src/IS-Seq-python3/IS-Seq.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a umi -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_umi.txt 2>&1 &
 ```
 
 ### To get FragmentBased results, you need to run the following command:
 
 ``` bash
 
-nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.5 python /usr/src/IS-Seq-python3/IS-Seq.py-1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a fragment -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_Frag.txt 2>&1 &
+nohup docker run --rm -v path/to/IS-Seq-python3/data:/in --rm -v  path/to/IS-Seq-python3/sample_research:/in1 --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/in2 --rm -v path/to/ISseqOutput:/out aiminy/isseq:2.5 python /usr/src/IS-Seq-python3/IS-Seq.py -1 /in/simulationUp_R1.fq.gz -2 /in/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o /out -t DEMO -r /in1/20210121_AssociationFIle_POOL6_Preclinical.csv -u /in2 -p /usr/src/IS-Seq-python3/utils -a fragment -c nothing -q 30 > path/to/ISseqOutput/log/logDEMO_Frag.txt 2>&1 &
 ```
 
 ### The outputs of IS-Seq pipeline:
