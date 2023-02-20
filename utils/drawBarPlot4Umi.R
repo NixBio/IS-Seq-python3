@@ -8,23 +8,6 @@ other.name <- file.path(script.basename, "ipak.R")
 print(paste("Sourcing",other.name,"from",script.name))
 source(other.name)
 
-# CRAN PACKAGES
-#cranpackages <- c("curl","stringr","ggplot2","ggpubr","cowplot","usethis", "covr", "httr", "roxygen2", "rversions","devtools","plyr","optparse")
-#ipak(cranpackages, repository='CRAN')
-
-# # BIOCONDUCTOR
-# #biocpackages <- c("AnnotationDbi", "baySeq", "Biobase", "BiocGenerics", 
-#                   "BiocParallel", "DEDS", "DESeq2", "EBSeq", "edgeR", "IHW", "iCOBRA",
-#                   "limma", "Linnorm", "MAST", "monocle", "NOISeq", "qvalue", "ROTS", "RUVSeq", 
-#                   "S4Vectors", "scater", "scDD", "scde", "scone", "scran", "SCnorm", 
-#                   "SingleCellExperiment", "SummarizedExperiment", "zinbwave")
-# # ipak(biocpackages, repository='Bioconductor')
-# 
-# # GITHUB
-# #githubpackages <- c('nghiavtr/BPSC', 'VCCRI/cidr', 'cz-ye/DECENT', 
-#                     'mohuangx/SAVER', 'statOmics/zingeR')
-# #ipak(githubpackages, repository = 'github')
-
 packages <- c("stringr","ggplot2","ggpubr","plyr","optparse")
 zzz<-lapply(packages, function(xxx) suppressMessages(require(xxx, character.only = TRUE,quietly=TRUE,warn.conflicts = FALSE)))
 
@@ -36,7 +19,7 @@ option_list = list(
 );
 
 example.use <- "Example:
-      Rscript /home/ayan/Aimin/ispipe/utils/drawBarPlot4Umi.R -i /home/ayan/Aimin/ispipe/ISseqOutput/Mar06/UmiBased/UmiCluster -o /home/ayan/Aimin/ispipe/ISseqOutput/Mar06/UmiBased/UmiCluster/UmiBarPlots"
+      Rscript $HOME/IS-Seq/IS-Seq-python3/utils/drawBarPlot4Umi.R -i path/to/UmiBased/UmiCluster -o path/to/UmiBased/UmiCluster/UmiBarPlots"
 
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);

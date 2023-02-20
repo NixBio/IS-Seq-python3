@@ -2,36 +2,25 @@
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)<2) {
   stop("Two argument first working directory and suffix name for file(date)", call.=FALSE)
-} else{
+} else {
   # default output file
   wd=args[1]
   suffixCollFile=args[2]
-#  dbwd=args[3]
-  
 }
 
-#wd="/media/danilopellin/6d51b13b-052e-4544-a57e-554a1394026e/pipeDfci/collision/Lenti_Human/filter60/dbTMP"
-#suffixCollFile="31Oct2018"
-
-
 library(plyr)
-#wd='/home/danilopellin/projects/pipeDfci/collision/Retro_Human/filter60/db'
-#suffixCollFile='20Oct2017'
 library(reshape)
-#setwd(wd)
-#setwd("/home/danilopellin/projects/pipeDfci/collision/Lenti_Human/filter60/BOS-LV1")
-#setwd("/home/danilopellin/HSR/MLD07")
-#files=dir(pattern = "_grouped_IS$")
+
 files=list.files(path=wd,pattern = "_grouped_IS$",full.names = TRUE)
-#suffixCollFile="10Feb2017"
+
 length_chr=data.frame(
   chr_int=c(1),
   length=c(4464),
   chr_n=c("pCDY.MND.GFP"),
   chr_per_hist=c("pCDY.MND.GFP")
 )
-mergeCutoff=7
 
+mergeCutoff=7
 
 for(f in 1:length(files)){
   if(file.info(files[f])$size>0){
@@ -54,9 +43,6 @@ for(i in 1:dim(allsoB)[1]){
   allsoB$relReadsCount[i]=allsoB$readsCount[i]/ trasdOverallReadsC$expr[trasdOverallReadsC$trasd==allsoB$trasd[i]]
 }
 
-#allsoB=allsoB[allsoB$chr=="chr6" & allsoB$pos>76000000 & allsoB$pos<100000000,]
-#chr8	8866487	8	+
-  
 for(St in c("+","-")){
   allso=allsoB[allsoB$strand==St,]
   allso$diff=abs(diff(c(0,allso$pos)))
@@ -109,8 +95,6 @@ for(St in c("+","-")){
 
 allsoBOK$label=apply(allsoBOK,1,function(x) {paste(as.character(x[1]),as.numeric(x[2],as.character(x[4])),sep='_',collapse='_')})
 
-#setwd(paste(wd,"/",suffixCollFile,sep=""))
-
 out = file.path(wd,suffixCollFile)
 if(!dir.exists(out)){dir.create(out,recursive = TRUE)}
            
@@ -133,7 +117,6 @@ for(ll in 1:length(trasdAll)){
             allsoUniqueM=merge(allsoUnique, trasdSpecCurr, by.x ='label', by.y = 'label', all.x = T, all.y = F)
             colnames(allsoUniqueM)=coln
             allsoUnique=allsoUniqueM
-           # print(dim(allsoUnique))
           }
         }
       }
@@ -149,3 +132,4 @@ for(ll in 1:length(trasdAll)){
   write.table(allsoUniqueBed,file = file.path(out,paste(trasdSpec$library[1],trasdSpec$ptDonor[1],trasdSpec$trasd[1],suffixCollFile,"CollisionClean_BedFormat",sep="_")),sep = "\t",row.names = F,quote = F,col.names = F)
 
 }
+

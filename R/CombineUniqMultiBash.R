@@ -19,13 +19,9 @@ if (length(args)==0) {
 } else if (length(args)>=1) {
   # default output file
   input.dir=args[1]
-  #output.dir=args[2]
-  #IS.type=args[3]
 }
 
 # Example: Rscript $HOME/IS-Seq/IS-Seq-python3/R/CombineUniqMultiBash.R $HOME/IS-Seq/ISseqOutput
-
-#input.dir <- "~/user/ISseqOutput"
 
 input.files <- list.files(input.dir,pattern = "Results.RData",recursive = TRUE,full.names=TRUE)
 
@@ -54,9 +50,4 @@ null <- lapply(1:dim(input.data)[1], function(u){
   system(cmd)
   
 })
-
-#temp <- strsplit("MOI30CLB6_IS0_multihit_allSites.rds",split="_")
-
-
-
 

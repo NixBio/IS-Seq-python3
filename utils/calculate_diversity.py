@@ -1,3 +1,7 @@
+# This script take as input the "final_parse" file of each sample and put in a list all the files corresponding to the same sample that contain the reads id per intergration site (IS). 
+# As output it prints a list of IS (chr, pos) with the strand +/- considering the LTR direction registered and the number of reads per IS.
+
+
 import sys
 import operator
 import re
@@ -7,20 +11,16 @@ import numpy as np
 from itertools import groupby
 import fnmatch
 
-#This script take as input the "final_parse" file of each sample and put in a list all the files corresponding to the same sample that contain the reads id per intergration site (IS). As output it prints a list of IS (chr, pos) with the strand +/- considering the LTR direction registered and the number of reads per IS.
 def unique(seq):
     # order preserving
     noDupes = []
     [noDupes.append(i) for i in seq if not noDupes.count(i)]
     return noDupes
 
-#
 myblast=open(sys.argv[1])
 my_legend=open(sys.argv[2])
 dwdt=sys.argv[3]
 os.chdir(dwdt)
-
-#os.mkdir(dwdt)
 
 baseDir = os.path.dirname(sys.argv[1])
 baseFile = os.path.basename(sys.argv[1])
@@ -44,10 +44,12 @@ myleg={}
 myData={}
 my_pos={}
 dist_cutoff = 7
+
 #List all the file containing the reads per IS
 for f in os.listdir(dwdt):
     if fnmatch.fnmatch(f,'*LTR*LC*filter*_chr*.txt'):
         list_pos.append(f)
+
 #Read the input file (final_parse) and store the infos about strand, chr and pos
 for l in myblast.readlines():
     l= l.rstrip()

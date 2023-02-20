@@ -34,8 +34,6 @@ input.chrom <- opt$chrom
 
 output.file <- opt$out_file
 
-#input.rmsk <- 'https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz'
-
 out.dir.name <- dirname(output.file)
 if (!dir.exists(out.dir.name)){dir.create(out.dir.name, recursive = TRUE)}
 
@@ -64,11 +62,6 @@ if(is.na(t.output)){
   cat("get chr1-22 and X, Y,M fasta file only\n")
   chr<-c(paste("chr",1:22,sep=""),"chrX","chrY","chrM")
   
-  # chr
-  # output.file <- '/home/ayan/user/ispipe/utilsRefData/hg38/GRCh38.primary_assembly.genome.fa'
-  # x <- dirname(output.file)
-  # y <- basename(x)
-  # z <- file.path(x,paste0(y,"ChrOnly.fa"))
   
   z.output <- file.info(z)$mtime
   
@@ -91,23 +84,12 @@ if(is.na(t.output)){
 
 w <- file.path(x,paste0('repeatMasker',y,'BED'))
 
-#w <- 'repeatMaskerhg38BED'
-
 t.w <- file.info(w)$mtime
 
 if(is.na(t.w)){
   
 cat("get repeatMaskerBED\n")
 
-# mySession = browserSession("UCSC")
-# genome(mySession) <- y
-# 
-# query <- ucscTableQuery(mySession, "rmsk")
-# 
-# rmsk.table <- track(query)
-# con <- file(w)
-# export(rmsk.table,con,format = "bed",trackLine = FALSE)
-  
   url = input.rmsk
   tmp <- tempfile()
   curl_download(url, tmp)
@@ -158,12 +140,6 @@ hg38.genome.num.time <- file.info(outputFile2)$mtime
 if(is.na(hg38.genome.num.time)){
   
 cat("get hg38.genome.num file\n")
-  
-#hg38.genome <- as.data.frame(SeqinfoForUCSCGenome(y))
-#hg38.genome.size <- data.frame(chr=row.names(hg38.genome),length=hg38.genome$seqlengths)
-#hg38.genome.num <- data.frame(chr.index=seq(1,length(row.names(hg38.genome))),chr=row.names(hg38.genome))
-
-#input.chrom <- "https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz"
 
 con <- gzcon(url(input.chrom))
 txt <- readLines(con)

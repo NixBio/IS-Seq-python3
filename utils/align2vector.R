@@ -17,8 +17,6 @@ option_list = list(
               help="output file", metavar="character")
 );
 
-example.use <- "Example: Rscript $HOME/Aimin/ispipe/R/getMissIS.R -i /home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/BAMSorted/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask.bam -r ~/Aimin/ispipe/utilsRefData/mm10.ebwt/mm10ChrOnly.fa -q 95 -o /home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask_missingIS.txt\n"
-
 opt_parser = OptionParser(option_list=option_list,epilogue=example.use);
 opt = parse_args(opt_parser);
 
@@ -65,23 +63,11 @@ system(cmd3)
 
 }
 
-#cols <- pslCols()
-
 cols <- c("matches","misMatches","repMatches","nCount","qNumInsert","qBaseInsert","tNumInsert","tBaseInsert","strand" ,"qName","qSize","qStart","qEnd","tName","tSize","tStart","tEnd","blockCount","blockSizes","qStarts","tStarts")
-
-
-#output_all_start_0_1_psl <- '~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask_le_30_start_0_1.psl'
-
-#output_all_start_0_1_psl <- '~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.4_aligned_mem_sort_inMask_le_30_start_0_1.psl'
-
-#output_all_start_0_1_psl <- '~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.3_aligned_mem_sort_inMask_le_30_start_0_1.psl'
- 
 
 s <- file.info(output_all_start_0_1_psl)$size
 
 if(s!=0) {
-  
-#output_all_start_0_1_psl <- '~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/July27/CutAdapt/missingIS/vectorAlign/R1_R2_Barcode_FB-P5-Rd1-LTR.20_FB-P7-Rd2-LC.20_aligned_mem_sort_inMask_le_30_start_0_1.psl'
   
 psl.df <- read.table(output_all_start_0_1_psl,sep="\t",header = FALSE,stringsAsFactors = FALSE)
 
@@ -139,7 +125,6 @@ psl.df.count.1 <- psl.df.count[,c(15,17,10,24)]
 
 psl.df.count.2 <- unique(psl.df.count.1)
 
-#chrOrder<-c(paste("chr",1:22,sep=""),"chrX","chrY")
 chrOrder<- c("pCDY.MND.GFP")
 
 psl.df.count.2$tName <- factor(psl.df.count.2$tName, levels=chrOrder)
@@ -250,22 +235,5 @@ res <- res[order(res$seqnames,res$start),]
 results  <- data.frame(chr=res$seqnames,start=res$start,chr.index=as.integer(res$seqnames),strand=res$strand,count=res$count) 
 }
 
-#x <- paste0("POOL-ISA-AVRO-TEST2_",substr(basename(output_all_start_0_1_psl),15,nchar(basename(output_all_start_0_1_psl))-44),"_final_parse_filterNo_grouped_IS.txt")
-
-#output.file <- file.path('~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS',x)
- 
 write.table(results,file=output.file ,sep = "\t",row.names = F,quote = F,col.names = F)
 }
-
-#t1 <- file.info('~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/BAMSorted/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.1_aligned_mem_sort_inMask.bam')$mtime
-
-
-#t2 <- file.info('~/Aimin/NoMachineLinux/home/ayan/Aimin/Seagate/ISseqOutput/June24/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.1_FB-P7-Rd2-LC.3_aligned_mem_sort_inMask_le_30_start_0_1.psl')$mtime
-
-
-#blat -stepSize=5 -repMatch=2253 -minScore=20 -minIdentity=0 utilsRefData/vector/pCDY.MND.GFP-KAN-BB-Aldevron-5LTR-3SIN-LTR.fa /home/ayan/Aimin/Seagate/ISseqOutput/July27/CutAdapt/missingIS/R1_R2_Barcode_FB-P5-Rd1-LTR.20_FB-P7-Rd2-LC.20_aligned_mem_sort_inMask_le_30.fa /home/ayan/Aimin/Seagate/ISseqOutput/July27/CutAdapt/missingIS/vectorAlign/R1_R2_Barcode_FB-P5-Rd1-LTR.20_FB-P7-Rd2-LC.20_aligned_mem_sort_inMask_le_30.psl
-
-#awk '$12==0' /home/ayan/Aimin/Seagate/ISseqOutput/July27/CutAdapt/missingIS/vectorAlign/R1_R2_Barcode_FB-P5-Rd1-LTR.20_FB-P7-Rd2-LC.20_aligned_mem_sort_inMask_le_30.psl | grep /1 > /home/ayan/Aimin/Seagate/ISseqOutput/July27/CutAdapt/missingIS/vectorAlign/R1_R2_Barcode_FB-P5-Rd1-LTR.20_FB-P7-Rd2-LC.20_aligned_mem_sort_inMask_le_30_start_0_1.psl
-
-# bedtools closest -a ~/Aimin/Seagate/ISseqOutput/July27/CutAdapt/missingIS/vectorAlign/filterNo/db/July27/POOL-ISA-AVRO-TEST3_HL60CellLine1-99-250ng-Tm62-0_HL60_July27_CollisionClean_BedFormat -b utilsRefData/vector/pCDY.MND.GFP-KAN-BB-Aldevron-5LTR-3SIN-LTR_sorted.bed -D "ref" -g utilsRefData/vector/vector_genome_sorted.txt
-
