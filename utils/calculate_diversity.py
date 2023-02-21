@@ -1,15 +1,14 @@
 # This script takes as input the "final_parse" file of each sample and applies 7 bp window rule to merge IS within one sample 
 # by considering LTR direction(strand: +/-)
 
-# input: POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt or 
+# Input: POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt or 
 # POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filter60.txt
 
-# output:
+# Output:
 
 # *final_parse_filter*_report.txt
 # *filter*_NonGrouped.txt
 # *final_parse_filter*_grouped_IS.txt
-
 
 import sys
 import operator
