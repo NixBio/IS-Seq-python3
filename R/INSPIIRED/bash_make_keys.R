@@ -62,4 +62,3 @@ null <- lapply(1:dim(input.all)[1], function(u){
 
 })
 }
-
