@@ -1,9 +1,5 @@
 # This script use blat-aligned R1 and R2 psl file to call IS
 
-# Rscript /home/ubuntu/intsitecaller/PslToIs_one_replicate_change_sequence_similarity.R /home/ubuntu/SHARE/ISseqOutput/Feb9G222/IsaByINSPIIRED/fa/HL60cl60HL60Poly100/R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P7-Rd2-LC.20.fq_trimwithCutAdapt_HL60cl60HL60Poly100_ReadyToAlignSort.fa.psl /home/ubuntu/SHARE/ISseqOutput/Feb9G222/IsaByINSPIIRED/fa/HL60cl60HL60Poly100/R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_FB-P5-Rd1-LTR.16.fq_trimwithCutAdapt_HL60cl60HL60Poly100_ReadyToAlignSort.fa.psl /home/ubuntu/SHARE/ISseqOutput/Feb9G222/IsaByINSPIIRED/fa/HL60cl60HL60Poly100/keys.rds ~/intsitecaller/testCases/intSiteValidation/completeMetadata.RData /home/ubuntu/SHARE/ISseqOutput/Feb9G222/IsaByINSPIIRED/fa/HL60cl60HL60Poly100/rev0 hg38 1 0
-
-# Rscript ~/IS-Seq/R/PslToIs_one_replicate_change_sequence_similarity.R /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/clone1-1/R1-1.fa.psl /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/clone1-1/R2-1.fa.psl /home/ubuntu/SHARE/Aimin/INSPIIRED_test_output/clone1-1/keys.rds ~/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData ~/SHARE/Aimin/INSPIIRED_test_output/clone1-1/IS_95 hg18 1 95
-
 initial.options <- commandArgs(trailingOnly = FALSE)
 print(initial.options)
 
@@ -36,28 +32,15 @@ print(output.dir)
 
 if(!dir.exists(output.dir)){dir.create(output.dir,recursive = TRUE)}
 
-#aws_root <- '/home/ubuntu/SHARE/ISseqOutput/Oct2721/IsaByINSPIIRED'
-#output.dir <- '/home/ubuntu/SHARE/ISseqOutput/Oct2721/IsaByINSPIIRED/output'
-
-#if(!dir.exists(output.dir)){dir.create(output.dir,recursive = TRUE)}
-
-#input.file <- '~/intsitecaller/testCases/intSiteValidation/completeMetadata.RData'
-
 completeMetadata <- get(load(input_completeMetadata))
 
-#psl.R2 <- list.files(file.path(aws_root,'align'), pattern="R2.*.fa.psl",recursive = T,full.names=T)
-
 psl.R2 <- input_R2_psl 
-
-#psl.R1 <- list.files(file.path(aws_root,'align'), pattern="R1.*.fa.psl",recursive = T,full.names=T)
 
 psl.R1 <- input_R1_psl 
 
 print(psl.R2)
 
 print(psl.R1)
-
-#source('~/ispipe/R/functions.R')
 
 #' read psl gz files, assuming psl gz files don't have column header
 #' @param pslFile character vector of file name(s)
@@ -125,13 +108,7 @@ print(hits.R2)
 
 hits.R2 <- processBLATData(hits.R2, "R2", completeMetadata[u,]$refGenome)  
 
-#print(hits.R2)
-
-#print(hits.R1)
-
 save.image(file.path(output.dir,'temp.RData'))
-
-#if(u==1){completeMetadata[u,]$minPctIdent <- 0}
 
 hits.R1 <- qualityFilter(hits.R1, completeMetadata[u,]$maxAlignStart, completeMetadata[u,]$minPctIdent)
 
@@ -163,8 +140,6 @@ library(GenomicRanges)
   )
   
   R1.loci <- red.hits.R1[queryHits(pairs)]
-  
-  #test <- lapply(red.hits.R2$revmap, function(x){as(x,"SimpleList")})
   
   test <- as(red.hits.R2$revmap,"SimpleList")
   mcols(red.hits.R2) <- test
@@ -210,10 +185,6 @@ library(IRanges)
     as.integer(hits.R1$qName[x])
   }))
   
-  #loci.key$R2.qNames <- IRanges::IntegerList(lapply(R2.loci$revmap, function(x){
-  #  as.integer(hits.R2$qName[x])
-  #}))
-  
   loci.key$R2.qNames <- IRanges::IntegerList(lapply(R2.loci$revmap, function(x){
     as.integer(hits.R2$qName[x])
   }),compress = FALSE)
@@ -223,11 +194,6 @@ library(IRanges)
     loci.key$R1.qNames, function(x){
       which(unique_key_pairs$R1 %in% x)
     }))
-  
-  #loci.key$R2.readPairs <- IRanges::IntegerList(lapply(
-  #  loci.key$R2.qNames, function(x){
-  #    which(unique_key_pairs$R2 %in% x)
-  #  }))
   
   loci.key$R2.readPairs <- IRanges::IntegerList(lapply(
     loci.key$R2.qNames, function(x){
@@ -294,11 +260,6 @@ chimera.reads <- failedReads[failedReads$R1 %in% hits.R1$qName & failedReads$R2 
   stats <- cbind(stats, chimeras)
   }
   
- 
-#chimeras <- length(unique(chimera.reads$names))
-
-#stats <- cbind(stats, chimeras)
- 
   uniq.read.loci.mat <- read.loci.mat[
     read.loci.mat$readPairKey %in% uniq.readPairs,]
   
@@ -480,8 +441,6 @@ numAllSingleReads <- length(allSites)
   names(multihitData) <- c("unclusteredMultihits", "clusteredMultihitPositions", "clusteredMultihitLengths")
 
   saveRDS(multihitData, file=file.path(output.dir,"multihitData.rds"))
-
-
 
   #' Record multihit metrics (reads, clusters, sonicLengths)
   multihitReads <- nrow(keys[keys$readPairKey %in% multihit.readPairs,])

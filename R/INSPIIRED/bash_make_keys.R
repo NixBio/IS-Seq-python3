@@ -8,8 +8,6 @@ script.name <- sub(file.arg.name, "", initial.options[grep(file.arg.name, initia
 script.dirname <- dirname(script.name)
 print(script.dirname)
 
-# Rscript /home/ubuntu/DEMO/IS-Seq/R/bash_make_keys.R /home/ubuntu/SHARE/D32_Platform_Development/MANUSCRIPTS_DATA/ISAtest/MiSeqTest/20210121_AssociationFIle_POOL6_Preclinical.csv /home/ubuntu/SHARE/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa /home/ubuntu/SHARE/ISseqOutput/Dec282021/IsaByINSPIIREDTimeTest/fa
-
 args = commandArgs(trailingOnly=TRUE)
 
 if (length(args)==0) {
@@ -31,46 +29,23 @@ if(!dir.exists(output.dir)){dir.create(output.dir,recursive = TRUE)}
 
 input <- read.table(input.file,sep=',',header=T)
 
-#print(input)
-
-#input.completeMetadata='/home/ubuntu/DEMO/IS-Seq/utilsRefData/INSPIIRED/completeMetadata.RData'
-#input.seq.similarity=80
-
-#print(input)
-
 SampleName=gsub('-','',input$Sample.Type)
 
 input.R1 = file.path(input.dir,SampleName,paste0('R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_',input$Fusion.Primer.LTR..ID,'.fq_trimwithCutAdapt','_',SampleName,'_ReadyToAlignSort'))
 
-#print(input.R1)
 
 input.R2 = file.path(input.dir,SampleName,paste0('R2_fastq_trim12nt_qcTrimmed_MatchBlastLtrLc_Barcode_',input$Fusion.Primer.LC..ID,'.fq_trimwithCutAdapt','_',SampleName,'_ReadyToAlignSort'))
 
-#print(input.R2)
-
-
 input.all <- data.frame(R1=input.R1,R2=input.R2,SampleName=gsub('-','',input$Sample.Type),sampleDir=file.path(output.dir,SampleName))
-
-#print(input.all)
-
 
 if(TRUE){
 
 cat('Start conversion\n')
 
-#input.all <- data.frame(R1=input.R1,R2=input.R2,SampleName=gsub('-','',input$Sample.Type))
-
-
-#print(input.all)
-
-#input.all <- input.all[-c(4,9,10),]
-
 null <- lapply(1:dim(input.all)[1], function(u){
  
   
   sample.dir <- input.all[u,]$sampleDir
-
-  #print(sample.dir)
 
   if(!dir.exists(sample.dir)){dir.create(sample.dir,recursive = TRUE)}
 

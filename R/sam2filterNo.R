@@ -4,7 +4,6 @@ packages <- c("optparse","stringr","GenomicRanges")
 
 zzz<-lapply(packages, function(xxx) suppressMessages(require(xxx, character.only = TRUE,quietly=TRUE,warn.conflicts = FALSE)))
 
-
 args = commandArgs(trailingOnly=TRUE)
 
 if (length(args)==0) {
