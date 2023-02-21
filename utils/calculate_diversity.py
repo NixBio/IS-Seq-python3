@@ -1,5 +1,14 @@
-# This script take as input the "final_parse" file of each sample and put in a list all the files corresponding to the same sample that contain the reads id per intergration site (IS). 
-# As output it prints a list of IS (chr, pos) with the strand +/- considering the LTR direction registered and the number of reads per IS.
+# This script takes as input the "final_parse" file of each sample and applies 7 bp window rule to merge IS within one sample 
+# by considering LTR direction(strand: +/-)
+
+# input: POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filterNo.txt or 
+# POOL-ISA-AVRO-6-Preclin_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_final_parse_filter60.txt
+
+# output:
+
+# *final_parse_filter*_report.txt
+# *filter*_NonGrouped.txt
+# *final_parse_filter*_grouped_IS.txt
 
 
 import sys
