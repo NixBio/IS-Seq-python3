@@ -84,7 +84,6 @@ sys.argv[1]=re.split('\.|\_', sys.argv[1])
 print(sys.argv[1][2]+'\t'+sys.argv[1][4]+'\t'+sys.argv[1][7]+'\n')
 for element in list_pos:
     element=re.split('\.|\_', element)
-#       print element[2]+'\n'
     #Finds the correct LTR and LC barcode
     if element[2]==sys.argv[1][2] and element[4]==sys.argv[1][4]:
         #Finds the correct filter: filterNo, filter30, filter45, filter60
@@ -178,7 +177,6 @@ for i in unique_list:
         my_pos[int(i[2])]=[tmp]
 for a in my_pos:
     b=my_pos[a]
-    #print d
     d=sorted(b, key=lambda x: (int(x[2]), int(x[1])))
     diff = [int(d[i+1][1])-int(d[i][1]) for i in range(len(d)-1)]
     avg = sum(diff) / len(diff)

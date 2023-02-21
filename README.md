@@ -122,8 +122,8 @@ docker run aiminy/isseq:2.5 python IS-Seq-python3/IS-Seq.py -h
         -   15: Linker-Cassette(required,used for R2 LC processing)
 
         -   16: Vector(required, used for selecting vector,currently we
-            have ‘MND-GFP’,‘GlucoCco’,‘IUPF-CTNS’ and ‘pCDY-EFS-hGLAco’
-            4 options)
+            have ‘MND-GFP’, ‘GlucoCco’, ‘IUPF-CTNS’ and
+            ‘pCDY-EFS-hGLAco’ 4 options)
 
         -   17: Other-Infos (optional)  
 
