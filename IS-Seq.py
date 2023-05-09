@@ -130,12 +130,12 @@ def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder,fc):
 
     if check:
 
-        def call_script_R(wd,suffix):
+        def call_script_R(utilsDir,wd,suffix,PreviousGroupedISfolder,fc):
             mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder+''' '''+fc
             print(mycmd)
             subprocess.call(mycmd,shell=True)
 
-        t1 = Thread(target=call_script_R, args=(dwdcFilterNo,suffix))
+        t1 = Thread(target=call_script_R, args=(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder,fc))
         t1.start()
         t1.join()
 
