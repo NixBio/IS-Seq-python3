@@ -21,9 +21,9 @@ from collections import OrderedDict
 tmpFolder = ""
 
 def usage():
-    print(('Usage: python '+sys.argv[0]+' -1 <r1.fq.gz> -2 <r2.fq.gz> -s <sampleName> -o <outputFolder> -t <suffix> -r <researchFile> -u <referenceDataDir> -p <utilsProgramDir> -a <analysisType> -c <previousRun> -q <repRegQual>'))
+    print(('Usage: python '+sys.argv[0]+' -1 <r1.fq.gz> -2 <r2.fq.gz> -s <sampleName> -o <outputFolder> -t <suffix> -r <researchFile> -u <referenceDataDir> -p <utilsProgramDir> -a <analysisType> -c <previousRun> -f <foldChange> -q <repRegQual>'))
     print('Example:')
-    print(('python '+sys.argv[0]+' -1 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o path/to/ISseqOutput -t 01212021 -r $HOME/IS-Seq/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u $HOME/IS-Seq/IS-Seq-python3/utilsRefData/IsSeq -p $HOME/IS-Seq/IS-Seq-python3/utils -a read -c nothing -q 30'))
+    print(('python '+sys.argv[0]+' -1 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R1.fq.gz -2 $HOME/IS-Seq/IS-Seq-python3/data/simulationUp_R2.fq.gz -s POOL-ISA-AVRO-6-Preclin -o path/to/ISseqOutput -t 01212021 -r $HOME/IS-Seq/IS-Seq-python3/sample_research/20210121_AssociationFIle_POOL6_Preclinical.csv -u $HOME/IS-Seq/IS-Seq-python3/utilsRefData/IsSeq -p $HOME/IS-Seq/IS-Seq-python3/utils -a read -c nothing -f 10 -q 30'))
 
 # helper funciton
 def unique(seq):
@@ -111,7 +111,7 @@ def reNameFile(DiversityOut,outputDir,inputPattern,sampleResearch):
                     copyfile(sourceFile,dwdcFilter60+destFile)
 
 # Use *_grouped_IS and PT-Transduction-ID in the association file to perform collision detection
-def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder):
+def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder,fc):
 
     inputFiles = []
     for f in fnmatch.filter(os.listdir(dwdcFilterNo),'*_grouped_IS'):
@@ -131,7 +131,7 @@ def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder):
     if check:
 
         def call_script_R(wd,suffix):
-            mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder
+            mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder+''' '''+fc
             print(mycmd)
             subprocess.call(mycmd,shell=True)
 
@@ -225,7 +225,7 @@ def main():
     repRegQual=30
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:],"1:2:s:o:t:r:u:p:a:c:q:h")
+        opts, args = getopt.getopt(sys.argv[1:],"1:2:s:o:t:r:u:p:a:c:f:q:h")
     except getopt.GetoptError as err:
         print(err)
         usage()
@@ -255,6 +255,8 @@ def main():
             utils=str(a)
         elif o == '-c':
             PreviousCollision=str(a)
+        elif o == '-f':
+            fc=int(a)
         elif o == '-q':
             repRegQual=int(a)
 
@@ -467,7 +469,7 @@ def main():
         if not os.path.exists(outputDir):
             os.makedirs(outputDir)
         # Get processed FATSQ files     
-        getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,repRegQual,PreviousCollision)
+        getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,repRegQual,PreviousCollision,fc)
 
     if analysisType == "align2Vector":
         print("align vector start")
@@ -669,7 +671,7 @@ def main():
             else:
                 PreviousGroupedISfolder=os.path.join(PreviousCollision,"UmiBased","collision","Lenti_Human",inputPattern+"/db")
 
-            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder)
+            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder,fc)
             dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
             annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
@@ -682,7 +684,7 @@ def main():
             else:
                 PreviousGroupedISfolder=os.path.join(PreviousCollision,"UmiBased","collision","Lenti_Human",inputPattern+"/db")
 
-            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder)
+            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder,fc)
             dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
             annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
@@ -796,7 +798,7 @@ def main():
             else:
                 PreviousGroupedISfolder=os.path.join(PreviousCollision,"FragmentBased","collision","Lenti_Human",inputPattern+"/db")
 
-            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder)
+            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder,fc)
             dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
             annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
@@ -809,7 +811,7 @@ def main():
             else:
                 PreviousGroupedISfolder=os.path.join(PreviousCollision,"FragmentBased","collision","Lenti_Human",inputPattern+"/db")
 
-            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder)
+            sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder,fc)
             dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
             annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
@@ -2091,7 +2093,7 @@ def extractUmiOnly(filename,outDir):
         subprocess.call(mycmd,shell=True)
 
 # Use processed FASTQ file to align to reference genome to get SAM, SM-BAM, BAM filtering, call IS, collision detection, annotation
-def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,repRegQual,PreviousCollision):
+def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,repRegQual,PreviousCollision,fc):
 
     ### getCollisionTable function #########
     alignOut = os.path.join(outputDir,"align")
@@ -2815,7 +2817,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
     else:
         PreviousGroupedISfolder=os.path.join(PreviousCollision,"CutAdapt",inputPattern+"/db")
 
-    sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder)
+    sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder,fc)
     dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
     annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
@@ -2828,7 +2830,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
     else:
         PreviousGroupedISfolder=os.path.join(PreviousCollision,"CutAdapt",inputPattern+"/db")
 
-    sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder)
+    sumToTable(utilsDir,dwdcFilter,suffix,PreviousGroupedISfolder,fc)
     dwdcFilterSuffix=os.path.join(dwdcFilter,suffix)
     annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 

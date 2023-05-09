@@ -7,6 +7,7 @@ if (length(args)<2) {
   wd=args[1]
   suffixCollFile=args[2]
   previous_grouped_IS_folder=args[3]
+  fc=args[4]
 }
 
 library(plyr)
@@ -130,7 +131,7 @@ if(length(unique(allsoB$trasd))==1){
           if( ((allsoToVerisEv$chr[1]=="chr19") & (allsoToVerisEv$pos[1]==49461738) & (St=='-') ) ){ # force this positive  to assignedISAfterCollision table
             allsoOK=rbind(allsoOK,allsoToVerisEv)
             write.table(allsoToVerisEv,file = file.path(wd,paste("assignedISAfterCollision",suffixCollFile,sep="")),sep = "\t",row.names = F,quote = F,col.names = F,append = T)
-          }else if ((trasdReadsC$expr[1]/trasdReadsC$expr[2])>=10){
+          }else if ((trasdReadsC$expr[1]/trasdReadsC$expr[2])>=fc){
             allsoOK=rbind(allsoOK,allsoToVerisEv[allsoToVerisEv$trasd==trasdReadsC$trasd[1],])
             write.table(allsoToVerisEv,file = file.path(wd,paste("assignedISAfterCollision",suffixCollFile,sep="")),sep = "\t",row.names = F,quote = F,col.names = F,append = T)
           }else{
