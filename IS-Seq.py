@@ -229,6 +229,7 @@ def main():
         sys.exit(1)
 
     repRegQual=30
+    fc=10
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],"1:2:s:o:t:r:u:p:a:c:f:q:h")
