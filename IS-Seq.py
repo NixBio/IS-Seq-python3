@@ -131,11 +131,6 @@ def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder,fc):
     if check:
 
         def call_script_R(utilsDir,wd,suffix,PreviousGroupedISfolder,fc):
-            print(utilsDir)
-            print(wd)
-            print(suffix)
-            print(PreviousGroupedISfolder)
-            print(fc)
             fc=str(fc)
             mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder+''' '''+fc
             print(mycmd)
@@ -529,7 +524,7 @@ def main():
             for x in threads[i:i+NT]:
                 x.join()
 
-        getMissIsTable(outputDirMissIS,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask)
+        getMissIsTable(outputDirMissIS,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,PreviousCollision,fc)
 
     if analysisType == "VectorCount":
         outputDirMissIS = os.path.join(dwdt,"CutAdapt","missingIS","vectorAlign")
@@ -2842,7 +2837,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
     annotateISite(dwdcFilterSuffix,sortedKnownGene,genomeSorted,NT,utilsRef,utilsDir,vectorBed,VectorMask,suffix)
 
 # Process IS that are located in vector region
-def getMissIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask):
+def getMissIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,sampleName,sortedKnownGene,genomeSorted,vectorBed,suffix,NT,maskFile,VectorMask,PreviousGroupedISfolder,fc):
 
     ####### Rename files ###################
     dwdcFilterNo=os.path.join(outputDir,"filterNo","db")
@@ -2913,12 +2908,13 @@ def getMissIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,dirGenome,
 
     if check:
 
-        def call_script_R(wd,suffix):
-            mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R ''')+wd+''' '''+suffix
+        def call_script_R(utilsDir,wd,suffix,PreviousGroupedISfolder,fc):
+            fc=str(fc)
+            mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder+''' '''+fc
             print(mycmd)
             subprocess.call(mycmd,shell=True)
-
-        t1 = Thread(target=call_script_R, args=(os.path.join(outputDir,"filterNo","db"),suffix))
+        
+        t1 = Thread(target=call_script_R, args=(utilsDir,os.path.join(outputDir,"filterNo","db"),suffix,PreviousGroupedISfolder,fc))
 
         t1.start()
         t1.join()
