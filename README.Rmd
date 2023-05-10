@@ -134,7 +134,7 @@ Note: you need to follow these order to run IS-Seq:
 
 ```{bash eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
 
-nohup docker run --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/out aiminy/isseq:2.5 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -m https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz -o /out/hg38/GRCh38.primary_assembly.genome.fa > path/to/ISseqOutput/log/logMakeHg38.txt 2>&1 &
+nohup docker run --rm -v path/to/IS-Seq-python3/utilsRefData/IsSeq:/out aiminy/isseq:2.6 Rscript /usr/src/IS-Seq-python3/R/makeREFIndex1.R -i https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz -g https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz -r https://hgdownload.soe.ucsc.edu/goldenPath/currentGenomes/Homo_sapiens/database/rmsk.txt.gz -m https://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/chromInfo.txt.gz -o /out/hg38/GRCh38.primary_assembly.genome.fa > path/to/ISseqOutput/log/logMakeHg38.txt 2>&1 &
 
 
 ```
