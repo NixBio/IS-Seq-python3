@@ -9,7 +9,7 @@ if (length(args)<2) {
   previous_grouped_IS_folder=args[3]
   fc=args[4]
 }
-
+fc=as.integer(fc)
 library(plyr)
 library(reshape)
 
