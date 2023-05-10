@@ -1,4 +1,4 @@
-# docker build --no-cache -f $HOME/IS-Seq/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:2.5 .
+# docker build --no-cache -f $HOME/IS-Seq/IS-Seq-python3/Docker/Dockerfile -t aiminy/isseq:2.6 .
 
 From ubuntu:focal
 
