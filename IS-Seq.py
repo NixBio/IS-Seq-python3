@@ -131,6 +131,11 @@ def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder,fc):
     if check:
 
         def call_script_R(utilsDir,wd,suffix,PreviousGroupedISfolder,fc):
+            print(utilsDir)
+            print(wd)
+            print(suffix)
+            print(PreviousGroupedISfolder)
+            print(fc)
             mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder+''' '''+fc
             print(mycmd)
             subprocess.call(mycmd,shell=True)
