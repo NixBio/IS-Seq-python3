@@ -136,6 +136,7 @@ def sumToTable(utilsDir,dwdcFilterNo,suffix,PreviousGroupedISfolder,fc):
             print(suffix)
             print(PreviousGroupedISfolder)
             print(fc)
+            fc=str(fc)
             mycmd='''Rscript --vanilla ''' +os.path.join(utilsDir,'''collisionTable.R''')+''' '''+wd+''' '''+suffix+''' '''+PreviousGroupedISfolder+''' '''+fc
             print(mycmd)
             subprocess.call(mycmd,shell=True)
