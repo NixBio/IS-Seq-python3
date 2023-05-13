@@ -52,6 +52,13 @@ IS-Seq across different platforms except git, git-lfs and Docker.
 
     docker pull aiminy/isseq:2.6
 
+#### Notes:
+
+This docker image can also be built on your local machine but depending
+on the environment of your system, you might encounter some errors.
+Therefore we strongly advise to simply pull the docker image as per
+instructions above.
+
 ### To have a quick start to using IS-Seq, you can run the following command:
 
 ``` bash
