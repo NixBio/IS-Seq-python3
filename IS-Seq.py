@@ -357,7 +357,9 @@ def main():
         sortedKnownGene=os.path.join(utilsRef,'mm10','mm10_genesKNOWN_sorted.bed')
         genomeSorted=os.path.join(utilsRef,'mm10','mm10_genome_sorted.txt')
 
-    seqPlat="MiSeq"
+    seqPlat="NextSeq"
+    print(seqPlat)
+
     VectorMask=""
 
     dwdt=outputFolder
@@ -2122,11 +2124,15 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
 
     print(check)
 
+    print(seqPlat)
+
     if check:
         if (seqPlat=="MiSeq"):
             pattern = re.compile('^@M')
         if (seqPlat=="HiSeq"):
             pattern = re.compile('^@HISEQ')
+        if (seqPlat=="NextSeq"):
+            pattern = re.compile('^@VH')
 
         with open(sampleResearch) as barCodeFile:
             for barCodeline in barCodeFile:
@@ -3461,6 +3467,8 @@ def align2vector(seqPlat,R1Out,R2Out,outputDir,sampleResearch,dirGenome,sampleNa
             pattern = re.compile('^@M')
         if (seqPlat=="HiSeq"):
             pattern = re.compile('^@HISEQ')
+        if (seqPlat=="NextSeq"):
+            pattern = re.compile('^@VH')
 
         with open(sampleResearch) as barCodeFile:
             for barCodeline in barCodeFile:
