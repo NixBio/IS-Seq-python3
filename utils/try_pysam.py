@@ -13,8 +13,8 @@ import os
 samfile = pysam.AlignmentFile(sys.argv[1], 'rb')
 
 outdir= os.path.dirname(os.path.dirname(sys.argv[1]))
-
-fileNameSplit=re.split('\_', sys.argv[1])
+fileName= os.path.basename(sys.argv[1])
+fileNameSplit=re.split('\_', fileName)
 print(fileNameSplit)
 sampleName=sys.argv[2]
 out_reads = open(os.path.join(outdir,sampleName+'_'+fileNameSplit[3]+'_'+fileNameSplit[4]+'_final_parse_filterNo.txt'), 'w')
