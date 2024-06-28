@@ -467,6 +467,7 @@ def main():
 
     if analysisType == "read":
         print("read based analysis start")
+        ## combine R1 trimmed and R2 trimmed
         R1Out = os.path.join(dwdt,"R1_fastq_trim12nt_qcTrimmed_MatchBlastLtrLcDEMULTIPLEXINGTofq")
         R2Out = os.path.join(dwdt,"RandomBarcodRemovalOutPut4R2CuReRun")
         outputDir = os.path.join(dwdt,"CutAdapt")
@@ -2460,6 +2461,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
                 x.join()
 
         #######merge non-repeated and high quality repeated ##############
+        ## output dir: BAMSorted
 
         threads = []
         def call_script_filterMap(filename):
@@ -2561,7 +2563,14 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
     check = compareFilesTime(inputFiles,outputFiles)
 
     print(check)
-
+    
+    
+    # This script uses pysam to parse bam alignment and select only those reads showing an exact match in the 3 nt following the end of the LTR, which ensures the insertion site is properly detected.
+    # This filter only applies to the read that is first in pair (R1) because these where carring the LTR before alignment.
+    
+    # input:  R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem_allFilter_rehead.bam
+    # output: R1_R2_Barcode_FB-P5-Rd1-LTR.9_FB-P7-Rd2-LC.9_aligned_mem_allFilter_rehead_exact3nt.bam
+    # 
     if check:
         threads = []
         def call_script_filterMap(filename):
@@ -2581,6 +2590,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
             # Wait for all of them to finish
             for x in threads[i:i+NT]:
                 x.join()
+    # is fulfilled
 
     ###### count unmapped ###########
     inputFiles = []
@@ -2718,7 +2728,6 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
             mycmd='''python '''+os.path.join(utilsDir,'''try_pysam.py ''')+filename+ ''' '''+ sampleName
             print(mycmd)
             subprocess.call(mycmd,shell=True)
-
         for filename in os.listdir(bamSortedOut):
             if fnmatch.fnmatch(filename,'*_allFilter_rehead_exact3nt_nonSupplementary.bam'):
                 print(filename)
@@ -2776,6 +2785,7 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
 
 
         ###### Calculate diversity ###########
+        #fails
     inputFiles = []
     for f in fnmatch.filter(os.listdir(outputDir),'*_final_parse_*.txt'):
         inputFiles.append(os.path.join(outputDir,f))
@@ -2799,6 +2809,8 @@ def getCollisionTable(seqPlat,R1Out,R2Out,outputDir,sampleResearch,utilsDir,util
         def call_script_filterMap(filename):
             mycmd='''python '''+os.path.join(utilsDir,'''calculate_diversity.py ''') +filename+ ''' '''+chrList+''' '''+outIS
             print(mycmd)
+            #mycmd=" ".join(['python',os.path.join(utilsDir,'calculate_diversity.py'),filename,chrList,outIS])
+            #print(mycmd)
             subprocess.call(mycmd,shell=True)
 
         for filename in os.listdir(outputDir):
