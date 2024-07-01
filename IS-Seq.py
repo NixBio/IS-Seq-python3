@@ -637,7 +637,8 @@ def main():
             finalParseFileDir=os.path.join(dwdt,"CutAdapt")
             chrListFile=chrList
             ISoutDir=os.path.join(dwdt,"CutAdapt","ISout")
-
+            # ISoutDir non umi based ISout
+            # outDir: umibased DiversiytOut
             for filename in os.listdir(finalParseFileDir):
                 if fnmatch.fnmatch(filename,'*_final_parse_*.txt'):
                     t1 = Thread(target=calculateDiversity, args=(os.path.join(finalParseFileDir,filename),umi,chrListFile,ISoutDir,outDir,analysisType))
@@ -905,7 +906,7 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
     for f in os.listdir(dwdt):
         if fnmatch.fnmatch(f,'*LTR*LC*filter*_chr*.txt'):
             list_pos.append(os.path.join(dwdt,f))
-
+    list_posbase = [os.path.basename(x) for x in list_pos]
 
     #Read the input file (final_parse) and store the infos about strand, chr and pos
     for l in myblast.readlines():
@@ -940,66 +941,132 @@ def getCount4FragmentBased(finalParseFile,chrListFile,ISoutDir,outDir,analysisTy
             myleg[l[1]]=[l[0]]
 
     #Defines the corrispondence between the input file and the files into the list
+    baseFileS=re.split('\_', baseFile)
+    if len(baseFileS) > 6:
+        print("there are underscores used in the samplename and or Barcode names!, this is forbidden")
+        sys.exit(1)
+    
+    
     finalParseFileTmp=re.split('\.|\_', baseFile)
-    print(finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
-
-    for element in list_pos:
-        element=re.split('\.|\_', element)
-        #Finds the correct LTR and LC barcode
-        if element[2]==finalParseFileTmp[2] and element[4]==finalParseFileTmp[4]:
-            #Finds the correct filter: filterNo, filter30, filter45, filter60
-            if element[5]==finalParseFileTmp[7]:
-                print(element[2]+'\t'+element[4]+'\t'+element[5]+'__'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
-                for chr,pos in mydict:
-                    #if the IS falls into a standard chr
-                    if len(element)==9:
-                        if chr == element[6] and pos == element[7]:
-                            if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
-                                for name in myleg:
-                                    if element[6]==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                            else:
-                                for name in myleg:
-                                    if element[6]==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '+', str(len(mydict[chr,pos]))])
-                    #if the IS falls into a chr_something
-                    if len(element)==10:
-                        if chr == (element[6]+'_'+element[7]) and pos == element[8]:
-                            if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos])
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                            else:
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '+', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                    #if the IS falls into a chr_something_something
-                    if len(element)==11:
-                        if chr == (element[6]+'_'+element[7]+'_'+element[8]) and pos == element[9]:
-                            if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7]+'_'+element[8])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                            else:
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7]+'_'+element[8])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '+', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-',str(len(mydict[chr,pos]))])
-
-
+    print(finalParseFileTmp)
+    # processing files with bacodes form ID.X, with X increasing number
+    if len(finalParseFileTmp)==9:
+        print("processing Fragment based with Barcode.X")
+        print(finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
+        
+        for element in list_pos:
+            element=re.split('\.|\_', element)
+            #Finds the correct LTR and LC barcode
+            if element[2]==finalParseFileTmp[2] and element[4]==finalParseFileTmp[4]:
+                #Finds the correct filter: filterNo, filter30, filter45, filter60
+                if element[5]==finalParseFileTmp[7]:
+                    print(element[2]+'\t'+element[4]+'\t'+element[5]+'__'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
+                    for chr,pos in mydict:
+                        #if the IS falls into a standard chr
+                        if len(element)==9:
+                            if chr == element[6] and pos == element[7]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if element[6]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if element[6]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '+', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something
+                        if len(element)==10:
+                            if chr == (element[6]+'_'+element[7]) and pos == element[8]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos])
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something_something
+                        if len(element)==11:
+                            if chr == (element[6]+'_'+element[7]+'_'+element[8]) and pos == element[9]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7]+'_'+element[8])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7]+'_'+element[8])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-',str(len(mydict[chr,pos]))])
+    
+    elif len(finalParseFileTmp)==7:
+        print(finalParseFileTmp[1]+'\t'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[5]+'\n')
+        
+        for element in list_posbase:
+            element=re.split('\.|\_', element)
+            #Finds the correct LTR and LC barcode
+            if element[1]==finalParseFileTmp[1] and element[2]==finalParseFileTmp[2]:
+                #Finds the correct filter: filterNo, filter30, filter45, filter60
+                if element[3]==finalParseFileTmp[5]:
+                    print(element[1]+'\t'+element[2]+'\t'+element[3]+'__'+finalParseFileTmp[1]+'\t'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[5]+'\n')
+                    for chr,pos in mydict:
+                        #if the IS falls into a standard chr
+                        if len(element)==7:
+                            if chr == element[4] and pos == element[5]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if element[4]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if element[4]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '+', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something
+                        if len(element)==8:
+                            if chr == (element[4]+'_'+element[5]) and pos == element[6]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos])
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something_something
+                        if len(element)==9:
+                            if chr == (element[4]+'_'+element[5]+'_'+element[6]) and pos == element[7]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5]+'_'+element[6])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5]+'_'+element[6])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-',str(len(mydict[chr,pos]))])
+    
     if analysisType == 'fragment':
-
+    
         for x in list_strand:
             chr = x[0].strip("'")
             pos = x[1].strip("'")
@@ -3183,6 +3250,7 @@ def getVectorIsTable(outputDir,sampleResearch,utilsDir,utilsRef,chrList,sampleNa
         t1.join()
 
 # Use IS files from path/to/CutAdapt/ISout/ as input, merge IS using 7bp role for each sample
+# This is in part redundant with utils/calculate_diversity.py
 def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisType):
 
     myblast=open(finalParseFile)
@@ -3194,7 +3262,8 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
     baseDir = os.path.dirname(finalParseFile)
     baseFile = os.path.basename(finalParseFile)
     outDir = outDir
-
+    
+    # create UmiBased/DiversityOut
     if not os.path.exists(outDir):
         os.makedirs(outDir)
 
@@ -3214,12 +3283,13 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
     my_pos={}
     dist_cutoff = 7
     mydictUmi={}
-
+    
     #List all the file containing the reads per IS
     for f in os.listdir(dwdt):
         if fnmatch.fnmatch(f,'*LTR*LC*filter*_chr*.txt'):
             list_pos.append(os.path.join(dwdt,f))
-
+    list_posbase=[os.path.basename(x) for x in list_pos]
+    
     #Read the input file (final_parse) and store the infos about strand, chr and pos
     for l in myblast.readlines():
         l= l.rstrip()
@@ -3234,7 +3304,7 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
         except:
             mydict[tmp]=[l[0]]
             mydictUmi[tmp]=[l[1]]
-
+    
     #print "mydictUmi"
     for chr,pos in mydictUmi:
         umiList=[]
@@ -3244,7 +3314,7 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
         umiCount = len(umiList)
         umiUniqCount = len(set(umiList))
         mydictUmi[chr,pos]=umiUniqCount
-
+    
     for l in my_legend.readlines():
         l= l.rstrip()
         if l[0]=='#':
@@ -3254,67 +3324,129 @@ def calculateDiversity(finalParseFile,umi,chrListFile,ISoutDir,outDir,analysisTy
             myleg[l[1]].append(l[0])
         except:
             myleg[l[1]]=[l[0]]
-
+    
     #Defines the correspondence between the input file and the files into the list
+    baseFileS=re.split('\_',baseFile)
+    if len(baseFileS) > 6:
+        print("there are underscores used in the samplename and or Barcode names!, this is forbidden")
+        sys.exit(1)
+    
     finalParseFileTmp=re.split('\.|\_', baseFile)
-    print(finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
+    if len(finalParseFileTmp)==9:
+        print(finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
+        # analysis of barcods named: ID.X where X is an increasing number
+        for element in list_pos:
+            element=re.split('\.|\_', element)
+            #Finds the correct LTR and LC barcode
+            if element[2]==finalParseFileTmp[2] and element[4]==finalParseFileTmp[4]:
+                #Finds the correct filter: filterNo, filter30, filter45, filter60
+                if element[5]==finalParseFileTmp[7]:
+                    print(element[2]+'\t'+element[4]+'\t'+element[5]+'__'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
+                    for chr,pos in mydict:
+                        #if the IS falls into a standard chr
+                        if len(element)==9:
+                            if chr == element[6] and pos == element[7]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if element[6]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if element[6]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '+', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something
+                        if len(element)==10:
+                            if chr == (element[6]+'_'+element[7]) and pos == element[8]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos])
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something_something
+                        if len(element)==11:
+                            if chr == (element[6]+'_'+element[7]+'_'+element[8]) and pos == element[9]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7]+'_'+element[8])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[6]+'_'+element[7]+'_'+element[8])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-',str(len(mydict[chr,pos]))])
+    elif len(finalParseFileTmp)==7:
+        # Analysis for unique barcode names with dashes and unique names but no dots.
+        print(finalParseFileTmp[1]+'\t'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[5]+'\n')
 
-    for element in list_pos:
-        element=re.split('\.|\_', element)
-        #Finds the correct LTR and LC barcode
-        if element[2]==finalParseFileTmp[2] and element[4]==finalParseFileTmp[4]:
-            #Finds the correct filter: filterNo, filter30, filter45, filter60
-            if element[5]==finalParseFileTmp[7]:
-                print(element[2]+'\t'+element[4]+'\t'+element[5]+'__'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[4]+'\t'+finalParseFileTmp[7]+'\n')
-                for chr,pos in mydict:
-                    #if the IS falls into a standard chr
-                    if len(element)==9:
-                        if chr == element[6] and pos == element[7]:
-                            if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
-                                for name in myleg:
-                                    if element[6]==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                            else:
-                                for name in myleg:
-                                    if element[6]==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '+', str(len(mydict[chr,pos]))])
-                    #if the IS falls into a chr_something
-                    if len(element)==10:
-                        if chr == (element[6]+'_'+element[7]) and pos == element[8]:
-                            if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos])
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                            else:
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '+', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                    #if the IS falls into a chr_something_something
-                    if len(element)==11:
-                        if chr == (element[6]+'_'+element[7]+'_'+element[8]) and pos == element[9]:
-                            if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7]+'_'+element[8])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '-', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
-                            else:
-                                for name in myleg:
-                                    if (element[6]+'_'+element[7]+'_'+element[8])==name:
-                                        for code in myleg[name]:
-                                            #print chr, pos, code, '+', str(len(mydict[chr,pos]))
-                                            list_strand.append([chr, pos, code, '-',str(len(mydict[chr,pos]))])
-
-
-
+        for element in list_posbase:
+            element=re.split('\.|\_', element)
+            #Finds the correct LTR and LC barcode
+            if element[1]==finalParseFileTmp[1] and element[2]==finalParseFileTmp[2]:
+                #Finds the correct filter: filterNo, filter30, filter45, filter60
+                if element[3]==finalParseFileTmp[5]:
+                    print(element[1]+'\t'+element[2]+'\t'+element[3]+'__'+finalParseFileTmp[1]+'\t'+finalParseFileTmp[2]+'\t'+finalParseFileTmp[5]+'\n')
+                    for chr,pos in mydict:
+                        #if the IS falls into a standard chr
+                        if len(element)==7:
+                            if chr == element[4] and pos == element[5]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if element[4]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if element[4]==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '+', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something
+                        if len(element)==8:
+                            if chr == (element[4]+'_'+element[5]) and pos == element[6]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos])
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                        #if the IS falls into a chr_something_something
+                        if len(element)==9:
+                            if chr == (element[4]+'_'+element[5]+'_'+element[6]) and pos == element[7]:
+                                if str(set(mydict[chr,pos]))[1:9] == "'R1_rev'":
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5]+'_'+element[6])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '-', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-', str(len(mydict[chr,pos]))])
+                                else:
+                                    for name in myleg:
+                                        if (element[4]+'_'+element[5]+'_'+element[6])==name:
+                                            for code in myleg[name]:
+                                                #print chr, pos, code, '+', str(len(mydict[chr,pos]))
+                                                list_strand.append([chr, pos, code, '-',str(len(mydict[chr,pos]))])
+    
+    
     if analysisType == 'umi':
 
         for x in list_strand:
